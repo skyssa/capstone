@@ -7,114 +7,73 @@ if (!$_SESSION['fullname']) {
      exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <title>CampusComm</title>
   <link rel="icon" href="rental.png">
 
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/adminstyle.css">
-
-  <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="cssfiles/chat.css">
-
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <!-- Custom styles -->
+  <link href="cssfiles/chat.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
 
-  <div class="container">
-    <div id="side1">
-                  <a class="nav-link" href="role.php" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-dark small">
-                        newsfeed
-                    </span>
-                </a>
-    </div>
-    <div id="side2">
-                <a class="nav-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-dark small"><?php
-
-                    $fullname = $_SESSION['fullname'];
-
-                    $query = "SELECT * FROM tbl_user WHERE fullname = '$fullname' ";
-                    $result = mysqli_query($conn, $query);
-                    $row = mysqli_fetch_assoc($result);
-                    do {
-                        $full = $row['fullname'];
-                        echo $full;
-                        $row = mysqli_fetch_assoc($result);
-                    } while ($row);
-
-                                                                        ?></span>
-                  <!-- <img class="img-profile rounded-circle" src="user.png"> -->
-                </a>
-    </div>
-    <div id="side3">
-      <a href="logout.php">Log Out</a>
-    </div>
-  </div>
-
-  <!-- Page Wrapper -->
-  <div id="chat-app">
-    <div id="wrapper">
-
+  <div class="container-fluid">
+    <div class="row">
       <!-- Sidebar -->
-    
-      <!-- End of Sidebar -->
+      <div class="col-md-3">
+        <div class="card mt-3">
+          <div class="card-body">
+            <a class="nav-link" href="role.php" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="mr-2 d-none d-lg-inline text-dark small">Newsfeed</span>
+            </a>
+          </div>
 
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
+          <div class="card-body">
+            <span class="mr-2 d-none d-lg-inline text-dark small">
+              <?php
+              $fullname = $_SESSION['fullname'];
 
-        <!-- Main Content -->
-        <div id="content">
-
-          <!-- Topbar -->
-          <!-- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-           
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-              <i class="fa fa-bars" style="color:black"></i>
-            </button>
-
-
-            <ul class="navbar-nav ml-auto">
-
-
-              <div class="topbar-divider d-none d-sm-block"></div>
-              
-
-            </ul>
-
-          </nav> -->
-          <!-- End of Topbar -->
-
-          <!-- Begin Page Content -->
-          <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-dark" align="center">Messages</h1>
+              $query = "SELECT * FROM tbl_user WHERE fullname = '$fullname' ";
+              $result = mysqli_query($conn, $query);
+              $row = mysqli_fetch_assoc($result);
+              do {
+                  $full = $row['fullname'];
+                  echo $full;
+                  $row = mysqli_fetch_assoc($result);
+              } while ($row);
+              ?>
+            </span>
+          </div>
+        </div>
+      </div>
 
 
-            
-            <div class="card shadow mb-4">
-              <div class="card-body">
-                <div class="table-responsive">
+      <!-- Main Content -->
+      <div class="col-md-6">
+        <div class="card mt-3">
+          <div class="card-header">
+            <h1 class="h3 mb-2 text-dark">Messenger</h1>
+          </div>
+          <div class="card-body">
+            <!-- Messages section -->
+            <div class="messages-section">
+              <!-- Send Messages -->
+              <div class="send-messages">
+                <!-- Add your code for displaying sent messages here -->
+                <ul class="list-group">
+                  <li class="list-group-item">
                   <table>
                     <h5>send Messages</h5>
                       <thead>
@@ -146,7 +105,15 @@ if (!$_SESSION['fullname']) {
                         <td></td>
                       </tbody>
                   </table>
-
+                  </li>
+                  <!-- Add more sent messages as needed -->
+                </ul>
+              </div>
+              <!-- Receive Messages -->
+              <div class="receive-messages mt-3">
+                <!-- Add your code for displaying received messages here -->
+                <ul class="list-group">
+                  <li class="list-group-item">
                   <table>
                     <h5>receive Messages</h5>
                       <thead>
@@ -175,8 +142,15 @@ if (!$_SESSION['fullname']) {
                         ?>
                       </tbody>
                   </table><br><br>
-                  <form @submit="fnChat($event)">
-                    <div>
+                  </li>
+                  <!-- Add more received messages as needed -->
+                </ul>
+              </div>
+            </div>
+
+            <!-- Chat input form -->
+            <form @submit="fnChat($event)">
+                <div>
                       <label for="from">From: </label>
                       <input type="hidden" name="from" value="<?php echo $_SESSION['user_id'] ?>"><?php echo $full?>
                           
@@ -196,34 +170,36 @@ if (!$_SESSION['fullname']) {
                             echo "</select>";
                             ?>
                     </div>
-                    <div>
-                      <textarea class='form-control' name="msg"></textarea>
-                    </div>
-                    <div id="send-chat">
-                    <button type='submit' style="background-color: black; color:aliceblue;">Send Message</button>
-                    </div>
-                    
-                  </form>
-                </div>
               </div>
-            </div>
-
-
-
-
+              <div class="form-group">
+                <label for="msg">Message:</label>
+                <textarea class="form-control" name="msg"></textarea>
+              </div>
+              <button type="submit" class="btn btn-dark">Send Message</button>
+            </form>
           </div>
-          <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
-
       </div>
-      <!-- End of Content Wrapper -->
 
+      <!-- User Profile and Log Out -->
+      <div class="col-md-3">
+        <div class="card mt-3">
+          
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <a href="logout.php">Log Out</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- End of Page Wrapper -->
 
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Your custom scripts -->
   <script src="jsfiles/vue.3.js"></script>
   <script src="jsfiles/axios.js"></script>
   <script>
@@ -233,9 +209,7 @@ if (!$_SESSION['fullname']) {
 
     createApp({
       data() {
-        return {
-
-        }
+        return {};
       },
       methods: {
         fnChat: function(e) {
@@ -243,34 +217,27 @@ if (!$_SESSION['fullname']) {
           e.preventDefault();
           var form = e.currentTarget;
           const data = new FormData(form);
-          data.append('method','fnChat');
+          data.append('method', 'fnChat');
           axios.post('model/listModel.php', data)
             .then(function(r) {
               console.log(r);
               if (r.data == 1) {
-                alert('Message successfully send');
+                alert('Message successfully sent');
                 window.location.href = "chatbox.php";
               } else {
-                alert('there was an error');
+                alert('There was an error');
               }
-
-            })
+            });
         },
-
       },
-      created: function() {
-
-      }
-    }).mount('#chat-app')
+      created: function() {},
+    }).mount('#chat-app');
   </script>
   <script>
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
     }
   </script>
-
-
-
 
 </body>
 
