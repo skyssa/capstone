@@ -10,7 +10,31 @@ if(function_exists($method)){ //fnSave
 else{
     echo "Function not exists";
 }
+function fnSaveProfile(){
+    global $conn;
+    $last_name= $_POST['last_name'];
+    $first_name= $_POST['first_name'];
+    $middle_name= $_POST['middle_name'];
+    $username = $_POST['username'];
+    $pword = $_POST['password'];
+    $gender= $_POST['gender'];
+    $addr= $_POST['address'];
+    $phone_number= $_POST['phone_number'];
+    $email= $_POST['email'];
+    $user_type= $_POST['user_type'];
+    $query = $conn->prepare('INSERT INTO tb_users(last_name,first_name,middle_name,username,"password",gender,"address",phone_number,email,user_type,"status") 
+    VALUES($last_name,$first_name,$middle_name,$username,$pword,$gender,$addr,$phone_number,$email,$user_type,1)');
+    var_dump($query);
+    $query->bind_param('sssssssiss',$last_name,$first_name,$middle_name,$username,$pword,$gender,$addr,$phone_number,$email,$user_type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
 
+}
 function fnSaveUser(){
     global $conn;
     $last_name= $_POST['last_name'];
@@ -221,6 +245,7 @@ function fnLogin(){
     $password = $_POST['password'];
     
     $query = $conn->prepare("call sp_savelogin(?,?)");
+    // call sp_savelogin(?,?)
     $query->bind_param('ss',$username,$password);
     $query->execute();
     $result = $query->get_result();

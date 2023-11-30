@@ -14,6 +14,24 @@ createApp({
         }
     },
     methods:{
+        fnSaveProfile:function(e){
+            const vm = this;
+            e.preventDefault();    
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method','fnSaveProfile');
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                console.log(r);
+                if(r.data == 1){
+                    alert("Profile successfully saved");
+                    // vm.fnGetUsers();
+                }
+                else{
+                    alert('There was an error.');
+                }
+            })
+        },
         fnSaveUser:function(e){
             const vm = this;
             e.preventDefault();    

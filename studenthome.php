@@ -2,11 +2,12 @@
 session_start();
 include "includes/config.php";
 if (!$_SESSION['fullname']) {
-     echo '<script>window.location.href="sign-in.php";</script>';
-     exit();
+    echo '<script>window.location.href="sign-in.php";</script>';
+    exit();
 }
 ?>
 <html lang="en" class=" sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers"><!-- Mirrored from uitheme.net/sociala/default.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 17:10:12 GMT -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +55,7 @@ if (!$_SESSION['fullname']) {
                 </form> -->
 
                 <a href="#" class="p-2 text-center ms-auto menu-icon show" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="true"></a>
-                
+
                 <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
                 <div class="p-2 text-center ms-3 position-relative dropdown-menu-icon menu-icon cursor-pointer">
                     <i class="feather-settings animation-spin d-inline-block font-xl text-current"></i>
@@ -190,9 +191,9 @@ if (!$_SESSION['fullname']) {
                             <ul class="mb-1">
                                 <li><a href="chatbox.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Message</span><span class="circle-count bg-warning mt-0"></span></a></li>
                                 <li><?php
-                                        echo $_SESSION['fullname'];
-                                        ?></li>
-                                <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i ></i><span>Log Out</span></span></a></li>
+                                    echo $_SESSION['fullname'];
+                                    ?></li>
+                                <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i></i><span>Log Out</span></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -309,57 +310,57 @@ if (!$_SESSION['fullname']) {
                                             <!-- Modal -->
                                             <div class="modal fade" id="commentModal" role="dialog">
                                                 <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Comments</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form @submit="fnSaveComment($event)">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Comments</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form @submit="fnSaveComment($event)">
                                                                 <input type="hidden" name="pid" value="{{ post.post_id }}">
-                                                                <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']?>">
-                                                                <input type="hidden" name="uname" value="<?php echo $_SESSION['fullname']?>">
+                                                                <input type="hidden" name="id" value="<?php echo $_SESSION['user_id'] ?>">
+                                                                <input type="hidden" name="uname" value="<?php echo $_SESSION['fullname'] ?>">
                                                                 <textarea name="comment" id="comment" cols="30" rows="10" placeholder="comment"></textarea>
                                                                 <button type="submit">save comment</button>
-                                                        </form>
-                                                        <div class="card" v-for="comment in comments">
+                                                            </form>
+                                                            <div class="card" v-for="comment in comments">
                                                                 <div class="card-heading">
                                                                     <div class="cardtitle">
                                                                         <h6>{{ comment.uname}}</h6>
                                                                     </div>
                                                                 </div>
-                                    
+
                                                                 <div class="card-content">
                                                                     <p>{{ comment.comment }}<br></p> <br><br>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="container">
-                         
+
                                             <!-- Trigger the modal with a button -->
                                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="fas fa-cog"></i>Report</button>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="myModal" role="dialog">
                                                 <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Reports</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                    <form @submit="fnSaveReport($event)">
-                                                            <?php $pid="{{ post.post_id }}";?>
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Reports</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form @submit="fnSaveReport($event)">
+                                                                <?php $pid = "{{ post.post_id }}"; ?>
                                                                 <input type="text" name="postid" v-if="post.post_id" value="{{ post.post_id }}">
-                                                                <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']?>">
+                                                                <input type="hidden" name="id" value="<?php echo $_SESSION['user_id'] ?>">
                                                                 <select name="report_type">
                                                                     <option disabled>report Type</option>
                                                                     <option>sexuall content</option>
@@ -368,12 +369,12 @@ if (!$_SESSION['fullname']) {
                                                                     <option>illegal trading</option>
                                                                 </select>
                                                                 <button type="submit">submit report</button>
-                                                        </form>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
                                                 </div>
                                             </div>
                                         </div>s
@@ -437,11 +438,11 @@ if (!$_SESSION['fullname']) {
                                         <h4 class="fw-700 mb-0 font-xssss text-grey-900">Announcement</h4>
                                         <!-- <a href="default-member.html" class="fw-600 ms-auto font-xssss text-primary">See
                                             all</a> -->
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#announceModal">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#announceModal">
                                             See all
-                                            </button>
+                                        </button>
 
-                                            <!-- announcement -->
+                                        <!-- announcement -->
                                         <div class="modal fade" id="announceModal" tabindex="-1" role="dialog" aria-labelledby="announceModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -456,9 +457,9 @@ if (!$_SESSION['fullname']) {
                                                                 <h6>{{ announces.date_created}}</h6>
                                                                 <h5>Title: {{ announces.title }}<br></h5>
                                                             </div>
-                                                                
+
                                                         </div>
-                                
+
                                                         <div class="card-content">
                                                             <p>Content: {{ announces.description }}<br></p> <br><br>
                                                         </div>
@@ -468,7 +469,7 @@ if (!$_SESSION['fullname']) {
                                         </div>
                                     </div>
                                 </div>
-                        
+
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                     <div class="card-body d-flex align-items-center  p-4">
                                         <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
@@ -477,40 +478,40 @@ if (!$_SESSION['fullname']) {
                                     </div>
                                     <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                         <div>
-                        
+
                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-                                            SEE EVENTS
+                                                SEE EVENTS
                                             </button>
 
                                             <!-- event -->
                                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <!-- <form @submit="fnSaveEvent($event)">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <!-- <form @submit="fnSaveEvent($event)">
                                                         <input type="text" name="title" id="" placeholder="Title">
                                                         <input type="date" name="date" id="" placeholder="date">
                                                         <input type="text" name="events" id="" placeholder="Event">
                                                         <button type="submit">create</button>
                                                     </form> -->
 
-                                                    <div class="card" v-for="event in events">
-                                                        <div class="card-heading">
+                                                        <div class="card" v-for="event in events">
+                                                            <div class="card-heading">
                                                                 <div class="cardtitle">
                                                                     <h5>Event Title: {{ event.title }}<br></h5>
                                                                     <h5>Date: {{ event.date }}</h5>
                                                                 </div>
-                                                        </div>
-                                                        <div class="card-content">
+                                                            </div>
+                                                            <div class="card-content">
                                                                 <p>Content: {{ event.event }}<br></p><br>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
-
                                         </div>
-                                    </div>
 
-                                    <!-- <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
+                                        <!-- <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                         <div class="bg-warning me-2 p-3 rounded-xxl">
                                             <h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600">APR</span>30</h4>
                                         </div>
@@ -526,53 +527,53 @@ if (!$_SESSION['fullname']) {
                                                 floor 24 new work, NY 10010</span> </h4>
                                     </div> -->
 
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- main content -->
+
+                <!-- right chat -->
+                <div class="right-chat nav-wrap mt-2 right-scroll-bar">
+                    <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
+
+                        <!-- loader wrapper -->
+                        <div class="preloader-wrap p-3" style="display: none;">
+                            <div class="box shimmer">
+                                <div class="lines">
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- main content -->
-
-            <!-- right chat -->
-            <div class="right-chat nav-wrap mt-2 right-scroll-bar">
-                <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
-
-                    <!-- loader wrapper -->
-                    <div class="preloader-wrap p-3" style="display: none;">
-                        <div class="box shimmer">
-                            <div class="lines">
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
+                            <div class="box shimmer mb-3">
+                                <div class="lines">
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                </div>
+                            </div>
+                            <div class="box shimmer">
+                                <div class="lines">
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                    <div class="line s_shimmer"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="box shimmer mb-3">
-                            <div class="lines">
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                            </div>
-                        </div>
-                        <div class="box shimmer">
-                            <div class="lines">
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- loader wrapper -->
+                        <!-- loader wrapper -->
 
-                    <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
-                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
-                        <ul class="list-group list-group-flush">
-                            <!-- <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+                        <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
+                            <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
+                            <ul class="list-group list-group-flush">
+                                <!-- <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
                                 <figure class="avatar float-left mb-0 me-2">
                                     <img src="images/user-8.png" alt="image" class="w35">
                                 </figure>
@@ -653,137 +654,147 @@ if (!$_SESSION['fullname']) {
                                 <span class="bg-success ms-auto btn-round-xss"></span>
                             </li> -->
 
-                        </ul>
+                            </ul>
+                        </div>
+                        <div class="section full pe-3 ps-4 pt-4 pb-4 position-relative feed-body">
+                            <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">GROUPS</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+
+                                    <span class="btn-round-sm bg-primary-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
+                                    <h3 class="fw-700 mb-0 mt-0">
+                                        <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Studio
+                                            Express</a>
+                                    </h3>
+                                    <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">2 min</span>
+                                </li>
+                                <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+
+                                    <span class="btn-round-sm bg-gold-gradiant me-3 ls-3 text-white font-xssss fw-700">AR</span>
+                                    <h3 class="fw-700 mb-0 mt-0">
+                                        <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Armany
+                                            Design</a>
+                                    </h3>
+                                    <span class="bg-warning ms-auto btn-round-xss"></span>
+                                </li>
+                                <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+
+                                    <span class="btn-round-sm bg-mini-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
+                                    <h3 class="fw-700 mb-0 mt-0">
+                                        <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">De
+                                            fabous</a>
+                                    </h3>
+                                    <span class="bg-success ms-auto btn-round-xss"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+
                     </div>
-                    <div class="section full pe-3 ps-4 pt-4 pb-4 position-relative feed-body">
-                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">GROUPS</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-
-                                <span class="btn-round-sm bg-primary-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Studio
-                                        Express</a>
-                                </h3>
-                                <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">2 min</span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-
-                                <span class="btn-round-sm bg-gold-gradiant me-3 ls-3 text-white font-xssss fw-700">AR</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Armany
-                                        Design</a>
-                                </h3>
-                                <span class="bg-warning ms-auto btn-round-xss"></span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-
-                                <span class="btn-round-sm bg-mini-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">De
-                                        fabous</a>
-                                </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
-                            </li>
-                        </ul>
-                    </div>
-
-
                 </div>
+
+
+                <!-- right chat -->
+
+                <div class="app-footer border-0 shadow-lg bg-primary-gradiant">
+                    <a href="default.html" class="nav-content-bttn nav-center"><i class="feather-home"></i></a>
+                    <a href="default-video.html" class="nav-content-bttn"><i class="feather-package"></i></a>
+                    <a href="default-live-stream.html" class="nav-content-bttn" data-tab="chats"><i class="feather-layout"></i></a>
+                    <a href="shop-2.html" class="nav-content-bttn"><i class="feather-layers"></i></a>
+                    <a href="default-settings.html" class="nav-content-bttn"><img src="images/female-profile.png" alt="user" class="w30 shadow-xss"></a>
+                </div>
+
+                <div class="app-header-search">
+                    <form class="search-form">
+                        <div class="form-group searchbox mb-0 border-0 p-1">
+                            <input type="text" class="form-control border-0" placeholder="Search...">
+                            <i class="input-icon">
+                                <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                            </i>
+                            <a href="#" class="ms-1 mt-1 d-inline-block close searchbox-close">
+                                <i class="ti-close font-xs"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-
-
-            <!-- right chat -->
-
-            <div class="app-footer border-0 shadow-lg bg-primary-gradiant">
-                <a href="default.html" class="nav-content-bttn nav-center"><i class="feather-home"></i></a>
-                <a href="default-video.html" class="nav-content-bttn"><i class="feather-package"></i></a>
-                <a href="default-live-stream.html" class="nav-content-bttn" data-tab="chats"><i class="feather-layout"></i></a>
-                <a href="shop-2.html" class="nav-content-bttn"><i class="feather-layers"></i></a>
-                <a href="default-settings.html" class="nav-content-bttn"><img src="images/female-profile.png" alt="user" class="w30 shadow-xss"></a>
-            </div>
-
-            <div class="app-header-search">
-                <form class="search-form">
-                    <div class="form-group searchbox mb-0 border-0 p-1">
-                        <input type="text" class="form-control border-0" placeholder="Search...">
-                        <i class="input-icon">
-                            <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
-                        </i>
-                        <a href="#" class="ms-1 mt-1 d-inline-block close searchbox-close">
-                            <i class="ti-close font-xs"></i>
-                        </a>
-                    </div>
-                </form>
-            </div>
-
         </div>
-    </div>    
 
-    <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content border-0 bg-transparent">
-                <button type="button" class="close mt-0 position-absolute top--30 right--10" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-900 font-xssss"></i></button>
-                <div class="modal-body p-0">
-                    <div class="card w-100 border-0 rounded-3 overflow-hidden bg-gradiant-bottom bg-gradiant-top">
-                        <div class="owl-carousel owl-theme dot-style3 story-slider owl-dot-nav nav-none owl-loaded owl-drag">
-
+        <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content border-0 bg-transparent">
+                    <button type="button" class="close mt-0 position-absolute top--30 right--10" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-900 font-xssss"></i></button>
+                    <div class="modal-body p-0">
+                        <div class="card w-100 border-0 rounded-3 overflow-hidden bg-gradiant-bottom bg-gradiant-top">
+                            <div class="owl-carousel owl-theme dot-style3 story-slider owl-dot-nav nav-none owl-loaded owl-drag">
 
 
 
 
-                            <div class="owl-stage-outer">
-                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 0px;"><div class="owl-item cloned active" style="width: 0px;">
-                                        <div class="item"><img src="images/story-7.jpg" alt="image"></div>
-                                    </div><div class="owl-item cloned" style="width: 0px;">
-                                        <div class="item"><img src="images/story-8.jpg" alt="image"></div>
-                                    </div><div class="owl-item cloned" style="width: 0px;">
-                                        <div class="item"><img src="images/story-5.jpg" alt="image"></div>
-                                    </div><div class="owl-item cloned" style="width: 0px;">
-                                        <div class="item"><img src="images/story-6.jpg" alt="image"></div>
+
+                                <div class="owl-stage-outer">
+                                    <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 0px;">
+                                        <div class="owl-item cloned active" style="width: 0px;">
+                                            <div class="item"><img src="images/story-7.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item cloned" style="width: 0px;">
+                                            <div class="item"><img src="images/story-8.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item cloned" style="width: 0px;">
+                                            <div class="item"><img src="images/story-5.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item cloned" style="width: 0px;">
+                                            <div class="item"><img src="images/story-6.jpg" alt="image"></div>
+                                        </div>
+
+
+                                        <div class="owl-item" style="width: 0px;">
+                                            <div class="item"><img src="images/story-5.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item" style="width: 0px;">
+                                            <div class="item"><img src="images/story-6.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item" style="width: 0px;">
+                                            <div class="item"><img src="images/story-7.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item" style="width: 0px;">
+                                            <div class="item"><img src="images/story-8.jpg" alt="image"></div>
+                                        </div>
+
+
+                                        <div class="owl-item cloned" style="width: 0px;">
+                                            <div class="item"><img src="images/story-7.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item cloned" style="width: 0px;">
+                                            <div class="item"><img src="images/story-8.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item cloned" style="width: 0px;">
+                                            <div class="item"><img src="images/story-5.jpg" alt="image"></div>
+                                        </div>
+                                        <div class="owl-item cloned" style="width: 0px;">
+                                            <div class="item"><img src="images/story-6.jpg" alt="image"></div>
+                                        </div>
                                     </div>
-                                    
-                                    
-                                    <div class="owl-item" style="width: 0px;">
-                                        <div class="item"><img src="images/story-5.jpg" alt="image"></div>
-                                    </div>
-                                    <div class="owl-item" style="width: 0px;">
-                                        <div class="item"><img src="images/story-6.jpg" alt="image"></div>
-                                    </div>
-                                    <div class="owl-item" style="width: 0px;">
-                                        <div class="item"><img src="images/story-7.jpg" alt="image"></div>
-                                    </div>
-                                    <div class="owl-item" style="width: 0px;">
-                                        <div class="item"><img src="images/story-8.jpg" alt="image"></div>
-                                    </div>
-                                    
-                                    
-                                <div class="owl-item cloned" style="width: 0px;">
-                                        <div class="item"><img src="images/story-7.jpg" alt="image"></div>
-                                    </div><div class="owl-item cloned" style="width: 0px;">
-                                        <div class="item"><img src="images/story-8.jpg" alt="image"></div>
-                                    </div><div class="owl-item cloned" style="width: 0px;">
-                                        <div class="item"><img src="images/story-5.jpg" alt="image"></div>
-                                    </div><div class="owl-item cloned" style="width: 0px;">
-                                        <div class="item"><img src="images/story-6.jpg" alt="image"></div>
-                                    </div></div>
+                                </div>
+                                <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
+                                <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
+                                <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
+                                <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div>
+                                <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
+                                <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div>
                             </div>
-                            <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
-                            <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
-                            <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
-                            <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div>
-                        <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div><div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div></div>
-                    </div>
-                    <div class="form-group mt-3 mb-0 p-3 position-absolute bottom-0 z-index-1 w-100">
-                        <input type="text" class="style2-input w-100 bg-transparent border-light-md p-3 pe-5 font-xssss fw-500 text-white" value="Write Comments">
-                        <span class="feather-send text-white font-md text-white position-absolute" style="bottom: 35px;right:30px;"></span>
+                        </div>
+                        <div class="form-group mt-3 mb-0 p-3 position-absolute bottom-0 z-index-1 w-100">
+                            <input type="text" class="style2-input w-100 bg-transparent border-light-md p-3 pe-5 font-xssss fw-500 text-white" value="Write Comments">
+                            <span class="feather-send text-white font-md text-white position-absolute" style="bottom: 35px;right:30px;"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- <div class="modal-popup-chat d-block">
+        <!-- <div class="modal-popup-chat d-block">
         <div class="modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
             <div class="modal-popup-header w-100 border-bottom">
                 <div class="card p-3 d-block border-0 d-block">
@@ -825,184 +836,251 @@ if (!$_SESSION['fullname']) {
 
 
 
-    <script src="js/plugin.js"></script>
-    <script src="js/lightbox.js"></script>
-    <script src="js/scripts.js"></script>
-    <script src="jsfiles/vue.3.js"></script>
-     <script src="jsfiles/axios.js"></script>
-     <script src="jsfiles/app.camp.js"></script>
+        <script src="js/plugin.js"></script>
+        <script src="js/lightbox.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="jsfiles/vue.3.js"></script>
+        <script src="jsfiles/axios.js"></script>
+        <script src="jsfiles/app.camp.js"></script>
 
 
 
 
 
-    <div id="lightboxOverlay" tabindex="-1" class="lightboxOverlay" style="display: none;"></div>
-    <div id="lightbox" tabindex="-1" class="lightbox" style="display: none;">
-        <div class="lb-outerContainer">
-            <div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt="">
-                <div class="lb-nav"><a class="lb-prev" aria-label="Previous image" href=""></a><a class="lb-next" aria-label="Next image" href=""></a></div>
-                <div class="lb-loader"><a class="lb-cancel"></a></div>
+        <div id="lightboxOverlay" tabindex="-1" class="lightboxOverlay" style="display: none;"></div>
+        <div id="lightbox" tabindex="-1" class="lightbox" style="display: none;">
+            <div class="lb-outerContainer">
+                <div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt="">
+                    <div class="lb-nav"><a class="lb-prev" aria-label="Previous image" href=""></a><a class="lb-next" aria-label="Next image" href=""></a></div>
+                    <div class="lb-loader"><a class="lb-cancel"></a></div>
+                </div>
+            </div>
+            <div class="lb-dataContainer">
+                <div class="lb-data">
+                    <div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div>
+                    <div class="lb-closeContainer"><a class="lb-close"></a></div>
+                </div>
+            </div>
+            <div class="right-comment chat-left scroll-bar theme-dark-bg">
+                <div class="card-body ps-2 pe-4 pb-0 d-flex">
+                    <figure class="avatar me-3"><img src="images/user-8.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                    <h4 class="fw-700 text-grey-900 font-xssss mt-1 text-left">Hurin Seary <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4> <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
+                </div>
+                <div class="card-body d-flex ps-2 pe-4 pt-0 mt-0"> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss me-3 text-dark"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss text-dark"><i class="feather-message-circle text-grey-900 btn-round-sm font-lg text-dark"></i>22 Comment</a>
+                </div>
+                <div class="card w-100 border-0 shadow-none right-scroll-bar">
+                    <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Surfiya Zakir <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Goria Coast <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Hurin Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">David Goria <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Seary Victor <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Ana Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Studio Express <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-comment chat-left scroll-bar theme-dark-bg">
+                <div class="card-body ps-2 pe-4 pb-0 d-flex">
+                    <figure class="avatar me-3"><img src="images/user-8.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                    <h4 class="fw-700 text-grey-900 font-xssss mt-1 text-left">Hurin Seary <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4> <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
+                </div>
+                <div class="card-body d-flex ps-2 pe-4 pt-0 mt-0"> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss me-3 text-dark"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss text-dark"><i class="feather-message-circle text-grey-900 btn-round-sm font-lg text-dark"></i>22 Comment</a>
+                </div>
+                <div class="card w-100 border-0 shadow-none right-scroll-bar">
+                    <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Surfiya Zakir <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Goria Coast <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Hurin Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">David Goria <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Seary Victor <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Ana Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Studio Express <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-comment chat-left scroll-bar theme-dark-bg">
+                <div class="card-body ps-2 pe-4 pb-0 d-flex">
+                    <figure class="avatar me-3"><img src="images/user-8.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                    <h4 class="fw-700 text-grey-900 font-xssss mt-1 text-left">Hurin Seary <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4> <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
+                </div>
+                <div class="card-body d-flex ps-2 pe-4 pt-0 mt-0"> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss me-3 text-dark"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss text-dark"><i class="feather-message-circle text-grey-900 btn-round-sm font-lg text-dark"></i>22 Comment</a></div>
+                <div class="card w-100 border-0 shadow-none right-scroll-bar">
+                    <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Surfiya Zakir <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Goria Coast <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Hurin Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">David Goria <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Seary Victor <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Ana Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
+                        <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
+                        <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
+                            <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Studio Express <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
+                            <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="lb-dataContainer">
-            <div class="lb-data">
-                <div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div>
-                <div class="lb-closeContainer"><a class="lb-close"></a></div>
-            </div>
-        </div>
-        <div class="right-comment chat-left scroll-bar theme-dark-bg">
-            <div class="card-body ps-2 pe-4 pb-0 d-flex">
-                <figure class="avatar me-3"><img src="images/user-8.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                <h4 class="fw-700 text-grey-900 font-xssss mt-1 text-left">Hurin Seary <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4> <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-            </div>
-            <div class="card-body d-flex ps-2 pe-4 pt-0 mt-0"> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss me-3 text-dark"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss text-dark"><i class="feather-message-circle text-grey-900 btn-round-sm font-lg text-dark"></i>22 Comment</a>
-            </div>
-            <div class="card w-100 border-0 shadow-none right-scroll-bar">
-                <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Surfiya Zakir <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Goria Coast <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Hurin Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">David Goria <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Seary Victor <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Ana Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Studio Express <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="right-comment chat-left scroll-bar theme-dark-bg">
-            <div class="card-body ps-2 pe-4 pb-0 d-flex">
-                <figure class="avatar me-3"><img src="images/user-8.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                <h4 class="fw-700 text-grey-900 font-xssss mt-1 text-left">Hurin Seary <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4> <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-            </div>
-            <div class="card-body d-flex ps-2 pe-4 pt-0 mt-0"> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss me-3 text-dark"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss text-dark"><i class="feather-message-circle text-grey-900 btn-round-sm font-lg text-dark"></i>22 Comment</a>
-            </div>
-            <div class="card w-100 border-0 shadow-none right-scroll-bar">
-                <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Surfiya Zakir <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Goria Coast <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Hurin Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">David Goria <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Seary Victor <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Ana Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Studio Express <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <div class="right-comment chat-left scroll-bar theme-dark-bg"><div class="card-body ps-2 pe-4 pb-0 d-flex"> <figure class="avatar me-3"><img src="images/user-8.png" alt="image" class="shadow-sm rounded-circle w45"></figure><h4 class="fw-700 text-grey-900 font-xssss mt-1 text-left">Hurin Seary <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4> <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a></div><div class="card-body d-flex ps-2 pe-4 pt-0 mt-0"> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss me-3 text-dark"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss text-dark"><i class="feather-message-circle text-grey-900 btn-round-sm font-lg text-dark"></i>22 Comment</a></div><div class="card w-100 border-0 shadow-none right-scroll-bar"><div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div></div><div class="card-body pt-0 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Surfiya Zakir <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div></div><div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Goria Coast <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div></div><div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Hurin Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div></div><div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">David Goria <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div></div><div class="card-body pt-0 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Seary Victor <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div></div><div class="card-body pt-0 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Ana Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div></div><div class="card-body pt-0 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Studio Express <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div> </div></div></div></div>
 
 
 
 
 
 
-</body><!-- Mirrored from uitheme.net/sociala/default.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 17:15:45 GMT --></html>
+</body><!-- Mirrored from uitheme.net/sociala/default.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 17:15:45 GMT -->
+
+</html>
