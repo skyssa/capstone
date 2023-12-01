@@ -5,7 +5,7 @@ createApp({
         return{
             users:[],
             posts:[],
-            user_id:0,
+            user_id:'',
             pictures: [],
             announce: [],
             events: [],

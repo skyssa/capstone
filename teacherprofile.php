@@ -34,10 +34,10 @@ if (!$_SESSION['fullname']) {
             <!-- navigation top-->
             <div class="nav-header bg-white shadow-xs border-0">
                 <div class="nav-top">
-                    <a href="index.html"><i class="feather- text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xl logo-text mb-0">CAMPUSCOMM </span> </a>
+                    <a href="teacherhome.php"><i class="feather- text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xl logo-text mb-0">CAMPUSCOMM </span> </a>
                     <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="default-video.html" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                    <a href="tdepartment.php" class="mob-menu me-2"><i class="feather-globe text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                    <a href="teacherhome.php" class="mob-menu me-2"><i class="feather-home text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                     <button class="nav-menu me-0 ms-2"></button>
                 </div>
 
@@ -225,11 +225,15 @@ if (!$_SESSION['fullname']) {
                                     <div class="card-body d-block pt-4 text-center position-relative">
                                         <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="images/pt-1.jpg" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
 
-                                        <h4 class="font-xs ls-1 fw-700 text-grey-900"><?php
-                                                                                        echo $_SESSION['fullname'];
-                                                                                        ?><span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><?php
-                                                                                                                                                            echo $_SESSION['dep_type'];
-                                                                                                                                                            ?></span></h4>
+                                        <h4 class="font-xs ls-1 fw-700 text-grey-900">
+                                            <?php
+                                                echo $_SESSION['fullname'];
+                                            ?>
+                                            <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
+                                            <?php
+                                                echo $_SESSION['dep_type'];
+                                            ?></span>
+                                        </h4>
 
                                         <div class="d-flex align-items-center justify-content-center position-absolute right-15 top-10 mt-2 me-2">
 
@@ -306,13 +310,13 @@ if (!$_SESSION['fullname']) {
                                     </div> -->
                                     <form class="profile" @submit="fnSaveProfile($event)" method="post" enctype="multipart/form-data">
 
-                                            <h4 class="display-4  fs-1">Edit Profile</h4><br>
-                                            <div class="mb-3">
-                                                <label class="form-label">School Id</label>
-                                                <input type="number" class="form-control" name="school_id">
+                                        <h4 class="display-4  fs-1">Edit Profile</h4><br>
+                                        <div class="mb-3">
+                                            <label class="form-label">School Id</label>
+                                            <input type="number" class="form-control" name="school_id">
                                             <div class="mb-3">
                                                 <label class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" name="fullname" value="<?php echo $_SESSION['fullname']?>">
+                                                <input type="text" class="form-control" name="fullname" value="<?php echo $_SESSION['fullname'] ?>">
                                             </div>
 
                                             <div class="mb-3">
@@ -328,14 +332,14 @@ if (!$_SESSION['fullname']) {
                                                 <input type="text" class="form-control" name="number">
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Number</label>
-                                                
+                                                <label class="form-label">Department</label>
+
                                                 <select name="role_in_school" class="form-control">
-                                                        <option disabled>Choose</option>
-                                                        <option>BSIT</option>
-                                                        <option>BSHM</option>
-                                                        <option>BSED</option>
-                                                        <option>BEED</option>
+                                                    <option disabled>Choose</option>
+                                                    <option>BSIT</option>
+                                                    <option>BSHM</option>
+                                                    <option>BSED</option>
+                                                    <option>BEED</option>
                                                 </select>
                                             </div>
 
@@ -348,7 +352,7 @@ if (!$_SESSION['fullname']) {
 
                                             <button type="submit" class="btn btn-primary">Update</button>
                                             <a href="home.php" class="link-secondary">Home</a>
-                                        </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>

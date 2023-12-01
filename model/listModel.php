@@ -2,14 +2,14 @@
 session_start();
 include "../includes/config.php"; 
 
-$method = $_POST['method'];
+// $method = $_POST['method'];
 
-if(function_exists($method)){ //fnSave
-    call_user_func($method);
-}
-else{
-    echo "Function not exists";
-}
+// if(function_exists($method)){ //fnSave
+//     call_user_func($method);
+// }
+// else{
+//     echo "Function not exists";
+// }
 function fnSaveProfile(){
     global $conn;
     $last_name= $_POST['last_name'];
@@ -225,9 +225,8 @@ function fnSaveRegister(){
     $dep_type=$_POST['dep_type'];
     $user_id=$_POST['user_id'];
 
-    $query = $conn->prepare('call sp_save(?,?,?,?,?,?,0,now(),1)');
-    //$query = $conn->prepare('INSERT INTO tbl_user(fullname,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');
-    $query->bind_param('isssss',$user_id,$fname,$username,$password,$user_type,$dep_type);
+    $query = $conn->prepare('INSERT INTO tbl_user(fullname,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');;
+    $query->bind_param('sssss',$fname,$username,$password,$user_type,$dep_type);
     
     if($query->execute()){
         echo 1;
@@ -236,7 +235,7 @@ function fnSaveRegister(){
         echo json_encode(mysqli_error($conn));
     }
 }
-
+ //
 
 
 function fnLogin(){
