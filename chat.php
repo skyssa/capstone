@@ -317,7 +317,7 @@ if (!$_SESSION['fullname']) {
                                             $count = mysqli_fetch_assoc($query);
                                             if ($count == 0) {
                                                 echo '<script>alert("no users")</script>';
-                                                die;
+                                                
                                             } else if ($count > 0) { ?>
                                                 <input type="hidden" value="<?php echo $user_id; ?>" id="incoming_id_inp">
                                             <?php } ?>

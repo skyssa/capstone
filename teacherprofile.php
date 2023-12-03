@@ -182,12 +182,36 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
+                                <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>Profile</span></a></li>
+                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
+                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
+                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
+                            <ul class="mb-1">
+                                <li><a href="chat.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Message</span><span class="circle-count bg-warning mt-0"></span></a></li>
+                                <li><?php
+                                    echo $_SESSION['fullname'];
+                                    ?></li>
+                                <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i></i><span>Log Out</span></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- <nav class="navigation scroll-bar">
+                <div class="container ps-0 pe-0">
+                    <div class="nav-content">
+                        <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
+                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
+                            <ul class="mb-1 top-content">
                                 <li class="logo d-none d-xl-block d-lg-block"></li>
-                                <li><a href="homepage.html" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
+                                <li><a href="teacherhome.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
                                 <li></li>
-                                <li><a href="departmnent.html" class="nav-content-bttn open-font"><i class="feather-globe btn-round-md bg-gold-gradiant me-3"></i><span>Departments</span></a></li>
+                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-globe btn-round-md bg-gold-gradiant me-3"></i><span>Departments</span></a></li>
                                 <li></li>
-                                <li><a href="userprofile.html" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>User Profile </span></a></li>
+                                <li><a href="teacherprofile" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>User Profile </span></a></li>
                             </ul>
                         </div>
 
@@ -211,7 +235,7 @@ if (!$_SESSION['fullname']) {
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav> -->
             <!-- navigation left -->
             <!-- main content -->
             <div class="main-content right-chat-active">
@@ -235,7 +259,7 @@ if (!$_SESSION['fullname']) {
                                             ?></span>
                                         </h4>
 
-                                        <div class="d-flex align-items-center justify-content-center position-absolute right-15 top-10 mt-2 me-2">
+                                        <!-- <div class="d-flex align-items-center justify-content-center position-absolute right-15 top-10 mt-2 me-2">
 
                                             <a href="#" class="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"><i class="feather-mail font-md"></i></a>
                                             <a href="#" id="dropdownMenu8" class="d-none d-lg-block btn-round-lg ms-2 rounded-3 text-grey-700 bg-greylight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-more font-md"></i></a>
@@ -257,24 +281,13 @@ if (!$_SESSION['fullname']) {
                                                     <h4 class="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-0">Unfollow Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
-                                    <!-- <div class="card-body d-block w-100 shadow-none mb-0 p-0 border-top-xs">
-                                        <ul class="nav nav-tabs h55 d-flex product-info-tab border-bottom-0 ps-4" id="pills-tab" role="tablist">
-                                            <li class="active list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block active" href="#navtabs1" data-toggle="tab">About</a></li>
-                                            <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs2" data-toggle="tab">Membership</a></li>
-                                            <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs3" data-toggle="tab">Discussion</a></li>
-                                            <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs4" data-toggle="tab">Video</a></li>
-                                            <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs3" data-toggle="tab">Group</a></li>
-                                            <li class="list-inline-item me-5"><a class="fw-700 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs1" data-toggle="tab">Events</a></li>
-                                            <li class="list-inline-item me-5"><a class="fw-700 me-sm-5 font-xssss text-grey-500 pt-3 pb-3 ls-1 d-inline-block" href="#navtabs7" data-toggle="tab">Media</a></li>
-                                            <li class="list-inline-item ms-auto mt-3 me-4"><a href="#" class=""><i class="ti-more-alt text-grey-500 font-xs"></i></a></li>
-                                        </ul>
-                                    </div> -->
+                                    
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-xxl-3 col-lg-4 pe-0">
+                            <div class="col-xl-8 col-xxl-9 col-lg-8 pe-0">
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                     <div class="card-body d-block p-4">
                                         <h4 class="fw-700 mb-3 font-xsss text-grey-900">Your Profile</h4>
@@ -289,31 +302,49 @@ if (!$_SESSION['fullname']) {
                                             </a>
                                         </div> -->
                                     </div>
+                                    <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-user text-black-100 font-sm">Basic Info</i></h4>
                                     <div class="card-body d-flex pt-0">
-                                        <i class="feather-map-pin text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1">Flodia, Austia </h4>
+                                        <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
                                     </div>
                                     <div class="card-body d-flex pt-0">
-                                        <i class="feather-users text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1">Genarel Group</h4>
+                                        <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
                                     </div>
-                                </div>
-                                <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
-                                </div>
-                                <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                    <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
+                                    <div class="card-body d-flex pt-0">
+                                        <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                    </div>
+                                    <div class="card-body d-flex pt-0">
+                                        <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                    </div>
+                                    <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-edit-2 text-black-100 font-sm">Academic Info</i></h4>
+                                    <div class="card-body d-flex pt-0">
+                                        <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                    </div>
+                                    <div class="card-body d-flex pt-0">
+                                        <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 col-lg-8">
+                            <div class="col-xl-4 col-xxl-3 col-lg-4">
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
                                     <!-- <div v-for="post in posts">
                                         <h4>{{post.names}}</h4>
                                     </div> -->
                                     <form class="profile" @submit="fnSaveProfile($event)" method="post" enctype="multipart/form-data">
 
-                                        <h4 class="display-4  fs-1">Edit Profile</h4><br>
-                                        <div class="mb-3">
-                                            <label class="form-label">School Id</label>
-                                            <input type="number" class="form-control" name="school_id">
+                                        
+                                        <h4 class="fw-700 mb-3 font-xsss text-grey-900">Edit Your Profile</h4>
+                                        <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>" id="">
+                                            <div class="mb-1">
+                                                <label class="form-label">School Id</label>
+                                                <input type="number" class="form-control" name="school_id">
+                                            </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Full Name</label>
                                                 <input type="text" class="form-control" name="fullname" value="<?php echo $_SESSION['fullname'] ?>">
@@ -332,9 +363,20 @@ if (!$_SESSION['fullname']) {
                                                 <input type="text" class="form-control" name="number">
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Department</label>
-
+                                                <label class="form-label">role in school</label>
                                                 <select name="role_in_school" class="form-control">
+                                                    <option disabled>Choose</option>
+                                                    <option>Dean</option>
+                                                    <option>Chairperson</option>
+                                                    <option>Accounting</option>
+                                                    <option>Faculty</option>
+                                                    <option>Part-time</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">department</label>
+                                                <select name="department" class="form-control">
                                                     <option disabled>Choose</option>
                                                     <option>BSIT</option>
                                                     <option>BSHM</option>
@@ -345,13 +387,12 @@ if (!$_SESSION['fullname']) {
 
                                             <div class="mb-3">
                                                 <label class="form-label">Profile Picture</label>
-                                                <input type="file" name="productimage" class="form-control">
-                                                <img src="upload/<?= $user['pp'] ?>" class="rounded-circle" style="width: 70px">
-                                                <input type="text" hidden="hidden" name="old_pp" value="<?= $user['pp'] ?>">
+                                                <input type="file" name="profile" class="form-control">
+                                                <input type="file" name="cover" class="form-control">
+                                                
                                             </div>
 
                                             <button type="submit" class="btn btn-primary">Update</button>
-                                            <a href="home.php" class="link-secondary">Home</a>
                                     </form>
                                 </div>
                             </div>
@@ -398,77 +439,15 @@ if (!$_SESSION['fullname']) {
                     <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
                         <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
                         <ul class="list-group list-group-flush">
+                            
                             <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-8.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Hurin Seary</a>
-                                </h3>
-                                <span class="badge badge-primary text-white badge-pill fw-500 mt-0">2</span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-7.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Victor Exrixon</a>
-                                </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-6.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Surfiya Zakir</a>
-                                </h3>
-                                <span class="bg-warning ms-auto btn-round-xss"></span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-5.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Goria Coast</a>
-                                </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-4.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Hurin Seary</a>
-                                </h3>
-                                <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">4:09 pm</span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-3.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">David Goria</a>
-                                </h3>
-                                <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">2 days</span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-2.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Seary Victor</a>
-                                </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
+                                <!-- <figure class="avatar float-left mb-0 me-2">
                                     <img src="images/user-12.png" alt="image" class="w35">
-                                </figure>
+                                </figure> -->
                                 <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Ana Seary</a>
+                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#"></a>
                                 </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
+                               
                             </li>
 
                         </ul>

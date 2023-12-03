@@ -22,13 +22,25 @@ if (!$_SESSION['fullname']) {
     <link rel="icon" type="image/png" sizes="16x16" href="img/CPC.jpg">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy12aC9fv5+gM5bGgS7J2h2bjvZkmH4bY1" crossorigin="anonymous">
-
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/emoji.css">
-
     <link rel="stylesheet" href="css/lightbox.css">
     <script src="https://kit.fontawesome.com/b06a377e67.js" crossorigin="anonymous"></script>
+    <style media="screen">
+        #preview {
+            margin: 10px;
+            display: flex;
+            width: 100%;
+            height: 100px;
+            flex-wrap: wrap;
+            overflow-y: scroll;
+        }
 
+        #preview img {
+            width: 50%;
+            height: 30%;
+        }
+    </style>
 
 </head>
 
@@ -41,22 +53,14 @@ if (!$_SESSION['fullname']) {
             <!-- navigation top-->
             <div class="nav-header bg-white shadow-xs border-0">
                 <div class="nav-top">
-                    <a href="teacherhome.html"><i class="feather-zap text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm.</span>
+                    <a href="teacherhome.html"><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm</span>
                     </a>
                     <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                     <a href="default-video.html" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                     <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                     <button class="nav-menu me-0 ms-2"></button>
                 </div>
-
-                <!-- <form action="#" class="float-left header-search">
-                    <div class="form-group mb-0 icon-input">
-
-
-                    </div>
-                </form> -->
-
-                <a href="#" class="p-2 text-center ms-auto menu-icon show" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="true"></a>
+                <a href="#" class="p-2 text-center ms-auto menu-icon show" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell font-xl text-current"></i></a>
 
                 <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
                 <div class="p-2 text-center ms-3 position-relative dropdown-menu-icon menu-icon cursor-pointer">
@@ -161,10 +165,7 @@ if (!$_SESSION['fullname']) {
 
                     </div>
                 </div>
-
-
                 <a href="default-settings.html" class="p-0 ms-3 menu-icon"></a>
-
             </div>
             <!-- navigation top -->
 
@@ -175,19 +176,11 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
-                                <li class="logo d-none d-xl-block d-lg-block"></li>
-                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a>
-                                </li>
-                                <li></li>
-                                <li></li>
-                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a>
-                                </li>
-                                <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>Profile
-                                        </span></a></li>
+                                <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>Profile</span></a></li>
+                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
+                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
                             </ul>
                         </div>
-
-
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
                             <ul class="mb-1">
@@ -204,7 +197,6 @@ if (!$_SESSION['fullname']) {
             <!-- navigation left -->
             <!-- main content -->
             <div class="main-content right-chat-active">
-
                 <div class="middle-sidebar-bottom">
                     <div class="middle-sidebar-left">
                         <!-- loader wrapper -->
@@ -230,7 +222,7 @@ if (!$_SESSION['fullname']) {
                                     <div class="line s_shimmer"></div>
                                     <div class="line s_shimmer"></div>
                                     <div class="line s_shimmer"></div>
-                                    <div class="line s_shimmer"></div>daas
+                                    <div class="line s_shimmer"></div>
                                 </div>
                             </div>
                         </div>
@@ -241,22 +233,21 @@ if (!$_SESSION['fullname']) {
                                     <a href="#" class=" font-xssss fw-600 text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create
                                         Post</a>
                                     <!-- post -->
-                                    <form @submit="fnSavePost($event)">
+                                    <form enctype="multipart/form-data" @submit="fnSavePost($event)">
                                         <input type="hidden" name="name" value="<?php echo $_SESSION['fullname']; ?>" id="">
                                         <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>" id="">
                                         <div class="form-group">
-                                            <!-- <textarea id="post" rows="5" class="form-control" name="description"></textarea> -->
                                             <textarea name="description" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="What's on your mind?"></textarea>
 
                                         </div>
                                         <div class="form-group">
+                                           
                                             <div id="imageInputsContainer">
-                                                <input type="file" name="productimage[]" multiple="multiple">
+                                                <input type="file" name="productimage" id="fileimg"  multiple >
+                                             
                                             </div>
-                                            <button type="button" onclick="addImageInput()" class="btn btn-primary">
-                                                Add More Images
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">
+                                    
+                                            <button type="submit"  class="btn btn-primary">
                                                 Post
                                             </button>
                                         </div>
@@ -272,14 +263,7 @@ if (!$_SESSION['fullname']) {
                                         </h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2" style="margin: 0px;">
-
-                                            <div class="card-body p-0 d-flex mt-2">
-                                                <i class="feather-alert-circle text-grey-500 me-3 font-lg"></i>
-                                                <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide Post <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to
-                                                        your saved items</span></h4>
-                                            </div>
-
-
+                                        
                                         </div>
                                     </div>
                                     <div class="card-body p-0 me-lg-5">
@@ -472,7 +456,7 @@ if (!$_SESSION['fullname']) {
                                 <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 
                                     <!-- loader wrapper -->
-                                    <div class="preloader-wrap p-3" style="display: none;">
+                                    <!-- <div class="preloader-wrap p-3" style="display: none;">
                                         <div class="box shimmer">
                                             <div class="lines">
                                                 <div class="line s_shimmer"></div>
@@ -497,7 +481,7 @@ if (!$_SESSION['fullname']) {
                                                 <div class="line s_shimmer"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- loader wrapper -->
 
                                     <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
@@ -517,7 +501,7 @@ if (!$_SESSION['fullname']) {
 
                                         </ul>
                                     </div>
-                                    <div class="section full pe-3 ps-4 pt-4 pb-4 position-relative feed-body">
+                                    <!-- <div class="section full pe-3 ps-4 pt-4 pb-4 position-relative feed-body">
                                         <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">GROUPS</h4>
                                         <ul class="list-group list-group-flush">
                                             <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
@@ -548,7 +532,7 @@ if (!$_SESSION['fullname']) {
                                                 <span class="bg-success ms-auto btn-round-xss"></span>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> -->
 
 
                                 </div>
@@ -589,13 +573,8 @@ if (!$_SESSION['fullname']) {
                                 <div class="modal-body p-0">
                                     <div class="card w-100 border-0 rounded-3 overflow-hidden bg-gradiant-bottom bg-gradiant-top">
                                         <div class="owl-carousel owl-theme dot-style3 story-slider owl-dot-nav nav-none owl-loaded owl-drag">
-
-
-
-
-
                                             <div class="owl-stage-outer">
-                                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 0px;">
+                                                <!-- <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 0px;">
                                                     <div class="owl-item cloned active" style="width: 0px;">
                                                         <div class="item"><img src="images/story-7.jpg" alt="image"></div>
                                                     </div>
@@ -636,35 +615,24 @@ if (!$_SESSION['fullname']) {
                                                     <div class="owl-item cloned" style="width: 0px;">
                                                         <div class="item"><img src="images/story-6.jpg" alt="image"></div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
-                                            <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
+                                            <!-- <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
                                             <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
                                             <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
                                             <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div>
                                             <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="ti-angle-left icon-nav"></i></button><button type="button" role="presentation" class="owl-next"><i class="ti-angle-right icon-nav"></i></button></div>
-                                            <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div>
+                                            <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div> -->
                                         </div>
                                     </div>
-                                    <div class="form-group mt-3 mb-0 p-3 position-absolute bottom-0 z-index-1 w-100">
+                                    <!-- <div class="form-group mt-3 mb-0 p-3 position-absolute bottom-0 z-index-1 w-100">
                                         <input type="text" class="style2-input w-100 bg-transparent border-light-md p-3 pe-5 font-xssss fw-500 text-white" value="Write Comments">
                                         <span class="feather-send text-white font-md text-white position-absolute" style="bottom: 35px;right:30px;"></span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        function addImageInput() {
-                            var container = document.getElementById('imageInputsContainer');
-                            var newInput = document.createElement('input');
-                            newInput.type = 'file';
-                            newInput.name = 'productimage[]';
-                            newInput.multiple = 'multiple';
-                            container.appendChild(newInput);
-                        }
-                    </script>
 
                     <script src="js/plugin.js"></script>
                     <script src="js/lightbox.js"></script>
@@ -672,6 +640,7 @@ if (!$_SESSION['fullname']) {
                     <script src="jsfiles/vue.3.js"></script>
                     <script src="jsfiles/axios.js"></script>
                     <script src="jsfiles/app.camp.js"></script>
+                    <!-- <script src="jsfiles/feature.js"></script> -->
 
                     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-XpST91Agn3uZd1QVq3JcNvLyA7uj13d3s9fQbY8bF2jW0JqJSFkh6DEVDJLbcQ8E" crossorigin="anonymous"></script>

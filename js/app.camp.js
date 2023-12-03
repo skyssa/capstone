@@ -50,29 +50,6 @@ createApp({
                 }
             })
         },
-        // fnGetUsers:function(){
-        //     const vm = this;
-        //     const data = new FormData();
-        //     data.append("method","fnGetUsers");
-        //     axios.post('model/listModel.php',data)
-        //     .then(function(r){
-        //         vm.users = [];
-        //         r.data.forEach(function(v){
-        //             vm.users.push({
-        //                 last_name: v.last_name,
-        //                 first_name: v.first_name,
-        //                 middle_name: v.middle_name,
-        //                 usernmae: v.username,
-        //                 gender: v.gender,
-        //                 address: v.address,
-        //                 phone_number: v.phone_number,
-        //                 email: v.email,
-        //                 user_type: v.user_type
-                        
-        //             })
-        //         })
-        //     })
-        // },
         fnSavePost:function(e){
             const vm = this;
             e.preventDefault();    
@@ -98,8 +75,8 @@ createApp({
             data.append("method","fnGetPost");
             axios.post('model/listModel.php',data)
             .then(function(r){
-                vm.posts = [];
-                r.data.forEach(function(v){
+                rm.posts = [];
+                v.data.forEach(function(v){
                     vm.posts.push({
                         post_id: v.post_id,
                         user_id: v.user_id,
@@ -131,7 +108,8 @@ createApp({
                     console.log(r);
                 }
             })
-        },fnGetAnnouncement:function(){
+        },
+        fnGetAnnouncement:function(){
             const vm = this;
             const data = new FormData();
             data.append("method","fnGetAnnouncement");

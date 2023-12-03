@@ -34,7 +34,7 @@
                 <div class="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
                     <div class="card shadow-none border-0 ms-auto me-auto login-card">
                         <div class="card-body rounded-0 text-left">
-                            <h2 class="fw-700 display1-size display2-md-size mb-4">Create <br>your account</h2>
+                            <h2 class="fw-700 display1-size display2-md-size mb-4">Log In <br>your account</h2>
                             <form class="register" @submit="fnLogin($event)">
                                 <div class="form-group icon-input mb-3">
                                     <i class="font-sm ti-user text-grey-500 pe-0"></i>

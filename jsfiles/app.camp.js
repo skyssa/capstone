@@ -14,6 +14,24 @@ createApp({
         }
     },
     methods:{
+        fnSaveProfile:function(e){
+            const vm = this;
+            e.preventDefault();    
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method','fnSaveProfile');
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                console.log(r);
+                if(r.data == 1){
+                    alert("Profile successfully saved");
+                    // vm.fnGetUsers();
+                }
+                else{
+                    alert('There was an error.');
+                }
+            })
+        },
         fnSaveUser:function(e){
             const vm = this;
             e.preventDefault();    
@@ -69,7 +87,8 @@ createApp({
                     vm.fnGetPost();
                 }
                 else{
-                    alert('There was an error.');
+                    // window.location.href = "teacherhome.php";
+                    // alert('There was an error.');
                     console.log(r);
                 }
             })
@@ -113,14 +132,15 @@ createApp({
                     console.log(r);
                 }
             })
-        },fnGetAnnouncement:function(){
+        },
+        fnGetAnnouncement:function(){
             const vm = this;
             const data = new FormData();
             data.append("method","fnGetAnnouncement");
             axios.post('model/listModel.php',data)
-            .then(function(r){
+            .then(function(){
                 vm.announce = [];
-                r.data.forEach(function(v){
+                data.forEach(function(v){
                     vm.announce.push({
                         title: v.title,
                         description: v.description,
@@ -176,9 +196,9 @@ createApp({
             const data = new FormData();
             data.append("method","fnGetcomment");
             axios.post('model/listModel.php',data)
-            .then(function(r){
+            .then(function(){
                 vm.comments = [];
-                r.data.forEach(function(v){
+                data.forEach(function(v){
                     vm.comments.push({
                         uname: v.uname,
                         comment: v.comment,
@@ -259,9 +279,9 @@ createApp({
             const data = new FormData();
             data.append("method","fnGetEvent");
             axios.post('model/listModel.php',data)
-            .then(function(r){
+            .then(function(){
                 vm.events = [];
-                r.data.forEach(function(v){
+                data.forEach(function(v){
                     vm.events.push({
 
                         title: v.title,

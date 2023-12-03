@@ -2,30 +2,32 @@
 session_start();
 include "../includes/config.php"; 
 
-// $method = $_POST['method'];
+$method = $_POST['method'];
 
-// if(function_exists($method)){ //fnSave
-//     call_user_func($method);
-// }
-// else{
-//     echo "Function not exists";
-// }
+if(function_exists($method)){ //fnSave
+    call_user_func($method);
+}
+else{
+    echo "Function not exists";
+}
 function fnSaveProfile(){
     global $conn;
-    $last_name= $_POST['last_name'];
-    $first_name= $_POST['first_name'];
-    $middle_name= $_POST['middle_name'];
-    $username = $_POST['username'];
-    $pword = $_POST['password'];
-    $gender= $_POST['gender'];
-    $addr= $_POST['address'];
-    $phone_number= $_POST['phone_number'];
+    $id=$_SESSION['user_id'];
+    $school_id= $_POST['school_id'];
+    $fullname= $_POST['fullname'];
     $email= $_POST['email'];
-    $user_type= $_POST['user_type'];
-    $query = $conn->prepare('INSERT INTO tb_users(last_name,first_name,middle_name,username,"password",gender,"address",phone_number,email,user_type,"status") 
-    VALUES($last_name,$first_name,$middle_name,$username,$pword,$gender,$addr,$phone_number,$email,$user_type,1)');
+    $address = $_POST['address'];
+    $number = $_POST['number'];
+    $role_in_school= $_POST['role_in_school'];
+    $department= $_POST['department'];
+    $pic= $_POST['pic'];
+    $cover= $_POST['cover'];
+
+
+    $query = $conn->prepare('INSERT INTO users(uid,school_id,fullname,email,address,number,yr_sec,acadyr,role_in_school,department,pic,cover,date_registered,status,approval) 
+    VALUES($id,$school_id,$fullname,$email,$address,$number,$role_in_school,$department,$pic,$cover,$now(),active,pending)');
     var_dump($query);
-    $query->bind_param('sssssssiss',$last_name,$first_name,$middle_name,$username,$pword,$gender,$addr,$phone_number,$email,$user_type);
+    $query->bind_param('iisssissss',$id,$school_id,$fullname,$email,$address,$number,$role_in_school,$department,$pic,$cover,);
     
     if($query->execute()){
         echo 1;
@@ -65,18 +67,42 @@ function fnSaveUser(){
 function fnSavePost(){
     global $conn;
     $id=$_POST['id'];
-    $name=$_POST['name'];
+    $user=$_POST['name'];
     // $title= $_POST['title'];
     $description= $_POST['description']; 
     
 
     $filename = $_FILES['productimage']['name'];
     $folder = '../uploads/';
+    // $uploadedfiles=[];
     $destination = $folder . $filename;
     move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
 
+    // foreach($_FILES['productimage']['name'] as $key=> $name){
+    //     $tempFile = $_FILES['productimage']['tmp_name'][$key];
+    //     $targetFile = $folder . $name;
+
+    //     if (move_uploaded_file($tempFile, $targetFile)) {
+    //         $uploadedfiles[] = $targetFile;
+    //     } else {
+    //         $uploadedfiles[] = 'Error uploading ' . $name;
+    //     }
+    // }
+    // echo json_encode(['status' => 'success', 'files' => $uploadedfiles]);
+    // $destination = $folder . $filename;
+    // move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+    // if (is_uploaded_file($_FILES['productimage']['tmp_name'][0])) {
+    //     Move the uploaded file to the destination folder
+    //     move_uploaded_file($_FILES['productimage']['tmp_name'][0], $destination);
+    //     echo "File uploaded successfully.";
+    // } else {
+    //     echo "Error uploading file.";
+    // }
+    
+
+
     $query = $conn->prepare('INSERT INTO tbl_post(user_id,names,`description`,image,date_created,isdeleted) values(?,?,?,?,now(),1)');
-    $query->bind_param('isss',$id,$name,$description,$filename);
+    $query->bind_param('isss',$id,$user,$description,$filename);
     
     if($query->execute()){
         echo 1;
@@ -93,7 +119,7 @@ function fnGetPost(){
     $query->execute();
     $result = $query->get_result();
     $data = array();
-    while($row = $result->fetch_array()){
+    while($row = $result->fetch_assoc()){
         
         $data[] = $row;
     }
@@ -233,6 +259,7 @@ function fnSaveRegister(){
     }
     else{
         echo json_encode(mysqli_error($conn));
+        
     }
 }
  //
