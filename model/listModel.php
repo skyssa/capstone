@@ -20,22 +20,47 @@ function fnSaveProfile(){
     $number = $_POST['number'];
     $role_in_school= $_POST['role_in_school'];
     $department= $_POST['department'];
-    $pic= $_POST['pic'];
-    $cover= $_POST['cover'];
+    // $pic= $_POST['pic'];
+    $pic = $_FILES['profile']['name'];
+    $folder = '../uploads/';
+    $destination = $folder . $pic;
+    move_uploaded_file($_FILES['profile']['tmp_name'],$destination);
 
+    // $cover= $_POST['cover'];
+    $cover = $_FILES['cover']['name'];
+    $folder = '../uploads/';
+    $destination = $folder . $cover;
+    move_uploaded_file($_FILES['cover']['tmp_name'],$destination);
 
-    $query = $conn->prepare('INSERT INTO users(uid,school_id,fullname,email,address,number,yr_sec,acadyr,role_in_school,department,pic,cover,date_registered,status,approval) 
-    VALUES($id,$school_id,$fullname,$email,$address,$number,$role_in_school,$department,$pic,$cover,$now(),active,pending)');
-    var_dump($query);
-    $query->bind_param('iisssissss',$id,$school_id,$fullname,$email,$address,$number,$role_in_school,$department,$pic,$cover,);
+    if($_SESSION['user_type']=='Teacher'){
+        $query = $conn->prepare('INSERT INTO users(`uid`,school_id,fullname,email,`address`,`number`,role_in_school,department,pic,cover,date_registered,`status`,approval) 
+        VALUES(?,?,?,?,?,?,?,?,?,?,now(),"active","pending")');
+        var_dump($query);
+        $query->bind_param('iisssissss',$id,$school_id,$fullname,$email,$address,$number,$role_in_school,$department,$pic,$cover);
+         
+        if($query->execute()){
+            echo 1;
+        }
+        else{
+            echo json_encode(mysqli_error($conn));
+        }   
+
+   }else if($_SESSION['user_type']=='Student'){
+        $query = $conn->prepare('INSERT INTO users(`uid`,school_id,fullname,email,`address`,`number`,yr_sec,acadyr,role_in_school,department,pic,cover,date_registered,`status`,approval) 
+        VALUES(?,?,?,?,?,?,?,?,?,?,now(),"active","pending")');
+        var_dump($query);
+        $query->bind_param('iisssissss',$id,$school_id,$fullname,$email,$address,$number,$role_in_school,$department,$pic,$cover);
+            
+        if($query->execute()){
+            echo 1;
+        }
+        else{
+            echo json_encode(mysqli_error($conn));
+        }
+
+   }
     
-    if($query->execute()){
-        echo 1;
-    }
-    else{
-        echo json_encode(mysqli_error($conn));
-    }
-
+   
 }
 function fnSaveUser(){
     global $conn;
@@ -68,37 +93,14 @@ function fnSavePost(){
     global $conn;
     $id=$_POST['id'];
     $user=$_POST['name'];
-    // $title= $_POST['title'];
     $description= $_POST['description']; 
     
 
     $filename = $_FILES['productimage']['name'];
     $folder = '../uploads/';
-    // $uploadedfiles=[];
+    
     $destination = $folder . $filename;
     move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
-
-    // foreach($_FILES['productimage']['name'] as $key=> $name){
-    //     $tempFile = $_FILES['productimage']['tmp_name'][$key];
-    //     $targetFile = $folder . $name;
-
-    //     if (move_uploaded_file($tempFile, $targetFile)) {
-    //         $uploadedfiles[] = $targetFile;
-    //     } else {
-    //         $uploadedfiles[] = 'Error uploading ' . $name;
-    //     }
-    // }
-    // echo json_encode(['status' => 'success', 'files' => $uploadedfiles]);
-    // $destination = $folder . $filename;
-    // move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
-    // if (is_uploaded_file($_FILES['productimage']['tmp_name'][0])) {
-    //     Move the uploaded file to the destination folder
-    //     move_uploaded_file($_FILES['productimage']['tmp_name'][0], $destination);
-    //     echo "File uploaded successfully.";
-    // } else {
-    //     echo "Error uploading file.";
-    // }
-    
 
 
     $query = $conn->prepare('INSERT INTO tbl_post(user_id,names,`description`,image,date_created,isdeleted) values(?,?,?,?,now(),1)');

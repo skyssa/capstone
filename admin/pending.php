@@ -1,10 +1,20 @@
+<?php
+session_start();
+include "assets/config/config.php";
+if (!$_SESSION['fullname']) {
+    echo '<script>window.location.href="sign-in.php";</script>';
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dashboard |  Admin</title>
+    <title>Dashboard | Admin</title>
     <link href="assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -71,12 +81,73 @@
                     <div class="row">
                         <div class="col-md-12 page-header">
                             <div class="page-pretitle">Overview</div>
-                            <h2 class="page-title">pendings</h2>
+                            <h2 class="page-title">Teachers Request</h2>
                         </div>
+                        <form action="../model/approve.php" method="post">
+                            <table class="table table-striped" style="width:100%">
+
+                                <?php
+                                $query = "SELECT * FROM users WHERE approval = 'pending' ";
+                                $result = mysqli_query($con, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                do {
+                                    if (!is_null($row) && isset($row['approval']) && $row['approval'] == 'pending'){
+                                    // echo '';
+                                    $imagePath = '../uploads/' . $row['pic'];
+                                    $coverPath = '../uploads/' . $row['cover'];
+                            
+                                    ?>
+                                    <thead>
+                                        <tr>
+                                            <th>School Id</th>
+                                            <th>Full Name</th>
+                                            <th>email</th>
+                                            <th>address</th>
+                                            <th>number</th>
+                                            <th>role in school</th>
+                                            <th>department type</th>
+                                            <th>Profile Photo</th>
+                                            <th>cover Photo</th>
+                                            <th>date registered</th>
+                                            <th>status</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><?php echo $row['school_id']; ?></td>
+                                            <td><?php echo $row['fullname']; ?></td>
+                                            <td><?php echo $row['email']; ?></td>
+                                            <td><?php echo $row['address']; ?></td>
+                                            <td><?php echo $row['number']; ?></td>
+                                            <td><?php echo $row['role_in_school']; ?></td>
+                                            <td><?php echo $row['department']; ?></td>
+                                            <td><img src="<?php echo $imagePath; ?>" class="img-fluid" alt="Image description"></td>
+                                            <td><img src="<?php echo $coverPath; ?>" class="img-fluid" alt="Image description"></td>
+                                            <td><?php echo $row['date_registered']; ?></td>
+                                            <td><?php echo $row['status']; ?></td>
+                                            <td>
+                                                    <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
+                                                    <button type="submit" name="approve" class="btn btn-info">Approve</button>
+                                                    <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <?php 
+                                    }else{
+                                        echo'<h4>NO REQUEST AT THE MOMENT</h4>';
+
+                                    }
+                                $row = mysqli_fetch_assoc($result);
+                                } while ($row);
+                                ?>
+
+                            </table>
+                        </form>
                     </div>
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </div>

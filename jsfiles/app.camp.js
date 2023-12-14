@@ -24,11 +24,12 @@ createApp({
             .then(function(r){
                 console.log(r);
                 if(r.data == 1){
-                    alert("Profile successfully saved");
+                    alert("Your request is being processed..");
+                    window.location.href = "teacherprofile.php";
                     // vm.fnGetUsers();
                 }
                 else{
-                    alert('There was an error.');
+                    alert('Your request is being processed..');
                 }
             })
         },

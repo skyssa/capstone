@@ -244,7 +244,6 @@ if (!$_SESSION['fullname']) {
                                            
                                             <div id="imageInputsContainer">
                                                 <input type="file" name="productimage" id="fileimg"  multiple >
-                                             
                                             </div>
                                     
                                             <button type="submit"  class="btn btn-primary">
