@@ -22,22 +22,22 @@
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                    <a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="users.html"><i class="fas fa-user-friends"></i>Users</a>
+                    <a href="users.php"><i class="fas fa-user-friends"></i>Users</a>
                 </li>
                 <li>
-                    <a href="admin.html"><i class="fas fa-user-friends"></i>Admins</a>
+                    <a href="admin.php"><i class="fas fa-user-friends"></i>Admins</a>
                 </li>
                 <li>
-                    <a href="reports.html"><i class="fas fa-file"></i>Reports</a>
+                    <a href="reports.php"><i class="fas fa-file"></i>Reports</a>
                 </li>
                 <li>
-                    <a href="post.html"><i class="fas fa-file"></i>Post</a>
+                    <a href="post.php"><i class="fas fa-file"></i>Post</a>
                 </li>
                 <li>
-                    <a href="settings.html"><i class="fas fa-cog"></i>Settings</a>
+                    <a href="pending.php"><i class="fas fa-cog"></i>pendings</a>
                 </li>
             </ul>
         </nav>
@@ -93,7 +93,6 @@
                                 <td>{{ user.report_type }}</td>
                                 <td>{{ user.date_reported }} </td>
                                 <td><button type="submit" class="btn btn-info">update</button><button type="submit" class="btn btn-danger">delete</button></td>
-
                             </tr>
                         </tbody>
                     </table>

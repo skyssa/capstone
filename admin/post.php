@@ -1,11 +1,3 @@
-<?php
-session_start();
-include "assets/config/config.php";
-if (!$_SESSION['fullname']) {
-     echo '<script>window.location.href="sign-in.php";</script>';
-     exit();
-}
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -60,20 +52,7 @@ if (!$_SESSION['fullname']) {
                         <li class="nav-item dropdown">
                             <div class="nav-dropdown">
                                 <a href="#" id="nav2" class="nav-item nav-link dropdown-toggle text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user"></i> <span>
-                                        <?php
-                                        $fullname = $_SESSION['fullname'];
-     
-                                        $query = "SELECT * FROM tbl_user WHERE fullname = '$fullname' ";
-                                        $result = mysqli_query($con, $query);
-                                        $row = mysqli_fetch_assoc($result);
-                                        do {
-                                             $full = $row['fullname'];
-                                             echo $full;
-                                             $row = mysqli_fetch_assoc($result);
-                                        } while ($row);
-                                        ?>
-                                    </span> <i style="font-size: .8em;" class="fas fa-caret-down"></i>
+                                    <i class="fas fa-user"></i> <span>John Doe</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end nav-link-menu">
                                     <ul class="nav-list">
@@ -92,36 +71,32 @@ if (!$_SESSION['fullname']) {
                     <div class="row">
                         <div class="col-md-12 page-header">
                             <div class="page-pretitle">Overview</div>
-                            <h2 class="page-title">Users</h2>
+                            <h2 class="page-title">Reports</h2>
                         </div>
                     </div>
-                    <div id="list-app">
-                        <table class="table table-striped" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>user type</th>
-                                    <th>department type</th>
-                                    <th>isdeleted</th>
-                                    <th>date_created Number</th>
-                                    <th>status</th>
-                                    <th>action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="user in users">
-                                    <td>{{ user.fullname }}</td>
-                                    <td>{{ user.user_type }}</td>
-                                    <td>{{ user.dep_type }} </td>
-                                    <td>{{ user.isdeleted }} </td>
-                                    <td>{{ user.date_created }} </td>
-                                    <td>{{ user.status }} </td>
-                                    <td><button type="submit" class="btn btn-info">update</button><button type="submit" class="btn btn-danger">delete</button></td>
+                    
+                </div>
+                <div id="list-app">
+                    <table>
+                        <thead>
+                            <tr>
+                                
+                                <th>post id</th>
+                                <th>report type</th>
+                                <th>date reported</th>
+                                <th>action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="user in report">
+                                <td>{{ user.post_id }}</td>
+                                <td>{{ user.report_type }}</td>
+                                <td>{{ user.date_reported }} </td>
+                                <td><button type="submit" class="btn btn-info">update</button><button type="submit" class="btn btn-danger">delete</button></td>
 
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -130,7 +105,7 @@ if (!$_SESSION['fullname']) {
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/datatables/datatables.min.js"></script>
     <script src="assets/js/dashboard-charts.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>\
     <script src="assets/js/vue.3.js"></script>
     <script src="assets/js/axios.js"></script>
     <script src="assets/js/app.list.js"></script>

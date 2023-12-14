@@ -57,15 +57,10 @@ if (!$_SESSION['fullname']) {
                 <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
 
                     <h4 class="fw-700 font-xss mb-4">Notification</h4>
-                    <!-- <div class="card bg-transparent-card w-100 border-0 ps-5 mb-3">
-                        <img src="images/user-8.png" alt="user" class="w40 position-absolute left-0">
-                        <h5 class="font-xsss text-grey-90   0 mb-1 mt-0 fw-700 d-block">Hendrix Stamp <span class="text-grey-400 font-xsssss fw-600 float-right mt-1"> 3 min</span></h5>
-                        <h6 class="text-grey-500 fw-500 font-xssss lh-4">There are many variations of pass..</h6>
-                    </div>
-                    
-                    </div> -->
+                  
                 </div>
-                <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
+                <!-- <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
+                 -->
                 <div class="p-2 text-center ms-3 position-relative dropdown-menu-icon menu-icon cursor-pointer">
                     <i class="feather-settings animation-spin d-inline-block font-xl text-current"></i>
                     <div class="dropdown-menu-settings switchcolor-wrap">
@@ -182,7 +177,9 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
-                                <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>Profile</span></a></li>
+                                <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span><?php
+                                    echo $_SESSION['fullname'];
+                                    ?></span></a></li>
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
                                 <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
                             </ul>
@@ -191,51 +188,14 @@ if (!$_SESSION['fullname']) {
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
                             <ul class="mb-1">
                                 <li><a href="chat.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Message</span><span class="circle-count bg-warning mt-0"></span></a></li>
-                                <li><?php
-                                    echo $_SESSION['fullname'];
-                                    ?></li>
+                                
                                 <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i></i><span>Log Out</span></span></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </nav>
-            <!-- <nav class="navigation scroll-bar">
-                <div class="container ps-0 pe-0">
-                    <div class="nav-content">
-                        <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
-                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
-                            <ul class="mb-1 top-content">
-                                <li class="logo d-none d-xl-block d-lg-block"></li>
-                                <li><a href="teacherhome.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
-                                <li></li>
-                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-globe btn-round-md bg-gold-gradiant me-3"></i><span>Departments</span></a></li>
-                                <li></li>
-                                <li><a href="teacherprofile" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>User Profile </span></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2">
-                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span>More </span>Pages</div>
-                            <ul class="mb-3">
-                                <li></li>
-                                <li></li>
-                                <li><a href="default-event.html" class="nav-content-bttn open-font"><i class="font-xl text-current feather-map-pin me-3"></i><span>Latest Event</span></a></li>
-                                <li></li>
-                            </ul>
-                        </div>
-                        <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
-                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
-                            <ul class="mb-1">
-                                <li class="logo d-none d-xl-block d-lg-block"></li>
-                                <li><a href="default-settings.html" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-settings me-3 text-grey-500"></i><span>Settings</span></a></li>
-                                <li></li>
-                                <li><a href="default-message.html" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Chat</span><span class="circle-count bg-warning mt-0">23</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav> -->
+            
             <!-- navigation left -->
             <!-- main content -->
             <div class="main-content right-chat-active">
@@ -259,29 +219,7 @@ if (!$_SESSION['fullname']) {
                                             ?></span>
                                         </h4>
 
-                                        <!-- <div class="d-flex align-items-center justify-content-center position-absolute right-15 top-10 mt-2 me-2">
-
-                                            <a href="#" class="d-none d-lg-block bg-greylight btn-round-lg ms-2 rounded-3 text-grey-700"><i class="feather-mail font-md"></i></a>
-                                            <a href="#" id="dropdownMenu8" class="d-none d-lg-block btn-round-lg ms-2 rounded-3 text-grey-700 bg-greylight" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-more font-md"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu8">
-                                                <div class="card-body p-0 d-flex">
-                                                    <i class="feather-bookmark text-grey-500 me-3 font-lg"></i>
-                                                    <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-0">Save Link <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Add this to your saved items</span></h4>
-                                                </div>
-                                                <div class="card-body p-0 d-flex mt-2">
-                                                    <i class="feather-alert-circle text-grey-500 me-3 font-lg"></i>
-                                                    <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-0">Hide Post <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                                </div>
-                                                <div class="card-body p-0 d-flex mt-2">
-                                                    <i class="feather-alert-octagon text-grey-500 me-3 font-lg"></i>
-                                                    <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-0">Hide all from Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                                </div>
-                                                <div class="card-body p-0 d-flex mt-2">
-                                                    <i class="feather-lock text-grey-500 me-3 font-lg"></i>
-                                                    <h4 class="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-0">Unfollow Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                      
                                     </div>
 
                                     
@@ -291,16 +229,7 @@ if (!$_SESSION['fullname']) {
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                     <div class="card-body d-block p-4">
                                         <h4 class="fw-700 mb-3 font-xsss text-grey-900">Your Profile</h4>
-                                        <!-- <div class="shadow w-350 p-3 text-center">
-                                            <img src="upload/<?= $user['pp'] ?>" class="img-fluid rounded-circle">
-                                            <h3 class="display-4 "><?= $user['fname'] ?></h3>
-                                            <a href="edit.php" class="btn btn-primary">
-                                                Edit Profile
-                                            </a>
-                                            <a href="logout.php" class="btn btn-warning">
-                                                Logout
-                                            </a>
-                                        </div> -->
+                                      
                                     </div>
                                     <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-user text-black-100 font-sm">Basic Info</i></h4>
                                     <div class="card-body d-flex pt-0">
@@ -388,8 +317,11 @@ if (!$_SESSION['fullname']) {
                                             <div class="mb-3">
                                                 <label class="form-label">Profile Picture</label>
                                                 <input type="file" name="profile" class="form-control">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Cover Photo</label>
                                                 <input type="file" name="cover" class="form-control">
-                                                
                                             </div>
 
                                             <button type="submit" class="btn btn-primary">Update</button>
@@ -404,10 +336,10 @@ if (!$_SESSION['fullname']) {
             <!-- main content -->
 
             <!-- right chat -->
-            <div class="right-chat nav-wrap mt-2 right-scroll-bar">
+            <!-- <div class="right-chat nav-wrap mt-2 right-scroll-bar">
                 <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 
-                    <!-- loader wrapper -->
+                    loader wrapper
                     <div class="preloader-wrap p-3" style="display: none;">
                         <div class="box shimmer">
                             <div class="lines">
@@ -434,16 +366,16 @@ if (!$_SESSION['fullname']) {
                             </div>
                         </div>
                     </div>
-                    <!-- loader wrapper -->
+                    loader wrapper
 
                     <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
                         <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
                         <ul class="list-group list-group-flush">
                             
                             <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <!-- <figure class="avatar float-left mb-0 me-2">
+                                <figure class="avatar float-left mb-0 me-2">
                                     <img src="images/user-12.png" alt="image" class="w35">
-                                </figure> -->
+                                </figure>
                                 <h3 class="fw-700 mb-0 mt-0">
                                     <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#"></a>
                                 </h3>
@@ -505,7 +437,7 @@ if (!$_SESSION['fullname']) {
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
 
             <!-- right chat -->
@@ -576,7 +508,7 @@ if (!$_SESSION['fullname']) {
         </div>
     </div>
 
-    <div class="modal-popup-chat">
+    <!-- <div class="modal-popup-chat">
         <div class="modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
             <div class="modal-popup-header w-100 border-bottom">
                 <div class="card p-3 d-block border-0 d-block">
@@ -609,7 +541,7 @@ if (!$_SESSION['fullname']) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- 
     <script src="js/plugin.js"></script>
