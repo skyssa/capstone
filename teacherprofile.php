@@ -57,7 +57,7 @@ if (!$_SESSION['fullname']) {
                 <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
 
                     <h4 class="fw-700 font-xss mb-4">Notification</h4>
-                  
+
                 </div>
                 <!-- <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
                  -->
@@ -178,8 +178,8 @@ if (!$_SESSION['fullname']) {
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
                                 <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span><?php
-                                    echo $_SESSION['fullname'];
-                                    ?></span></a></li>
+                                                                                                                                                                            echo $_SESSION['fullname'];
+                                                                                                                                                                            ?></span></a></li>
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
                                 <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
                             </ul>
@@ -188,78 +188,162 @@ if (!$_SESSION['fullname']) {
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
                             <ul class="mb-1">
                                 <li><a href="chat.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Message</span><span class="circle-count bg-warning mt-0"></span></a></li>
-                                
+
                                 <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i></i><span>Log Out</span></span></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </nav>
-            
+
             <!-- navigation left -->
             <!-- main content -->
             <div class="main-content right-chat-active">
 
+
                 <div class="middle-sidebar-bottom">
                     <div class="middle-sidebar-left">
                         <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
-                                    <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url(images/bb-9.jpg);"></div>
-                                    <div class="card-body d-block pt-4 text-center position-relative">
-                                        <figure class="avatar mt--6 position-relative w75 z-index-1 w100 z-index-1 ms-auto me-auto"><img src="images/pt-1.jpg" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
+                            <?php
+                            $uid=$_SESSION['user_id'];
+                            $query = "SELECT * FROM users WHERE `uid`=$uid  AND approval = 'approve' ";
+                            $result = mysqli_query($conn, $query);
+                            $row = mysqli_fetch_assoc($result);
+                            do {
+                                if (!is_null($row) && isset($row['approval']) && $row['approval'] == 'approve') {
+                                    // echo '';
+                                    $imagePath = 'uploads/' . $row['pic'];
+                                    $coverPath = 'uploads/' . $row['cover'];
+                            ?>
+                                    <div class="col-xl-12">
+                                        <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
+                                            <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url('<?php echo $coverPath; ?>');"></div>
+                                            <div class="card-body d-block pt-4 text-center position-relative">
+                                                <figure class="avatar mt--6 position-relative w250 z-index-1 w100 z-index-1 ms-auto me-auto" style="border:1px solid black; border-radius:5px;"><img src="<?php echo $imagePath; ?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
 
-                                        <h4 class="font-xs ls-1 fw-700 text-grey-900">
-                                            <?php
-                                                echo $_SESSION['fullname'];
-                                            ?>
-                                            <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
-                                            <?php
-                                                echo $_SESSION['dep_type'];
-                                            ?></span>
-                                        </h4>
+                                                <h4 class="font-xs ls-1 fw-700 text-grey-900">
+                                                    <?php
+                                                    echo $_SESSION['fullname'];
+                                                    ?>
+                                                    <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
+                                                    <?php echo $row['status']; ?></span>
+                                                </h4>
 
-                                      
+
+                                            </div>
+
+
+                                        </div>
                                     </div>
+                                    <div class="col-xl-8 col-xxl-9 col-lg-8 pe-0">
+                                        <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                            <div class="card-body d-block p-4">
+                                                <h4 class="fw-700 mb-3 font-xsss text-grey-900">Your Profile</h4>
 
+                                            </div>
+                                            <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-user text-black-100 font-sm">Basic Info</i></h4>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['school_id']; ?></h4>
+                                            </div>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['fullname']; ?></h4>
+                                            </div>
+                                            <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['email']; ?></h4>
+                                            </div>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['number']; ?></h4>
+                                            </div>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['address']; ?></h4>
+                                            </div>
+                                            <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-edit-2 text-black-100 font-sm">Academic Info</i></h4>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['role_in_school']; ?></h4>
+                                            </div>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['department']; ?></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php
+                                } else {
+                                    ?>
                                     
-                                </div>
-                            </div>
-                            <div class="col-xl-8 col-xxl-9 col-lg-8 pe-0">
-                                <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
-                                    <div class="card-body d-block p-4">
-                                        <h4 class="fw-700 mb-3 font-xsss text-grey-900">Your Profile</h4>
-                                      
-                                    </div>
-                                    <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-user text-black-100 font-sm">Basic Info</i></h4>
-                                    <div class="card-body d-flex pt-0">
-                                        <i class="feather-user text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
-                                    </div>
-                                    <div class="card-body d-flex pt-0">
-                                        <i class="feather-mail text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
-                                    </div>
-                                    <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
-                                    <div class="card-body d-flex pt-0">
-                                        <i class="feather-user text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
-                                    </div>
-                                    <div class="card-body d-flex pt-0">
-                                        <i class="feather-mail text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
-                                    </div>
-                                    <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-edit-2 text-black-100 font-sm">Academic Info</i></h4>
-                                    <div class="card-body d-flex pt-0">
-                                        <i class="feather-user text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
-                                    </div>
-                                    <div class="card-body d-flex pt-0">
-                                        <i class="feather-mail text-grey-500 me-3 font-lg"></i>
-                                        <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                    <div class="col-xl-12">
+                                    <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
+                                        <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url();"></div>
+                                        <div class="card-body d-block pt-4 text-center position-relative">
+                                            <figure class="avatar mt--6 position-relative w250 z-index-1 w100 z-index-1 ms-auto me-auto" style="border:1px solid black; border-radius:5px;"><img src="" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
+
+                                            <h4 class="font-xs ls-1 fw-700 text-grey-900">
+                                                <?php
+                                                echo $_SESSION['fullname'];
+                                                ?>
+                                                <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">
+                                                    <?php
+                                                    echo $_SESSION['dep_type'];
+                                                    ?></span>
+                                            </h4>
+
+
+                                        </div>
+
+
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-xl-8 col-xxl-9 col-lg-8 pe-0">
+                                    <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                        <div class="card-body d-block p-4">
+                                            <h4 class="fw-700 mb-3 font-xsss text-grey-900">Your Profile</h4>
+
+                                        </div>
+                                        <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-user text-black-100 font-sm">Basic Info</i></h4>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
+                                        <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
+                                        <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-edit-2 text-black-100 font-sm">Academic Info</i></h4>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                <?php
+                                }
+                                $row = mysqli_fetch_assoc($result);
+                            } while ($row);
+                            ?>
+
+
+
                             <div class="col-xl-4 col-xxl-3 col-lg-4">
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
                                     <!-- <div v-for="post in posts">
@@ -267,64 +351,64 @@ if (!$_SESSION['fullname']) {
                                     </div> -->
                                     <form class="profile" @submit="fnSaveProfile($event)" method="post" enctype="multipart/form-data">
 
-                                        
+
                                         <h4 class="fw-700 mb-3 font-xsss text-grey-900">Edit Your Profile</h4>
                                         <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>" id="">
-                                            <div class="mb-1">
-                                                <label class="form-label">School Id</label>
-                                                <input type="number" class="form-control" name="school_id">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" name="fullname" value="<?php echo $_SESSION['fullname'] ?>">
-                                            </div>
+                                        <div class="mb-1">
+                                            <label class="form-label">School Id</label>
+                                            <input type="number" class="form-control" name="school_id">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" name="fullname" value="<?php echo $_SESSION['fullname'] ?>">
+                                        </div>
 
-                                            <div class="mb-3">
-                                                <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Address</label>
-                                                <input type="text" class="form-control" name="address">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Number</label>
-                                                <input type="text" class="form-control" name="number">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">role in school</label>
-                                                <select name="role_in_school" class="form-control">
-                                                    <option disabled>Choose</option>
-                                                    <option>Dean</option>
-                                                    <option>Chairperson</option>
-                                                    <option>Accounting</option>
-                                                    <option>Faculty</option>
-                                                    <option>Part-time</option>
-                                                </select>
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" name="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Address</label>
+                                            <input type="text" class="form-control" name="address">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Number</label>
+                                            <input type="text" class="form-control" name="number">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">role in school</label>
+                                            <select name="role_in_school" class="form-control">
+                                                <option disabled>Choose</option>
+                                                <option>Dean</option>
+                                                <option>Chairperson</option>
+                                                <option>Accounting</option>
+                                                <option>Faculty</option>
+                                                <option>Part-time</option>
+                                            </select>
+                                        </div>
 
-                                            <div class="mb-3">
-                                                <label class="form-label">department</label>
-                                                <select name="department" class="form-control">
-                                                    <option disabled>Choose</option>
-                                                    <option>BSIT</option>
-                                                    <option>BSHM</option>
-                                                    <option>BSED</option>
-                                                    <option>BEED</option>
-                                                </select>
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">department</label>
+                                            <select name="department" class="form-control">
+                                                <option disabled>Choose</option>
+                                                <option>BSIT</option>
+                                                <option>BSHM</option>
+                                                <option>BSED</option>
+                                                <option>BEED</option>
+                                            </select>
+                                        </div>
 
-                                            <div class="mb-3">
-                                                <label class="form-label">Profile Picture</label>
-                                                <input type="file" name="profile" class="form-control">
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Profile Picture</label>
+                                            <input type="file" name="profile" class="form-control">
+                                        </div>
 
-                                            <div class="mb-3">
-                                                <label class="form-label">Cover Photo</label>
-                                                <input type="file" name="cover" class="form-control">
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Cover Photo</label>
+                                            <input type="file" name="cover" class="form-control">
+                                        </div>
 
-                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
                                 </div>
                             </div>
