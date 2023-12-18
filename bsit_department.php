@@ -189,23 +189,23 @@ if (!$_SESSION['fullname']) {
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
                                 <?php
-                                $id = $_SESSION['user_id'];
-                                $query = "SELECT *
+                                    $id=$_SESSION['user_id'];
+                                     $query = "SELECT *
                                      FROM tbl_user AS tu
                                      JOIN users AS u ON tu.user_id = u.uid
                                      WHERE tu.user_id = $id;";
-                                $result = mysqli_query($conn, $query);
-                                $row = mysqli_fetch_assoc($result);
-                                if ($row != 0) {
-                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
+                                     $result = mysqli_query($conn, $query);
+                                     $row = mysqli_fetch_assoc($result);
+                                     if($row!=0){
+                                        echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
                                         ';
-                                }
+                                        
+                                     }
                                 ?>
-
+                                
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
                                 <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
                                 <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
-                                <li><a href="" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
                                 <li><a href="logouts.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
 
                             </ul>
@@ -260,7 +260,7 @@ if (!$_SESSION['fullname']) {
                                     <a href="#" class=" font-xssss fw-600 text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create
                                         Post</a>
                                     <!-- post -->
-                                    <form enctype="multipart/form-data" @submit="fnSavePost($event)">
+                                    <!-- <form enctype="multipart/form-data" @submit="fnSavePost($event)">
                                         <input type="hidden" name="name" value="<?php echo $_SESSION['fullname']; ?>" id="">
                                         <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>" id="">
                                         <div class="form-group">
@@ -277,8 +277,26 @@ if (!$_SESSION['fullname']) {
                                                 Post
                                             </button>
                                         </div>
-                                    </form>
+                                    </form> -->
+                                    <form enctype="multipart/form-data" @submit="fnSavebsit($event)">
+                                        <input type="hidden" name="name" value="<?php echo $_SESSION['fullname']; ?>" id="">
+                                        <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>" id="">
+                                        <div class="form-group">
+                                            <textarea name="description" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="What's on your mind?"></textarea>
 
+                                        </div>
+                                        <div class="form-group">
+                                           
+                                            <div id="imageInputsContainer">
+                                                <input type="file" name="productimage" id="fileimg"  multiple >
+                                             
+                                            </div>
+                                    
+                                            <button type="submit"  class="btn btn-primary">
+                                                Post
+                                            </button>
+                                        </div>
+                                    </form> 
                                 </div>
 
 
@@ -289,8 +307,7 @@ if (!$_SESSION['fullname']) {
                                         </h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2" style="margin: 0px;">
-                                            <a @click="editPost(post)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editPostModal">Edit</a>
-                                            <a @click="fnDeletePost(post.post_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
+
                                         </div>
                                     </div>
                                     <div class="card-body p-0 me-lg-5">
@@ -579,7 +596,7 @@ if (!$_SESSION['fullname']) {
                         </div>
                     </div>
 
-                    <!-- <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
+                    <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content border-0 bg-transparent">
                                 <button type="button" class="close mt-0 position-absolute top--30 right--10" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-900 font-xssss"></i></button>
@@ -593,36 +610,6 @@ if (!$_SESSION['fullname']) {
                                         </div>
                                     </div>
                                     
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form @submit.prevent="updatePost">
-                                        <label for="edit-names">Name:</label>
-                                        <input v-model="editingPost.names" type="text" id="edit-names" required>
-
-                                        <label for="edit-description">Description:</label>
-                                        <textarea v-model="editingPost.description" id="edit-description" required></textarea>
-
-                                        <label for="edit-image">Image URL:</label>
-                                        <input v-model="editingPost.image" type="text" id="edit-image" >
-
-                                        <button type="submit">Update Post</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>

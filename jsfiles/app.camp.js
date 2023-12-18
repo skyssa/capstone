@@ -1,8 +1,13 @@
+
+
 const {createApp} = Vue;
 
 createApp({
+   
     data(){
         return{
+            showEditModal:false,
+            showDeleteModal:false,
             users:[],
             posts:[],
             user_id:'',
@@ -10,10 +15,23 @@ createApp({
             announce: [],
             events: [],
             comments:[],
+            clickPost:{},
+
+            editingPost: {
+                post_id: null,
+                user_id: null,
+                names: '',
+                description: '',
+                image: '',
+                date_created: ''
+            }
             
         }
     },
     methods:{
+
+       
+
         fnSaveProfile:function(e){
             const vm = this;
             e.preventDefault();    
@@ -74,6 +92,8 @@ createApp({
         //         })
         //     })
         // },
+        
+        //post
         fnSavePost:function(e){
             const vm = this;
             e.preventDefault();    
@@ -99,22 +119,80 @@ createApp({
             const data = new FormData();
             data.append("method","fnGetPost");
             axios.post('model/listModel.php',data)
-            .then(function(r){
-                vm.posts = [];
-                r.data.forEach(function(v){
-                    vm.posts.push({
-                        post_id: v.post_id,
-                        user_id: v.user_id,
-                        names: v.names,
-                        description: v.description,
-                        image: v.image,
-                        date_created: v.date_created
-                        
-                    })
-                })
+            .then(function (response) {
+                console.log(response); // Log the entire response to the console
+    
+                // Check if the response data is an array before using forEach
+                if (Array.isArray(response.data)) {
+                    vm.posts = response.data.map(function (v) {
+                        return {
+                            post_id: v.post_id,
+                            user_id: v.user_id,
+                            names: v.names,
+                            description: v.description,
+                            image: v.image,
+                            date_created: v.date_created
+                        };
+                    });
+                } else {
+                    console.error("Response data is not an array:", response.data);
+                }
             })
+            .catch(function (error) {
+                console.error('Error during fnGetPost:', error);
+            });
+           
+        },
+        editPost(post) {
+            this.editingPost = { ...post };
         },
 
+        updatePost() {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnUpdatePost");
+            data.append("post_id", vm.editingPost.post_id);
+            data.append("names", vm.editingPost.names);
+            data.append("description", vm.editingPost.description);
+            data.append("image", vm.editingPost.image);
+    
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Post successfully updated");
+                        vm.fnGetPost(); // Refresh the post list
+                        // Optionally, close the form/modal or perform other actions
+                    } else {
+                        console.log(r);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error during updatePost:', error);
+                });
+
+                $('#editPostModal').modal('hide');
+        },
+        fnDeletePost(postId) {
+            const vm = this;
+            const data = new FormData();
+            data.append('method', 'fnDeletePost');
+            data.append('post_id', postId);
+    
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert('Post successfully deleted');
+                        vm.fnGetPost(); // Refresh the post list
+                    } else {
+                        console.log(r);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error during fnDeletePost:', error);
+                });
+        },
+   
+        // announcement
         fnSaveAnnouncement:function(e){
             const vm = this;
             e.preventDefault();    
@@ -125,7 +203,7 @@ createApp({
             .then(function(r){
                 if(r.data == 1){
                     alert("Announcement successfully saved");
-                    window.location.href = "teacherhome.php";
+                    window.location.href = "announceModal";
                     vm.fnGetAnnouncement();
                 }
                 else{
@@ -139,19 +217,46 @@ createApp({
             const data = new FormData();
             data.append("method","fnGetAnnouncement");
             axios.post('model/listModel.php',data)
-            .then(function(){
+            .then(function(r){
                 vm.announce = [];
-                data.forEach(function(v){
+                r.data.forEach(function(v){
                     vm.announce.push({
+                        a_id:v.a_id,
                         title: v.title,
                         description: v.description,
                         date_created: v.date_created
-                        
                     })
                 })
             })
         },
 
+    
+        // fnEditA:function(e){
+        //     const vm = this;
+        //     e.preventDefault();    
+        //     var form = e.currentTarget;
+        //     const data = new FormData(form);
+        //     data.append('method','fnEditA');
+        //     axios.post('model/listModel.php',data)
+        //     .then(function(r){
+        //         if(r.data == 1){
+        //             alert("Announcement successfully Edited");
+        //             window.location.href = "announceModal";
+                 
+        //         }
+        //         else{
+        //             alert('There was an error.');
+        //             console.log(r);
+        //         }
+        //     })
+        // },
+        editAnnouncement(index) {
+            // Set the editedAnnouncement data with the values of the selected announcement
+            this.editedAnnouncement = { ...this.announce[index] };
+
+            // Show the editAnnouncementModal
+            $('#editAnnouncementModal').modal('show');
+        },
 
         fnSaveEvent:function(e){
             const vm = this;
@@ -280,9 +385,9 @@ createApp({
             const data = new FormData();
             data.append("method","fnGetEvent");
             axios.post('model/listModel.php',data)
-            .then(function(){
+            .then(function(r){
                 vm.events = [];
-                data.forEach(function(v){
+                r.data.forEach(function(v){
                     vm.events.push({
 
                         title: v.title,
@@ -294,9 +399,7 @@ createApp({
                 })
             })
         },
-
-
-
+      
        
     },
     created:function(){
@@ -311,3 +414,4 @@ createApp({
     }
 
 }).mount('#camp-app')
+

@@ -11,7 +11,7 @@ if(isset($_POST['insert_data']) && isset($_POST['user_inp']) && isset($_POST['in
     $incoming_id = mysqli_real_escape_string($conn, $_POST['incoming_id']);
     $msg = mysqli_real_escape_string($conn, $_POST['user_inp']);
     
-    $query_user = mysqli_query($conn, "INSERT INTO user_msg(incoming_id,outgoing_id, messages) VALUES('$incoming_id','$outgoing_id','$msg')");
+    $query_user = mysqli_query($conn, "INSERT INTO user_msg(incoming_id,outgoing_id, messages, date_send) VALUES('$incoming_id','$outgoing_id','$msg',now())");
 
     if(!$query_user){
        echo "An error occur"; 

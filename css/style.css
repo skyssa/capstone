@@ -14225,7 +14225,7 @@ strong {
 
 .main-content .middle-sidebar-bottom {
     width: 100%;
-    padding: 20px 0 10px 0
+    padding: 20px 0 10px 0;
 }
 
 @media (min-width:1200px) {

@@ -297,11 +297,13 @@ if (!$_SESSION['fullname']) {
                         <div class="col-lg-12 position-relative">
                             <div class="chat-wrapper pt-0 w-100 position-relative scroll-bar bg-white theme-dark-bg">
                                 <div class="chat-body">
-                                    <div class="chat-msg-ovl">
-                                        <p>No messages available, stat a chat.</p>
+                                    <div class="profile">
+                                        
                                     </div>
 
-                                    <div class="chat-msg"></div>
+                                    <div class="chat-msg">
+
+                                    </div>
 
                                     
                                     <div class="chat-footer">
@@ -338,7 +340,7 @@ if (!$_SESSION['fullname']) {
         </div>
     </div>
   
-    <script src="./js/fetch_msg.js"></script>
+    <script src="js/fetch_msg.js"></script>
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>
 </body>

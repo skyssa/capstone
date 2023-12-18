@@ -130,6 +130,49 @@ function fnGetPost(){
 
 }
 
+function fnUpdatePost(){
+    global $conn;
+    $post_id = $_POST['post_id'];
+    $names = $_POST['names'];
+    $description = $_POST['description'];
+    $image = $_POST['image'];
+
+    $sql = "UPDATE tbl_post SET names=?, description=?, image=? WHERE post_id=?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'sssi', $names, $description, $image, $post_id);
+    $result = mysqli_stmt_execute($stmt);
+
+    if ($result) {
+        echo 1; // Success
+    } else {
+        echo 0; // Failure
+       
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
+
+function fnDeletePost(){
+    global $conn;
+        $post_id = $_POST['post_id'];
+        $sql = "DELETE FROM tbl_post WHERE post_id=?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $post_id);
+
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            echo 1; // Success
+        } else {
+            echo 0; // Failure
+            
+        }
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
+}
+
+
 function fnSaveAnnouncement(){
     global $conn;
     $title= $_POST['title'];
@@ -283,7 +326,7 @@ function fnLogin(){
         //$data[]=$row;
         if($row['ret'] == 1 ){
             $_SESSION['user_id'] = $row['user_id'];
-            $_SESSION['fullname'] = $row['fullname'];
+            $_SESSION['fullname'] = $row['name'];
             $_SESSION['user_type'] = $row['user_type'];
             $_SESSION['dep_type'] = $row['dep_type'];
            
@@ -424,4 +467,10 @@ function fnGetAbsit(){
     echo json_encode($data);
 
 }
+
+
+
+
+
+
 ?>

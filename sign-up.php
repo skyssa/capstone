@@ -72,7 +72,7 @@
                                     <div class="form-group mb-1"><button type="submit" name="register" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 ">Register</button></div>
                                 </div>
                             </form>
-                            <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Already have account <a href="sign-up.php" class="fw-700 ms-1">Login</a></h6>
+                            <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Already have account <a href="sign-in.php" class="fw-700 ms-1">Login</a></h6>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
             $user_type=$_POST['user_type'];
             $dep_type=$_POST['dep_type'];
 
-            $query = $conn->prepare('INSERT INTO tbl_user(fullname,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');;
+            $query = $conn->prepare('INSERT INTO tbl_user(name,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');;
             $query->bind_param('sssss',$fname,$username,$password,$user_type,$dep_type);
 
             if($query->execute()){
