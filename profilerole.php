@@ -5,7 +5,7 @@ if(!$_SESSION['fullname']){
      echo'<script>window.location.href="sign-in.php";</script>';
      exit();
 }else if($_SESSION['user_type']=='Student'){
-     echo '<script>window.location.href = "userprofile.php";</script>';
+     echo '<script>window.location.href = "studentprofile.php";</script>';
 
 }else if($_SESSION['user_type']=='Teacher'){
      echo '<script>window.location.href = "teacherprofile.php";</script>';

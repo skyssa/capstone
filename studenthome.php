@@ -329,11 +329,11 @@ if (!$_SESSION['fullname']) {
                                         <figure class="avatar me-3"><i class="fa fa-user"></i></figure>
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{post.names}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{post.date_created}}</span>
                                         </h4>
-                                        <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2" style="margin: 0px;">
+                                        <!-- <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a> -->
+                                        <!-- <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2" style="margin: 0px;">
                                             <a @click="editPost(post)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editPostModal">Edit</a>
                                             <a @click="fnDeletePost(post.post_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="card-body p-0 me-lg-5">
                                         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
