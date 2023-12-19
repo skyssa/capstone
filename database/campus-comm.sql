@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2023 at 02:44 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Dec 19, 2023 at 10:37 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,6 +25,22 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_displayAnnounce` ()   BEGIN
+SELECT * FROM tbl_announcement ORDER BY date_created DESC;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_displayComment` ()   BEGIN
+SELECT * FROM tbl_comments;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_displayEvents` ()   BEGIN
+SELECT * FROM tbl_events;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_displayPost` ()   BEGIN
+SELECT * FROM tbl_post ORDER BY date_created DESC;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_displayUser` ()   BEGIN SELECT * FROM tbl_user;
 END$$
 
@@ -33,16 +49,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login` (IN `p_username` TEXT, IN
 SELECT * FROM tbl_user where username =p_username and password = p_password;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_save` (IN `p_user_id` INT(11), IN `p_fullname` TEXT, IN `p_username` TEXT, IN `p_password` VARCHAR(100), IN `p_user_type` TEXT, IN `p_dep_type` TEXT, IN `p_isdeleted` INT(11), IN `p_date_created` DATE, IN `p_status` INT)   BEGIN 
-INSERT INTO tbl_user(user_id,fullname,username,password,user_type,dep_type,isdeleted,date_created,status) VALUES(p_user_id,
-p_fullname, 
-p_username,
-p_password,
-p_user_type,
-p_dep_type,
-0,
-now(),
-1);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_saveAnnounce` (IN `p_title` TEXT, IN `p_description` TEXT, IN `p_date_created` DATETIME, IN `p_isdeleted` INT(11))   BEGIN
+INSERT INTO tbl_announcement(title,description,date_created,isdeleted) VALUES(p_title,p_description,now(),1);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_saveEvents` (IN `p_title` TEXT, IN `p_date` DATE, IN `p_event` TEXT, IN `p_date_posted` DATETIME)   BEGIN
+INSERT INTO tbl_events(title,date,event,date_posted) VALUES(p_title,p_date,p_event,now());
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_savelogin` (IN `p_username` TEXT, IN `p_password` VARCHAR(100))   BEGIN
@@ -63,6 +75,124 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `alumniannounce`
+--
+
+CREATE TABLE `alumniannounce` (
+  `a_id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `date_created` datetime NOT NULL,
+  `isdeleted` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `alumniannounce`
+--
+
+INSERT INTO `alumniannounce` (`a_id`, `title`, `description`, `date_created`, `isdeleted`) VALUES
+(1, 'sasda', 'sasadsda', '2023-12-20 04:57:14', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alumnicomment`
+--
+
+CREATE TABLE `alumnicomment` (
+  `comment_id` int(11) NOT NULL,
+  `pos_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `uname` text NOT NULL,
+  `comment` text NOT NULL,
+  `date` datetime NOT NULL,
+  `isapprove` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `alumnicomment`
+--
+
+INSERT INTO `alumnicomment` (`comment_id`, `pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`) VALUES
+(2, 1, 23, 'Jhon Richard Bensi', '132121231xzcxz', '2023-12-20 04:52:25', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alumnipost`
+--
+
+CREATE TABLE `alumnipost` (
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `names` text NOT NULL,
+  `description` text NOT NULL,
+  `image` text NOT NULL,
+  `date_created` datetime NOT NULL,
+  `isdeleted` int(11) NOT NULL,
+  `isapprove` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `alumnipost`
+--
+
+INSERT INTO `alumnipost` (`post_id`, `user_id`, `names`, `description`, `image`, `date_created`, `isdeleted`, `isapprove`) VALUES
+(1, 23, 'Jhon Richard Bensi', 'sadsadsadsa', '', '2023-12-20 04:39:32', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alumnireport`
+--
+
+CREATE TABLE `alumnireport` (
+  `report_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `report_type` text NOT NULL,
+  `date_reported` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `alumnireport`
+--
+
+INSERT INTO `alumnireport` (`report_id`, `post_id`, `report_type`, `date_reported`) VALUES
+(1, 1, 'spam', '2023-12-20 04:46:38'),
+(2, 1, 'illegal content', '2023-12-20 04:47:34'),
+(3, 1, 'illegal content', '2023-12-20 04:48:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bsitannouncement`
+--
+
+CREATE TABLE `bsitannouncement` (
+  `a_id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `date_created` datetime NOT NULL,
+  `isdeleted` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bsitevents`
+--
+
+CREATE TABLE `bsitevents` (
+  `events_id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `date` date NOT NULL,
+  `event` text NOT NULL,
+  `date_posted` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `message`
 --
 
@@ -71,17 +201,7 @@ CREATE TABLE `message` (
   `fromuser` int(100) NOT NULL,
   `touser` int(100) NOT NULL,
   `message` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `message`
---
-
-INSERT INTO `message` (`id`, `fromuser`, `touser`, `message`) VALUES
-(1, 3, 2, 'xZCcZcZasd'),
-(3, 1, 3, 'sdsadsadsa'),
-(4, 8, 4, 'dkjsahdkhska'),
-(5, 8, 3, 'dasdhsjahdasfasdf');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -95,17 +215,18 @@ CREATE TABLE `tbl_announcement` (
   `description` text NOT NULL,
   `date_created` datetime NOT NULL,
   `isdeleted` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_announcement`
 --
 
 INSERT INTO `tbl_announcement` (`a_id`, `title`, `description`, `date_created`, `isdeleted`) VALUES
-(1, 'sadsadsa', 'dasdsadsadsad', '2023-04-25 03:02:51', 1),
-(2, 'dsadsa', 'sadsadsadsadsa', '2023-04-25 14:35:45', 1),
-(3, 'scholarship ', 'dnmsklandkjbsad', '2023-05-13 16:08:21', 1),
-(4, 'sdsads', 'sadsadsa', '2023-05-22 05:59:36', 1);
+(7, 'capstone defend', 'we will have capstone defence in december 23rd', '2023-12-18 02:33:23', 1),
+(8, 'sadsa', 'asdsadsa', '2023-12-18 03:33:06', 1),
+(9, 'sadsa', 'sadsad', '2023-12-18 03:39:28', 1),
+(10, 'asdsad', 'sadsadsa', '2023-12-18 03:39:45', 1),
+(11, 'sadsad', 'sadsad', '2023-12-18 03:41:16', 1);
 
 -- --------------------------------------------------------
 
@@ -115,23 +236,23 @@ INSERT INTO `tbl_announcement` (`a_id`, `title`, `description`, `date_created`, 
 
 CREATE TABLE `tbl_comments` (
   `comment_id` int(11) NOT NULL,
+  `pos_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `uname` text NOT NULL,
   `comment` text NOT NULL,
-  `post_id` int(11) NOT NULL,
+  `date` datetime NOT NULL,
   `isapprove` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_comments`
 --
 
-INSERT INTO `tbl_comments` (`comment_id`, `comment`, `post_id`, `isapprove`) VALUES
-(0, 'saomethjinf askjdfaasnmbsad', 1, 0),
-(0, 'sdsadsadsad', 1, 0),
-(0, 'hahahha \r\n', 1, 0),
-(0, 'hahahha \r\ndsadsadsad', 1, 0),
-(0, 'bfsdkafasd', 1, 0),
-(0, 'awdsadwad', 1, 0),
-(0, 'awdsadwadsdcvsc', 1, 0);
+INSERT INTO `tbl_comments` (`comment_id`, `pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`) VALUES
+(10, 0, 20, 'arnel lamanilao', 'sasadsa', '2023-12-18 01:17:00', 0),
+(11, 0, 20, 'arnel lamanilao', 'sadsadsadsad', '2023-12-18 04:27:26', 0),
+(12, 0, 20, 'arnel lamanilao', 'sadsadsa', '2023-12-19 00:48:14', 0),
+(13, 0, 20, 'arnel lamanilao', 'sadsadsa', '2023-12-19 03:59:55', 0);
 
 -- --------------------------------------------------------
 
@@ -142,22 +263,19 @@ INSERT INTO `tbl_comments` (`comment_id`, `comment`, `post_id`, `isapprove`) VAL
 CREATE TABLE `tbl_events` (
   `events_id` int(11) NOT NULL,
   `title` text NOT NULL,
+  `date` date NOT NULL,
   `event` text NOT NULL,
   `date_posted` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_events`
 --
 
-INSERT INTO `tbl_events` (`events_id`, `title`, `event`, `date_posted`) VALUES
-(1, 'asdsad', 'sadasdas', '2023-04-25 02:59:53'),
-(2, 'asdsad', 'sadasdas', '2023-04-25 03:00:04'),
-(3, 'sdsd', 'sdsdsa', '2023-04-25 03:00:53'),
-(4, 'asd', 'sadsadsa', '2023-04-25 14:35:28'),
-(5, 'campagn', 'ssg', '2023-05-13 09:34:20'),
-(6, 'birhtyday', 'dsahkldhsa', '2023-05-13 16:08:00'),
-(7, 'dsad', 'asdsadsa', '2023-05-22 05:48:52');
+INSERT INTO `tbl_events` (`events_id`, `title`, `date`, `event`, `date_posted`) VALUES
+(12, 'aquintance party', '2023-11-25', 'aquintance party', '2023-12-18 02:36:28'),
+(13, '4rth year enrollment', '2023-12-26', 'enrollment for 4th year second sem', '2023-12-18 03:22:27'),
+(14, 'sdfsdfsd', '2023-12-29', 'sadsadsad', '2023-12-19 02:29:09');
 
 -- --------------------------------------------------------
 
@@ -174,21 +292,39 @@ CREATE TABLE `tbl_post` (
   `date_created` datetime NOT NULL,
   `isdeleted` int(11) NOT NULL,
   `isapprove` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_post`
 --
 
 INSERT INTO `tbl_post` (`post_id`, `user_id`, `names`, `description`, `image`, `date_created`, `isdeleted`, `isapprove`) VALUES
-(14, 1, 'jezrael suliano', 'asdfsdafsdf', '', '2023-05-15 21:15:55', 1, 0),
-(15, 1, 'jezrael suliano', 'sdf sdanfkslad', '', '2023-05-15 21:37:49', 1, 0),
-(18, 1, 'jezrael suliano', 'wadaw', '', '2023-05-15 22:32:16', 1, 0),
-(19, 1, 'jezrael suliano', 'b 8vyhjv y', '', '2023-05-15 22:32:36', 1, 0),
-(22, 1, 'jezrael suliano', 'qeqwe', '', '2023-05-16 00:58:14', 1, 0),
-(23, 1, 'jezrael suliano', 'ayaw pag buut kay di ka gwapo', '', '2023-05-16 02:02:57', 1, 0),
-(46, 4, 'Jolly Ford', 'awdsadawd', '', '2023-05-16 09:09:44', 1, 0),
-(47, 9, 'test', 'sasdasadsagjsdavjdsa', '', '2023-05-23 20:20:21', 1, 0);
+(92, 20, 'arnel lamanilao', 'yesss finally na edit na', '', '2023-12-19 03:21:35', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_postbsit`
+--
+
+CREATE TABLE `tbl_postbsit` (
+  `post_id` int(11) NOT NULL,
+  `user_id` text NOT NULL,
+  `names` text NOT NULL,
+  `description` text NOT NULL,
+  `image` text NOT NULL,
+  `date_created` datetime NOT NULL,
+  `isdeleted` int(11) NOT NULL,
+  `isapprove` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_postbsit`
+--
+
+INSERT INTO `tbl_postbsit` (`post_id`, `user_id`, `names`, `description`, `image`, `date_created`, `isdeleted`, `isapprove`) VALUES
+(7, '20', 'arnel lamanilao', 'sadsadsadsa', '', '2023-12-04 03:01:50', 1, 0),
+(8, '20', 'arnel lamanilao', 'dasdsadsa', '', '2023-12-04 03:01:53', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -201,18 +337,14 @@ CREATE TABLE `tbl_reports` (
   `post_id` int(11) NOT NULL,
   `report_type` text NOT NULL,
   `date_reported` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_reports`
 --
 
 INSERT INTO `tbl_reports` (`report_id`, `post_id`, `report_type`, `date_reported`) VALUES
-(1, 0, 'illegal content', '2023-05-04'),
-(2, 0, 'sexuall content', '2023-05-04'),
-(3, 0, 'sexuall content', '2023-05-04'),
-(4, 0, 'sexuall content', '2023-05-13'),
-(5, 0, 'sexuall content', '2023-05-23');
+(7, 0, 'inapproriate', '2023-12-18');
 
 -- --------------------------------------------------------
 
@@ -222,7 +354,7 @@ INSERT INTO `tbl_reports` (`report_id`, `post_id`, `report_type`, `date_reported
 
 CREATE TABLE `tbl_user` (
   `user_id` int(11) NOT NULL,
-  `fullname` text NOT NULL,
+  `name` text NOT NULL,
   `username` text NOT NULL,
   `password` varchar(100) NOT NULL,
   `user_type` text NOT NULL,
@@ -231,26 +363,117 @@ CREATE TABLE `tbl_user` (
   `date_created` date NOT NULL,
   `status` int(11) NOT NULL,
   `counterlock` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`user_id`, `fullname`, `username`, `password`, `user_type`, `dep_type`, `isdeleted`, `date_created`, `status`, `counterlock`) VALUES
-(1, 'jezrael suliano', 'jezra', '123456', 'Teacher', 'BSIT', 0, '2023-05-10', 1, 0),
-(2, 'arnel carcela', 'lenra', '1234567', 'Student', 'BSIT', 0, '2023-05-10', 1, 2),
-(3, 'bensi john', 'jhon', '12345', 'Student', 'BSHM', 0, '2023-05-11', 1, 0),
-(4, 'Jolly Ford', 'jolly', '123456789', 'Teacher', 'BSED', 0, '2023-05-12', 1, 0),
-(5, 'din dignaran', 'din', '123456789', 'Teacher', 'BEED', 0, '2023-05-13', 1, 0),
-(6, 'adcada', 'awdasd', 'awdsadawdsad', 'Student', 'BSIT', 0, '2023-05-16', 1, 0),
-(7, 'admin', 'admin', 'admin123', 'admin', 'admin', 0, '0000-00-00', 1, 0),
-(8, 'lenraesra', 'jojo', '123456', 'Student', 'BEED', 0, '2023-05-22', 1, 0),
-(9, 'test', 'test', 'test123', 'Teacher', 'BSIT', 0, '2023-05-23', 1, 0);
+INSERT INTO `tbl_user` (`user_id`, `name`, `username`, `password`, `user_type`, `dep_type`, `isdeleted`, `date_created`, `status`, `counterlock`) VALUES
+(15, 'jezrael suliano', 'jezra', '123456', 'Student', 'BSIT', 1, '2023-12-02', 0, 0),
+(20, 'arnel lamanilao', 'arnel', '12345', 'Teacher', 'BSIT', 1, '2023-12-02', 0, 0),
+(21, 'admin', 'admin', 'admin123', 'admin', 'admin', 0, '0000-00-00', 0, 0),
+(23, 'Jhon Richard Bensi', 'bensi', '1234', 'Alumni', 'BSIT', 1, '2023-12-20', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `fullname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `number` int(11) NOT NULL,
+  `yr_sec` varchar(50) NOT NULL,
+  `acadyr` varchar(50) NOT NULL,
+  `role_in_school` varchar(100) NOT NULL,
+  `department` varchar(100) NOT NULL,
+  `pic` text NOT NULL,
+  `cover` text NOT NULL,
+  `date_registered` date NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `approval` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `uid`, `school_id`, `fullname`, `email`, `address`, `number`, `yr_sec`, `acadyr`, `role_in_school`, `department`, `pic`, `cover`, `date_registered`, `status`, `approval`) VALUES
+(5, 20, 20200094, 'arnel lamanilao', 'carcelaarnel@gmail.com', 'soong 1', 2147483647, '', '', 'Faculty', 'BSIT', 'Screenshot 2023-12-02 010211.png', 'Screenshot (6).png', '2023-12-15', 'active', 'approve');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_msg`
+--
+
+CREATE TABLE `user_msg` (
+  `id` int(11) NOT NULL,
+  `incoming_id` int(11) NOT NULL,
+  `outgoing_id` int(11) NOT NULL,
+  `messages` varchar(299) NOT NULL,
+  `date_send` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_msg`
+--
+
+INSERT INTO `user_msg` (`id`, `incoming_id`, `outgoing_id`, `messages`, `date_send`) VALUES
+(18, 20, 15, 'dsadsadsa', '2023-12-17 16:00:00'),
+(19, 20, 15, 'dsadsadsad', '2023-12-17 16:00:00'),
+(20, 20, 15, 'dasdsad', '2023-12-17 16:00:00'),
+(21, 20, 15, 'dsadsad', '2023-12-17 16:00:00'),
+(22, 20, 15, 'dsadsad', '2023-12-17 16:00:00'),
+(23, 20, 15, 'dasdsad', '2023-12-17 16:00:00'),
+(24, 20, 15, 'dsadsad', '2023-12-17 16:00:00'),
+(25, 20, 15, 'sasadsadsad', '2023-12-18 12:12:07');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `alumniannounce`
+--
+ALTER TABLE `alumniannounce`
+  ADD PRIMARY KEY (`a_id`);
+
+--
+-- Indexes for table `alumnicomment`
+--
+ALTER TABLE `alumnicomment`
+  ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Indexes for table `alumnipost`
+--
+ALTER TABLE `alumnipost`
+  ADD PRIMARY KEY (`post_id`);
+
+--
+-- Indexes for table `alumnireport`
+--
+ALTER TABLE `alumnireport`
+  ADD PRIMARY KEY (`report_id`);
+
+--
+-- Indexes for table `bsitannouncement`
+--
+ALTER TABLE `bsitannouncement`
+  ADD PRIMARY KEY (`a_id`);
+
+--
+-- Indexes for table `bsitevents`
+--
+ALTER TABLE `bsitevents`
+  ADD PRIMARY KEY (`events_id`);
 
 --
 -- Indexes for table `message`
@@ -267,6 +490,12 @@ ALTER TABLE `tbl_announcement`
   ADD PRIMARY KEY (`a_id`);
 
 --
+-- Indexes for table `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  ADD PRIMARY KEY (`comment_id`);
+
+--
 -- Indexes for table `tbl_events`
 --
 ALTER TABLE `tbl_events`
@@ -276,6 +505,12 @@ ALTER TABLE `tbl_events`
 -- Indexes for table `tbl_post`
 --
 ALTER TABLE `tbl_post`
+  ADD PRIMARY KEY (`post_id`);
+
+--
+-- Indexes for table `tbl_postbsit`
+--
+ALTER TABLE `tbl_postbsit`
   ADD PRIMARY KEY (`post_id`);
 
 --
@@ -292,44 +527,116 @@ ALTER TABLE `tbl_user`
   ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_msg`
+--
+ALTER TABLE `user_msg`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `alumniannounce`
+--
+ALTER TABLE `alumniannounce`
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `alumnicomment`
+--
+ALTER TABLE `alumnicomment`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `alumnipost`
+--
+ALTER TABLE `alumnipost`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `alumnireport`
+--
+ALTER TABLE `alumnireport`
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `bsitannouncement`
+--
+ALTER TABLE `bsitannouncement`
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `bsitevents`
+--
+ALTER TABLE `bsitevents`
+  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_announcement`
 --
 ALTER TABLE `tbl_announcement`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_events`
 --
 ALTER TABLE `tbl_events`
-  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_post`
 --
 ALTER TABLE `tbl_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `tbl_postbsit`
+--
+ALTER TABLE `tbl_postbsit`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_reports`
 --
 ALTER TABLE `tbl_reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `user_msg`
+--
+ALTER TABLE `user_msg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables

@@ -13,95 +13,98 @@ if (!$_SESSION['fullname']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Messages</title>
-    
+
     <link rel="stylesheet" href="cssfiles/bootstrap.min.css" />
     <link rel="stylesheet" href="css/themify-icons.css">
     <link rel="stylesheet" href="css/feather.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <style>
-        .main-content .chat-msg-ovl{
-        width:100%;
-        height:85vh;
-        text-align:center;
-        position:absolute;
-        display: flex;
-        align-items:center;
-        justify-content: center;
-        display:none;
-        z-index:1;
-        background:#fff;
-        color:#000;
+        .main-content .chat-msg-ovl {
+            width: 100%;
+            height: 85vh;
+            text-align: center;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+            z-index: 1;
+            background: #fff;
+            color: #000;
         }
 
-        .main-content .chat-msg{
-        width:100%;
-        height:69vh;
-        overflow-y:scroll;
-        overflow-x:hidden;
-        transition: .2s;
-        padding:10px;
-        position:relative;
+        .main-content .chat-msg {
+            width: 100%;
+            height: 69vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            transition: .2s;
+            padding: 10px;
+            position: relative;
         }
 
-        .main-content .chat-body:hover > .chat-msg::-webkit-scrollbar{
-        visibility:visible;
-        transition: 1s;
-        }
-        .main-content .chat-msg::-webkit-scrollbar{
-        width:5px;
-        }
-        .main-content .chat-msg::-webkit-scrollbar-track{
-        width:5px;
-        background:#777;
+        .main-content .chat-body:hover>.chat-msg::-webkit-scrollbar {
+            visibility: visible;
+            transition: 1s;
         }
 
-        .main-content .chat-msg::-webkit-scrollbar-thumb{
-        border-radius:20px;
-        background:#13235a;
-        visibility: hidden;
+        .main-content .chat-msg::-webkit-scrollbar {
+            width: 5px;
         }
 
-        .main-content .chat-msg p{
-        padding:5px;
-        font-size:15px;
-        box-shadow:-3px 3px 20px #9b9898;
-
-        }
-        .main-content .chat-msg .incoming{
-        display:flex;
-        width:100%;
+        .main-content .chat-msg::-webkit-scrollbar-track {
+            width: 5px;
+            background: #777;
         }
 
-        .main-content .chat-msg .outgoing{
-        display:flex;
-        width:100%;
+        .main-content .chat-msg::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            background: #13235a;
+            visibility: hidden;
         }
+
+        .main-content .chat-msg p {
+            padding: 5px;
+            font-size: 15px;
+            box-shadow: -3px 3px 20px #9b9898;
+
+        }
+
+        .main-content .chat-msg .incoming {
+            display: flex;
+            width: 100%;
+        }
+
+        .main-content .chat-msg .outgoing {
+            display: flex;
+            width: 100%;
+        }
+
         /* .main-content .chat-msg .details{
 
         /* width:85%; */
-        
-        .main-content .chat-msg .incoming .details p{
-        background:blue;
-        color: white;
-        border-radius:5px 0px 5px 5px;
-        word-wrap: break-word;
+
+        .main-content .chat-msg .incoming .details p {
+            background: blue;
+            color: white;
+            border-radius: 5px 0px 5px 5px;
+            word-wrap: break-word;
         }
 
-        .main-content .chat-msg .incoming .details{
-        margin-left:auto;
-        max-width:350px;
-        align-items:flex-end;
-        position: relative;
+        .main-content .chat-msg .incoming .details {
+            margin-left: auto;
+            max-width: 350px;
+            align-items: flex-end;
+            position: relative;
         }
 
 
-        .main-content .chat-msg .outgoing .details{
-        margin-right:auto;
-        max-width:450px;
-        align-items:flex-end;
-        position: relative;
+        .main-content .chat-msg .outgoing .details {
+            margin-right: auto;
+            max-width: 450px;
+            align-items: flex-end;
+            position: relative;
         }
-
     </style>
     <script src="./js/jquery.js"></script>
     <script src="./js/bootstrap.min.js"></script>
@@ -251,36 +254,40 @@ if (!$_SESSION['fullname']) {
             <nav class="navigation scroll-bar">
                 <div class="container ps-0 pe-0">
                     <div class="nav-content">
-
-
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
-                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span>USER </span></div>
-                            <div class="logged-in-user">
+                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
+                            <ul class="mb-1 top-content">
                                 <?php
-                                $user_id = $_SESSION['user_id'];
-                                $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_id='$user_id'");
-                                $data = mysqli_fetch_assoc($query_user);
-                                ?>
-                                <div class="user-info">
-                                    <p class="username"><?php echo $data['username']; ?></p>
-                                    <span><?php echo $data['user_type']; ?> Of <?php echo $data['dep_type']; ?></span>
-                                    <br>
-                                    <div class="logout-cont mt-4">
-                                        <a href="logout.php?uid=<?php echo $data['user_id']; ?>" class="logout"><ion-icon name="lock-open"></ion-icon> Logout</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2">
-                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span>More </span>Users</div>
-                            <ul class="mb-3">
-                                <?php
-                                $query_user = mysqli_query($conn, "SELECT * FROM tbl_user ");
-                                while ($data = mysqli_fetch_assoc($query_user)) {
-                                    if ($data['user_id'] != $_SESSION['user_id'])
-                                        echo '<li><a href="?uid=' . $data["user_id"] . '">' . $data["fullname"] . ' - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '</a></li>';
+                                $id = $_SESSION['user_id'];
+                                $query = "SELECT *
+                                     FROM tbl_user AS tu
+                                     JOIN users AS u ON tu.user_id = u.uid
+                                     WHERE tu.user_id = $id;";
+                                $result = mysqli_query($conn, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                if ($row != 0) {
+
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
+                                        ';
+                                } else {
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
                                 ?>
+
+                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
+                                <li><a href="depalumni.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
+                                <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
+                                <li><a href="logout.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
+
+                            </ul>
+                        </div>
+                        <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
+                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span>Others</div>
+                            <ul class="mb-1">
+                                <li><a href="https://www.facebook.com/cpcofficial2005" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-facebook me-3 text-grey-500"></i><span>Facebook</span></a></li>
+                                <li><a href="https://www.facebook.com/cpcofficial2005" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather- me-3 text-grey-500"></i><span></span></a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -298,31 +305,34 @@ if (!$_SESSION['fullname']) {
                             <div class="chat-wrapper pt-0 w-100 position-relative scroll-bar bg-white theme-dark-bg">
                                 <div class="chat-body">
                                     <div class="profile">
-                                        
+
                                     </div>
 
                                     <div class="chat-msg">
 
                                     </div>
 
-                                    
+
                                     <div class="chat-footer">
                                         <div class="form-inline mt-1 input-group p-1">
                                             <input type="text" class="send-msg form-control" placeholder="Send message" id="send-msg-inp">
-
                                             <?php
-                                            
-                                            $user_id = $_GET['uid'];
+                                            $user_id = isset($_GET['uid']) ? $_GET['uid'] : null;
 
-                                            $query = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_id='$user_id'");
+                                            if ($user_id === null) {
+                                                echo '<h4>No Users</h4>';
+                                            } else {
+                                                $query = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_id='$user_id'");
+                                                $count = mysqli_fetch_assoc($query);
 
-                                            $count = mysqli_fetch_assoc($query);
-                                            if ($count == 0) {
-                                                echo '<script>alert("no users")</script>';
-                                                
-                                            } else if ($count > 0) { ?>
-                                                <input type="hidden" value="<?php echo $user_id; ?>" id="incoming_id_inp">
-                                            <?php } ?>
+                                                if ($count == 0) {
+                                                    echo '<h4>No Messages</h4>';
+                                                } else if ($count > 0) { ?>
+                                                    <input type="hidden" value="<?php echo $user_id; ?>" id="incoming_id_inp">
+                                            <?php
+                                                }
+                                            }
+                                            ?>
 
                                             <button class="send-btn  btn btn-primary" type="submit" id="send-btn">
                                                 Send
@@ -338,10 +348,34 @@ if (!$_SESSION['fullname']) {
                 </div>
             </div>
         </div>
+        <div class="right-chat nav-wrap mt-2 right-scroll-bar">
+            <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
+
+
+                <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
+
+                    <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
+                    <ul class="list-group list-group-flush">
+
+                        <?php
+                        $query_user = mysqli_query($conn, "SELECT * FROM tbl_user ");
+                        while ($data = mysqli_fetch_assoc($query_user)) {
+                            if ($data['user_id'] != $_SESSION['user_id'])
+                                echo '<li><a href="?uid=' . $data["user_id"] . '">' . $data["name"] . ' - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '</a></li>';
+                        }
+                        ?>
+
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
     </div>
-  
+
     <script src="js/fetch_msg.js"></script>
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>
 </body>
+
 </html>

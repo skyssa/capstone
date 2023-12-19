@@ -10,6 +10,10 @@ if(function_exists($method)){ //fnSave
 else{
     echo "Function not exists";
 }
+
+
+
+
 function fnSaveProfile(){
     global $conn;
     $id=$_SESSION['user_id'];

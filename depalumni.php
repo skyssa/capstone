@@ -235,16 +235,19 @@ if (!$_SESSION['fullname']) {
                                 $result = mysqli_query($conn, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 if ($row != 0) {
+
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
                                         ';
+                                } else {
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
                                 ?>
 
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
-                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="depalumni.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
                                 <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
-                                <li><a href="" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
-                                <li><a href="logouts.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
+                                <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
+                                <li><a href="logout.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
 
                             </ul>
                         </div>
@@ -460,7 +463,7 @@ if (!$_SESSION['fullname']) {
 
                                                     <!-- Display announcements in the modal -->
                                                     <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
-                                                        <div class="card mt-3" v-for="announces in announce">
+                                                        <div class="card mt-3" v-for="announces in announce" :key="announces.a_id">
                                                             <div class="card-heading bg-primary text-white p-3">
                                                                 <h6 class="font-xsssss mb-0">{{ announces.date_created }}</h6>
                                                                 <h5 class="font-xs fw-600 mb-2">Title: {{ announces.title }}</h5>
@@ -468,45 +471,14 @@ if (!$_SESSION['fullname']) {
                                                             <div class="card-content p-3">
                                                                 <p class="font-xsssss mb-0">Content:</p>
                                                                 <p class="font-xss fw-600 mb-2">{{ announces.description }}</p>
-                                                                <p>{{announces.a_id}}</p>
+                                                                
 
                                                                 <div class="d-flex justify-content-end mt-3">
-                                                                    <button class="btn btn-danger mr-2" @click="deleteAnnouncement(index)">Delete</button>
-                                                                    <button class="btn btn-primary" @click="editAnnouncement(index)">Edit</button>
+                                                                    <a @click="editAnnounce(announces)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editAnnounceModal">Edit</a>
+                                                                    <a @click="fnDeleteAnnounce(announces.a_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
                                                                 </div>
                                                             </div>
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal fade" id="editAnnouncementModal" tabindex="-1" role="dialog" aria-labelledby="editAnnouncementModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <!-- Modal Header -->
-                                                                <div class="modal-header bg-primary text-white">
-                                                                    <h5 class="modal-title" id="editAnnouncementModalLabel">Edit Announcement</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-
-                                                                <!-- Modal Body -->
-                                                                <div class="modal-body">
-                                                                    <!-- Form to edit announcements -->
-                                                                    <form method="post">
-
-                                                                        <div class="form-group">
-
-                                                                            <label for="editTitle" class="font-xssss fw-600 text-grey-500">Title:</label>
-                                                                            <input type="text" class="form-control" name="title" id="editTitle" required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="editDescription" class="font-xssss fw-600 text-grey-500">Description:</label>
-                                                                            <textarea class="form-control" name="description" id="editDescription" rows="3" required></textarea>
-                                                                        </div>
-                                                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -590,10 +562,13 @@ if (!$_SESSION['fullname']) {
                                         <ul class="list-group list-group-flush">
 
                                             <?php
-                                            $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_type='Student' OR user_type='Teacher' ");
+                                            $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_type='Alumni'");
                                             while ($data = mysqli_fetch_assoc($query_user)) {
-                                                if ($data['user_id'] != $_SESSION['user_id'])
+                                                if ($data['user_id'] != $_SESSION['user_id']){
                                                     echo '<li><a href="chat.php?uid=' . $data["user_id"] . '">' . $data["name"] . ' - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '</a></li>';
+                                                }else{
+                                                    echo '<h5> No Contacts </h5>';
+                                                }
                                             }
                                             ?>
 
@@ -606,24 +581,7 @@ if (!$_SESSION['fullname']) {
                         </div>
                     </div>
 
-                    <!-- <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content border-0 bg-transparent">
-                                <button type="button" class="close mt-0 position-absolute top--30 right--10" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-900 font-xssss"></i></button>
-                                <div class="modal-body p-0">
-                                    <div class="card w-100 border-0 rounded-3 overflow-hidden bg-gradiant-bottom bg-gradiant-top">
-                                        <div class="owl-carousel owl-theme dot-style3 story-slider owl-dot-nav nav-none owl-loaded owl-drag">
-                                            <div class="owl-stage-outer">
-                                              sadsad
-                                            </div>
-                                          
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                  
                     <!-- edit post -->
                     <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -682,6 +640,35 @@ if (!$_SESSION['fullname']) {
                             </div>
                         </div>
                     </div>
+<!-- edit announce -->
+                    <div class="modal fade" id="editAnnounceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="updateAnnounce">
+                                        <label for="edit-names">Title:</label>
+                                        <input v-model="editingAnnounce.title" type="text" id="edit-names" required>
+
+                                        <label for="edit-description">Description:</label>
+                                        <textarea v-model="editingAnnounce.description" id="edit-description" required></textarea>
+
+
+                                        <button type="submit" class="btn btn-primary" >Save changes</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-XpST91Agn3uZd1QVq3JcNvLyA7uj13d3s9fQbY8bF2jW0JqJSFkh6DEVDJLbcQ8E" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy12aC9fv5+gM5bGgS7J2h2bjvZkmH4bY1" crossorigin="anonymous"></script>
@@ -696,7 +683,7 @@ if (!$_SESSION['fullname']) {
 
                     <script src="jsfiles/vue.3.js"></script>
                     <script src="jsfiles/axios.js"></script>
-                    <script src="jsfiles/app.camp.js"></script>
+                    <script src="jsfiles/alumni.js"></script>
                     <!-- <script src="jsfiles/feature.js"></script> -->
 
 

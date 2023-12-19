@@ -29,64 +29,13 @@ if (!$_SESSION['fullname']) {
     <link rel="stylesheet" href="css/lightbox.css">
     <script src="https://kit.fontawesome.com/b06a377e67.js" crossorigin="anonymous"></script>
     <style media="screen">
-        #preview {
-            margin: 10px;
-            display: flex;
-            width: 100%;
-            height: 100px;
-            flex-wrap: wrap;
-            overflow-y: scroll;
-        }
-
-        #preview img {
-            width: 50%;
-            height: 30%;
-        }
-
-        .comment-container {
-            margin-bottom: 10px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-        }
-
-        .comment-author {
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-
-        .comment-input-container {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-top: 1px solid #ddd;
-        }
-
-        .comment-input {
-            flex-grow: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-right: 8px;
-        }
-
-        .comment-button {
-
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
         .style2 {
             /* margin-top:150px;
             margin-left:200px; */
-            width: 1100px;
-            height: 500px;
-            background: url(img/bgbunavista.jpg);
+            width: 1200px;
+            height: 600px;
+            background: url(img/Untitled.png);
+            background-repeat: no-repeat;
             /*            -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover; 
@@ -312,7 +261,29 @@ if (!$_SESSION['fullname']) {
                                                 <div class="col-md-1" style=" "></div>
                                                 <div class="col-md-1" style=" "></div>
                                                 <div class="col-md-3" style=" "></div>
-                                                <div class="col-md-7" style=" "></div>
+                                                <div type="button" data-toggle="modal" data-target="#guardhousemodal" class="col-md-7" style="height:30px; border:2px solid black;  width:50px; background-color:white;margin-top:30px;">
+                                                    guard house
+                                                    <div class="modal fade" id="guardhousemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ...
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                             <!-- end -->
                                             <!-- ten row -->
@@ -330,17 +301,17 @@ if (!$_SESSION['fullname']) {
                                             <!-- <div class="col-md-12 thirdway longonBorder" style="height: 5px;  "> 
 			</div>  -->
                                             <!-- eight row -->
-                                            <div class="col-lg-12 row">
-                                                <div class="col-md-12 longonBorder"></div>
-                                            </div>
+                                            <!-- <div class="col-lg-12 row">
+                                                <div class="col-md-12 longonBorder">13</div>
+                                            </div> -->
                                             <!-- end -->
                                             <!-- <div class="col-md-12 thirdway longonBorder" style="height: 5px;  "> 
 			</div> 
  -->
                                             <!-- seven row -->
-                                            <div class="col-lg-12 row">
-                                                <div class="col-md-12 longonBorder"></div>
-                                            </div>
+                                            <!-- <div class="col-lg-12 row">
+                                                <div class="col-md-12 longonBorder">14</div>
+                                            </div> -->
                                             <!-- end -->
 
                                             <!-- 	<div class="col-md-12 thirdway longonBorder" style="height: 5px;  "> 
@@ -348,17 +319,18 @@ if (!$_SESSION['fullname']) {
 
                                             <!-- six row -->
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder"></div>
-                                                <div class="col-md-2 longonBorder" style=" "></div>
-                                                <div class="col-md-6 longonBorder"></div>
+
+                                                <div class="col-md-4 longonBorder" style="height:30px; border:2px solid black;  width:80px; background-color:white; margin-left:315px; margin-top:85px;">Stair</div>
+
                                             </div>
                                             <!-- end  -->
 
                                             <!-- fifth row -->
 
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-9 longonBorder" style="">
-                                                    <div style="margin: 0px 0px 0px 150px;width: 30px"></div>
+                                                <div class="col-md-9 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:315px;  font-size:11px;">
+                                                    Comlab 1 & front-office
+
                                                 </div>
                                                 <div class="col-md-3 longonBorder"></div>
                                             </div>
@@ -367,8 +339,9 @@ if (!$_SESSION['fullname']) {
                                             <!-- forth row -->
 
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-11 longonBorder" style=" "></div>
-                                                <div class="col-md-1 longonBorder"></div>
+                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:315px; font-size:11px;">Comlab 2</div>
+
+
                                             </div>
                                             <!-- end -->
                                             <!-- 	<div class="col-md-12 thirdway longonBorder" style="height: 5px;  "> 
@@ -382,90 +355,110 @@ if (!$_SESSION['fullname']) {
 
                                             <!-- third row -->
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-6 longonBorder"></div>
-                                                <div class="col-md-2 longonBorder"></div>
-                                                <div class="col-md-4 longonBorder"></div>
+
+                                                <!-- <div class="col-md-2 longonBorder" style="height:30px; border:2px solid black;  width:50px; background-color:white;">21</div> -->
+                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:205px; font-size:11px;">canteen</div>
+                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:30px; font-size:11px;">Comlab 3</div>
+
                                             </div>
                                             <!-- end -->
                                             <!-- second row -->
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-6 longonBorder"></div>
-                                                <div class="col-md-2 longonBorder"></div>
-                                                <div class="col-md-4 longonBorder"></div>
+                                                <!-- <div class="col-md-2 longonBorder">24</div> -->
+                                                <div class="col-md-4 longonBorder" style="height:50px; border:2px solid black;  width:80px; background-color:white; margin-left:205px;">room</div>
+                                                <div class="col-md-4 longonBorder" style="height:30px; border:2px solid black;  width:80px; background-color:white; margin-left:30px;">stair</div>
+
                                             </div>
                                             <!-- end -->
                                             <!-- first row -->
-                                            <div class="col-lg-12 row">
-                                                <div class="col-md-12 thirdway longonBorder" style="height: 5px;  "> </div>
-                                            </div>
+                                            <!-- <div class="col-lg-12 row">
+                                                <div class="col-md-12 thirdway longonBorder" style="height: 5px;  ">26</div>
+                                            </div> -->
                                             <!-- end -->
 
 
                                         </div>
 
 
-                                        <div class="col-md-6">
+                                        <div class="col-lg-6">
                                             <!-- twelve row -->
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder "></div>
-                                                <div class="col-md-2 longonBorder" style="border: 2px solid #ddd"></div>
-                                                <div class="col-md-6 longonBorder partition "></div>
+
+                                                <div class="col-md-6 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; margin-top:10px; margin-left:300px; font-size:11px;">clinic</div>
+                                            </div>
+                                            <div class="col-lg-12 row">
+                                                <div class="col-md-1 longonBorder " style="height:50px; border:2px solid black;  width:40px; background-color:white; margin-left:300px; font-size:11px;">room</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:70px; background-color:white; margin-left:25px; font-size:11px;">Chair office</div>
+
+                                            </div>
+
+                                            <div class="col-lg-12 row">
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:60px; background-color:white; font-size:11px;">admin</div>
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:80px; background-color:white; ">avr</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px;">regsitrar</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; ">faculty</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px;">room</div>
+
                                             </div>
 
                                             <!-- end -->
                                             <!-- twelve row -->
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder "></div>
-                                                <div class="col-md-2 longonBorder" style="border: 2px solid #ddd"></div>
-                                                <div class="col-md-6 longonBorder " style="padding-bottom:  3px"></div>
+                                                <div class="col-md-3 longonBorder "></div>
+                                                <div class="col-md-3 longonBorder" style="height:50px; border:2px solid black;  width:99px; background-color:white; margin-top:30px;">tent</div>
+                                                <div class="col-md-1 longonBorder" style="height:100px; border:2px solid black;  width:70px; background-color:white; margin-left:155px; margin-top:30px;">tent</div>
                                             </div>
 
                                             <!-- end -->
                                             <!-- eleven row -->
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-10 longonBorder "></div>
-                                                <div class="col-md-1 longonBorder partition"> </div>
-                                                <div class="col-md-1 longonBorder "></div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px; margin-top:50px;">SAO</div>
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px; margin-top:30px;">stair</div>
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px; margin-top:30px;">room 3</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px; margin-top:30px;">room 2</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px; margin-top:30px;">room 1</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px; margin-top:30px;">stair</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:60px; background-color:white; font-size:11px; margin-top:30px;">Guidance</div>
                                             </div>
 
                                             <!-- end -->
                                             <!-- ten row -->
-                                            <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder "></div>
-                                                <div class="col-md-1 longonBorder partition"></div>
-                                                <div class="col-md-2 longonBorder "></div>
-                                                <div class="col-md-1 longonBorder partition"></div>
-                                                <div class="col-md-4 longonBorder "></div>
-                                            </div>
+                                            <!-- <div class="col-lg-12 row">
+                                                <div class="col-md-4 longonBorder ">35</div>
+                                                <div class="col-md-1 longonBorder partition">36</div>
+                                                <div class="col-md-2 longonBorder ">37</div>
+                                                <div class="col-md-1 longonBorder partition">38</div>
+                                                <div class="col-md-4 longonBorder ">39</div>
+                                            </div> -->
 
                                             <!-- end -->
                                             <!-- nine row -->
-                                            <div class="col-lg-12 row">
+                                            <!-- <div class="col-lg-12 row">
 
-                                                <div class="col-md-3 longonBorder partition"></div>
-                                                <div class="col-md-1 longonBorder"></div>
-                                                <div class="col-md-1 longonBorder partition"></div>
-                                                <div class="col-md-2 longonBorder"></div>
-                                                <div class="col-md-1 longonBorder partition"></div>
-                                                <div class="col-md-4 longonBorder"></div>
-                                            </div>
+                                                <div class="col-md-3 longonBorder partition">40</div>
+                                                <div class="col-md-1 longonBorder">41</div>
+                                                <div class="col-md-1 longonBorder partition">42</div>
+                                                <div class="col-md-2 longonBorder">43</div>
+                                                <div class="col-md-1 longonBorder partition">44</div>
+                                                <div class="col-md-4 longonBorder">45</div>
+                                            </div> -->
 
                                             <!-- end -->
                                             <!-- eight row -->
-                                            <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder "></div>
-                                                <div class="col-md-1 longonBorder partition"></div>
-                                                <div class="col-md-2 longonBorder "></div>
-                                                <div class="col-md-1 longonBorder partition"></div>
-                                                <div class="col-md-4 longonBorder "></div>
-                                            </div>
+                                            <!-- <div class="col-lg-12 row">
+                                                <div class="col-md-4 longonBorder ">46</div>
+                                                <div class="col-md-1 longonBorder partition">47</div>
+                                                <div class="col-md-2 longonBorder ">48</div>
+                                                <div class="col-md-1 longonBorder partition">49</div>
+                                                <div class="col-md-4 longonBorder ">50</div>
+                                            </div> -->
 
                                             <!-- end -->
                                             <!-- seven row -->
-                                            <div class="col-lg-12 row">
-                                                <div class="col-md-8 longonBorder partition"></div>
-                                                <div class="col-md-4 longonBorder"></div>
-                                            </div>
+                                            <!-- <div class="col-lg-12 row">
+                                                <div class="col-md-8 longonBorder partition">51</div>
+                                                <div class="col-md-4 longonBorder">52</div>
+                                            </div> -->
 
                                             <!-- end -->
                                             <!-- six row -->
