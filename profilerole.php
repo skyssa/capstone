@@ -12,6 +12,8 @@ if(!$_SESSION['fullname']){
 }
 else if($_SESSION['user_type']=='admin'){
      echo '<script>window.location.href = "adminprofile.html";</script>';
+}else if($_SESSION['user_type']=='Alumni'){
+     echo '<script>window.location.href = "alumniprofile.php";</script>';
 }
 
  ?>

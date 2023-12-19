@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-    <!-- <?php
+    <?php
         include './includes/config.php';
         if(isset($_POST['register'])){
             $fname=$_POST['fullname'];
@@ -102,7 +102,7 @@
                 echo '<script>console.log(query)</script>';
             }
         }
-    ?> -->
+    ?>
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/vue.3.js"></script>

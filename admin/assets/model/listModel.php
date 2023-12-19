@@ -17,7 +17,7 @@ function fnSave(){
     $fullname = $_POST['fullname'];
     $password = md5($_POST['password']);
 
-    $query = $con->prepare('INSERT INTO tbl_users(fullname,username,password,user_role,date_created) values(?,?,?,1,now())');
+    $query = $con->prepare('INSERT INTO tbl_users(name,username,password,user_role,date_created) values(?,?,?,1,now())');
     $query->bind_param('sss',$fullname,$username,$password);
     
     if($query->execute()){

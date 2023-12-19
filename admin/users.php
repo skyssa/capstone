@@ -2,17 +2,18 @@
 session_start();
 include "assets/config/config.php";
 if (!$_SESSION['fullname']) {
-     echo '<script>window.location.href="sign-in.php";</script>';
-     exit();
+    echo '<script>window.location.href="sign-in.php";</script>';
+    exit();
 }
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dashboard |  Admin</title>
+    <title>Dashboard | Admin</title>
     <link href="assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -63,14 +64,14 @@ if (!$_SESSION['fullname']) {
                                     <i class="fas fa-user"></i> <span>
                                         <?php
                                         $fullname = $_SESSION['fullname'];
-     
-                                        $query = "SELECT * FROM tbl_user WHERE fullname = '$fullname' ";
+
+                                        $query = "SELECT * FROM tbl_user WHERE name = '$fullname' ";
                                         $result = mysqli_query($con, $query);
                                         $row = mysqli_fetch_assoc($result);
                                         do {
-                                             $full = $row['fullname'];
-                                             echo $full;
-                                             $row = mysqli_fetch_assoc($result);
+                                            $full = $row['name'];
+                                            echo $full;
+                                            $row = mysqli_fetch_assoc($result);
                                         } while ($row);
                                         ?>
                                     </span> <i style="font-size: .8em;" class="fas fa-caret-down"></i>
@@ -103,24 +104,43 @@ if (!$_SESSION['fullname']) {
                                     <th>user type</th>
                                     <th>department type</th>
                                     <th>isdeleted</th>
-                                    <th>date_created Number</th>
+                                    <th>date_created</th>
                                     <th>status</th>
                                     <th>action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="user in users">
-                                    <td>{{ user.fullname }}</td>
-                                    <td>{{ user.user_type }}</td>
-                                    <td>{{ user.dep_type }} </td>
-                                    <td>{{ user.isdeleted }} </td>
-                                    <td>{{ user.date_created }} </td>
-                                    <td>{{ user.status }} </td>
-                                    <td><button type="submit" class="btn btn-info">update</button><button type="submit" class="btn btn-danger">delete</button></td>
+                                <?php
+                                global $con;
 
-                                </tr>
+                                $query = $con->prepare("call sp_displayUser()");
+                                $query->execute();
+                                $result = $query->get_result();
+                                $data = array();
+                                while ($row = $result->fetch_array()) {
+                                ?>
+
+                                    <tr>
+                                        <td><?php echo $row['name']; ?></td>
+                                        <td><?php echo $row['user_type']; ?></td>
+                                        <td><?php echo $row['user_type']; ?></td>
+                                        <td><?php echo $row['isdeleted']; ?></td>
+                                        <td><?php echo $row['date_created']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
+                                        <td><a href="./assets/model/update_user_page.php?user_id=<?php echo $row['user_id']; ?>" class="btn btn-info">Update</a>
+    
+                                        </td>
+
+                                    </tr>
+                                    
+                                <?php
+                                }
+                                ?>
                             </tbody>
+
                         </table>
+
+
                     </div>
                 </div>
             </div>

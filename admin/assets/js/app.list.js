@@ -36,7 +36,7 @@ createApp({
                 vm.users = [];
                 r.data.forEach(function(v){
                     vm.users.push({
-                        fullname: v.fullname,
+                        name: v.name,
                         user_type: v.user_type,
                         dep_type: v.dep_type,
                         isdeleted: v.isdeleted,
@@ -56,7 +56,7 @@ createApp({
                 vm.admins = [];
                 r.data.forEach(function(v){
                     vm.admins.push({
-                        fullname: v.fullname,
+                        name: v.name,
                         user_type: v.user_type,
                         dep_type: v.dep_type,
                         isdeleted: v.isdeleted,

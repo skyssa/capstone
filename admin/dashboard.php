@@ -60,11 +60,11 @@ if (!$_SESSION['fullname']) {
                                     <i class="fas fa-user"></i> <span><?php
                                    $fullname = $_SESSION['fullname'];
 
-                                   $query = "SELECT * FROM tbl_user WHERE fullname = '$fullname' ";
+                                   $query = "SELECT * FROM tbl_user WHERE name = '$fullname' ";
                                    $result = mysqli_query($con, $query);
                                    $row = mysqli_fetch_assoc($result);
                                    do {
-                                        $full = $row['fullname'];
+                                        $full = $row['name'];
                                         echo $full;
                                         $row = mysqli_fetch_assoc($result);
                                    } while ($row);

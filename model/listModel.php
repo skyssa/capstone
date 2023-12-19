@@ -18,6 +18,7 @@ function fnSaveProfile(){
     $email= $_POST['email'];
     $address = $_POST['address'];
     $number = $_POST['number'];
+    $acadyr=$_POST['acadyr'];
     $role_in_school= $_POST['role_in_school'];
     $department= $_POST['department'];
     // $pic= $_POST['pic'];
@@ -58,9 +59,19 @@ function fnSaveProfile(){
             echo json_encode(mysqli_error($conn));
         }
 
-   }
-    
-   
+   }else if($_SESSION['user_type']=='Alumni'){
+        $query = $conn->prepare('INSERT INTO users(`uid`,school_id,fullname,email,`address`,`number`,acadyr,role_in_school,department,pic,cover,date_registered,`status`,approval) 
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,now(),"active","pending")');
+        var_dump($query);
+        $query->bind_param('iisssisssss',$id,$school_id,$fullname,$email,$address,$number,$acadyr,$role_in_school,$department,$pic,$cover);
+        
+        if($query->execute()){
+            echo 1;
+        }
+        else{
+            echo json_encode(mysqli_error($conn));
+        }
+    }  
 }
 function fnSaveUser(){
     global $conn;
@@ -156,7 +167,11 @@ function fnUpdatePost(){
 function fnDeletePost(){
     global $conn;
         $post_id = $_POST['post_id'];
-        $sql = "DELETE FROM tbl_post WHERE post_id=?";
+        $sql = "DELETE tbl_post, tbl_reports, tbl_comments
+        FROM tbl_post
+        LEFT JOIN tbl_comments ON tbl_post.post_id = tbl_comments.pos_id
+        LEFT JOIN tbl_reports ON tbl_post.post_id = tbl_reports.post_id
+        WHERE tbl_post.post_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'i', $post_id);
 
@@ -170,6 +185,7 @@ function fnDeletePost(){
 
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
+        
 }
 
 
@@ -240,27 +256,36 @@ function fnGetEvent(){
 }
 
 
-function fnSaveComment(){
+function fnAddComment(){
     global $conn;
-    $pid=$_POST['pid'];
-    $id=$_POST['id'];
-    $uname=$_POST['uname'];
-    $comment=$_POST['comment'];
+    $id=$_SESSION['user_id'];
+    $uname=$_SESSION['fullname'];
+    $post_id = $_POST['post_id'];
+    $comment_text = $_POST['comment_text'];
 
-    $query = $conn->prepare('INSERT INTO tbl_comments(pos_id,user_id,uname,comment,date,isapprove) values(?,?,?,?,now(),0)');
-    $query->bind_param('iiss',$pid,$id,$uname,$comment);
-    
-    if($query->execute()){
-        echo 1;
+    $sql = "INSERT INTO `tbl_comments`( `pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`) VALUES (?,?,?, ?, NOW(),0)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'iiss', $post_id,$id,$uname, $comment_text);
+
+    $result = mysqli_stmt_execute($stmt);
+    if ($result) {
+        echo 1; // Success
+    } else {
+        echo 0; // Failure
     }
-    else{
-        echo json_encode(mysqli_error($conn));
-    }
+
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+   
 }
+
 function fnGetcomment(){
     global $conn;
+    $post_id = $_POST['post_id'];
 
-    $query = $conn->prepare("call sp_displayComment");
+    $query = $conn->prepare("SELECT * FROM tbl_comments WHERE pos_id=? ORDER BY tbl_comments.date DESC");
+    $query->bind_param('i',$post_id);
     $query->execute();
     $result = $query->get_result();
     $data = array();
@@ -271,13 +296,54 @@ function fnGetcomment(){
     echo json_encode($data);
 
 }
-
-function fnSaveReport(){
+function fnUpdateComment(){
     global $conn;
-    $report=$_POST['report_type'];
+    $comment_id = $_POST['comment_id'];
+    $names = $_POST['uname'];
+    $description = $_POST['comment'];
+  
 
-    $query = $conn->prepare('INSERT INTO tbl_reports(report_type,date_reported) values(?,now())');
-    $query->bind_param('s',$report);
+    $sql = "UPDATE tbl_comments SET uname=?, comment=?  WHERE comment_id=?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'ssi', $names, $description, $comment_id);
+    $result = mysqli_stmt_execute($stmt);
+
+    if ($result) {
+        echo 1; // Success
+    } else {
+        echo 0; // Failure
+       
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
+function fnDeleteComment(){
+    global $conn;
+        $comment_id = $_POST['comment_id'];
+        $sql = "DELETE FROM tbl_comments WHERE comment_id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $comment_id);
+
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            echo 1; // Success
+        } else {
+            echo 0; // Failure
+            
+        }
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
+        
+}
+function fnReportPost(){
+    global $conn;
+    $id=$_POST['post_id'];
+    $report=$_POST['reason'];
+
+    $query = $conn->prepare('INSERT INTO tbl_reports(post_id,report_type,date_reported) values(?,?,now())');
+    $query->bind_param('is',$id,$report);
     
     if($query->execute()){
         echo 1;
@@ -285,6 +351,14 @@ function fnSaveReport(){
     else{
         echo json_encode(mysqli_error($conn));
     }
+
+    // mysqli_stmt_close($stmt);
+
+    //     // Close the database connection
+    //     mysqli_close($conn);
+    // } else {
+    //     echo 'Invalid request method.';
+    // }
 }
 
 function fnSaveRegister(){

@@ -13,5 +13,8 @@ if(!$_SESSION['fullname']){
 else if($_SESSION['user_type']=='admin'){
      echo '<script>window.location.href = "admin/dashboard.php";</script>';
 }
+else if($_SESSION['user_type']=='Alumni'){
+     echo '<script>window.location.href = "alumnihome.php";</script>';
+}
 
  ?>
