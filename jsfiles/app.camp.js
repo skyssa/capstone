@@ -39,6 +39,18 @@ createApp({
                 comment: '',
                 date: ''
             },
+
+            a_id : '',
+            title: '',
+            description: '',
+            
+            editingAnnounce: {
+                a_id : '',
+                title: '',
+                description: '',
+                date_created: '',
+                isdeleted: ''
+            },
         }
     },
     methods: {
@@ -410,8 +422,6 @@ createApp({
         //         }
         //     })
         // },
-
-
         // announcement
         fnSaveAnnouncement: function (e) {
             const vm = this;
@@ -423,7 +433,7 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Announcement successfully saved");
-                        window.location.href = "announceModal";
+                       
                         vm.fnGetAnnouncement();
                     }
                     else {
@@ -449,6 +459,91 @@ createApp({
                     })
                 })
         },
+        editAnnounce(announces) {
+            this.editingAnnounce = { ...announces };
+        },
+
+        updateAnnounce() {
+            const vm = this;
+            const data = new FormData();
+            data.append("method","fnUpdateAnnounce");
+            console.log(vm.editingAnnounce);
+            data.append("a_id", vm.editingAnnounce.a_id);
+            data.append("title", vm.editingAnnounce.title);
+            data.append("description", vm.editingAnnounce.description);
+           
+        
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Announce successfully updated");
+                        vm.fnGetPost(); // Refresh the post list
+                        // Optionally, close the form/modal or perform other actions
+                    } else {
+                        console.log(r);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error during updatePost:', error);
+                });
+        },
+        fnDeleteAnnounce(a_id) {
+            const vm = this;
+            const data = new FormData();
+            data.append('method', 'fnDeleteAnnounce');
+            data.append('a_id', a_id);
+
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert('Announce successfully deleted');
+                        vm.fnGetPost(); // Refresh the post list
+                    } else {
+                        console.log(r);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error during fnDeletePost:', error);
+                });
+        },
+
+        // // announcement
+        // fnSaveAnnouncement: function (e) {
+        //     const vm = this;
+        //     e.preventDefault();
+        //     var form = e.currentTarget;
+        //     const data = new FormData(form);
+        //     data.append('method', 'fnSaveAnnouncement');
+        //     axios.post('model/listModel.php', data)
+        //         .then(function (r) {
+        //             if (r.data == 1) {
+        //                 alert("Announcement successfully saved");
+        //                 window.location.href = "announceModal";
+        //                 vm.fnGetAnnouncement();
+        //             }
+        //             else {
+        //                 alert('There was an error.');
+        //                 console.log(r);
+        //             }
+        //         })
+        // },
+        // fnGetAnnouncement: function () {
+        //     const vm = this;
+        //     const data = new FormData();
+        //     data.append("method", "fnGetAnnouncement");
+        //     axios.post('model/listModel.php', data)
+        //         .then(function (r) {
+        //             vm.announce = [];
+        //             r.data.forEach(function (v) {
+        //                 vm.announce.push({
+        //                     a_id: v.a_id,
+        //                     title: v.title,
+        //                     description: v.description,
+        //                     date_created: v.date_created
+        //                 })
+        //             })
+        //         })
+        // },
 
 
         // fnEditA:function(e){
@@ -470,13 +565,13 @@ createApp({
         //         }
         //     })
         // },
-        editAnnouncement(index) {
-            // Set the editedAnnouncement data with the values of the selected announcement
-            this.editedAnnouncement = { ...this.announce[index] };
+        // editAnnouncement(index) {
+        //     // Set the editedAnnouncement data with the values of the selected announcement
+        //     this.editedAnnouncement = { ...this.announce[index] };
 
-            // Show the editAnnouncementModal
-            $('#editAnnouncementModal').modal('show');
-        },
+        //     // Show the editAnnouncementModal
+        //     $('#editAnnouncementModal').modal('show');
+        // },
 
         fnSaveEvent: function (e) {
             const vm = this;

@@ -298,10 +298,10 @@ if (!$_SESSION['fullname']) {
                         <!-- loader wrapper -->
                         <div class="row feed-body">
                             <div class="col-xl-8 col-xxl-9 col-lg-8">
-                                <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
+                                <!-- <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
                                     <a href="#" class=" font-xssss fw-600 text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create
                                         Post</a>
-                                    <!-- post -->
+                                   
                                     <form enctype="multipart/form-data" @submit="fnSavePost($event)">
                                         <input type="hidden" name="name" value="<?php echo $_SESSION['fullname']; ?>" id="">
                                         <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>" id="">
@@ -321,7 +321,7 @@ if (!$_SESSION['fullname']) {
                                         </div>
                                     </form>
 
-                                </div>
+                                </div> -->
 
 
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3" v-for="post in posts">
@@ -447,8 +447,8 @@ if (!$_SESSION['fullname']) {
                                                     </div>
 
                                                     <!-- Modal Body -->
-                                                    <div class="modal-body">
-                                                        <!-- Form to submit announcements -->
+                                                    <!-- <div class="modal-body">
+                                                        Form to submit announcements
                                                         <form @submit="fnSaveAnnouncement($event)">
                                                             <div class="form-group">
                                                                 <label for="title" class="font-xssss fw-600 text-grey-500">Title:</label>
@@ -460,11 +460,11 @@ if (!$_SESSION['fullname']) {
                                                             </div>
                                                             <button type="submit" class="btn btn-primary">Announce</button>
                                                         </form>
-                                                    </div>
+                                                    </div> -->
 
                                                     <!-- Display announcements in the modal -->
                                                     <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
-                                                        <div class="card mt-3" v-for="announces in announce">
+                                                        <div class="card mt-3" v-for="announces in announce" :key="announces.a_id">
                                                             <div class="card-heading bg-primary text-white p-3">
                                                                 <h6 class="font-xsssss mb-0">{{ announces.date_created }}</h6>
                                                                 <h5 class="font-xs fw-600 mb-2">Title: {{ announces.title }}</h5>
@@ -472,47 +472,17 @@ if (!$_SESSION['fullname']) {
                                                             <div class="card-content p-3">
                                                                 <p class="font-xsssss mb-0">Content:</p>
                                                                 <p class="font-xss fw-600 mb-2">{{ announces.description }}</p>
-                                                                <p>{{announces.a_id}}</p>
+                                                    
 
-                                                                <div class="d-flex justify-content-end mt-3">
-                                                                    <button class="btn btn-danger mr-2" @click="deleteAnnouncement(index)">Delete</button>
-                                                                    <button class="btn btn-primary" @click="editAnnouncement(index)">Edit</button>
-                                                                </div>
+                                                                <!-- <div class="d-flex justify-content-end mt-3">
+                                                                    <a @click="editAnnounce(announces)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editAnnounceModal">Edit</a>
+                                                                    <a @click="fnDeleteAnnounce(announces.a_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
+                                                                </div> -->
                                                             </div>
 
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="editAnnouncementModal" tabindex="-1" role="dialog" aria-labelledby="editAnnouncementModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <!-- Modal Header -->
-                                                                <div class="modal-header bg-primary text-white">
-                                                                    <h5 class="modal-title" id="editAnnouncementModalLabel">Edit Announcement</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-
-                                                                <!-- Modal Body -->
-                                                                <div class="modal-body">
-                                                                    <!-- Form to edit announcements -->
-                                                                    <form method="post">
-
-                                                                        <div class="form-group">
-
-                                                                            <label for="editTitle" class="font-xssss fw-600 text-grey-500">Title:</label>
-                                                                            <input type="text" class="form-control" name="title" id="editTitle" required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="editDescription" class="font-xssss fw-600 text-grey-500">Description:</label>
-                                                                            <textarea class="form-control" name="description" id="editDescription" rows="3" required></textarea>
-                                                                        </div>
-                                                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -525,12 +495,12 @@ if (!$_SESSION['fullname']) {
 
                                         <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                             <div>
-                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                                                <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                                                     CREATE EVENTS
-                                                </button>
+                                                </button> -->
 
                                                 <!-- event modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <form @submit="fnSaveEvent($event)">
@@ -562,7 +532,7 @@ if (!$_SESSION['fullname']) {
                                                         </div>
                                                     </div>
 
-                                                </div>
+                                                </div> -->
 
                                                 <!-- event cards -->
                                                 <div class="card mt-3" v-for="event in events">
@@ -686,7 +656,35 @@ if (!$_SESSION['fullname']) {
                             </div>
                         </div>
                     </div>
+                    <!-- edit announce -->
+                    <!-- <div class="modal fade" id="editAnnounceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="updateAnnounce">
+                                        <label for="edit-names">Title:</label>
+                                        <input v-model="editingAnnounce.title" type="text" id="edit-names" required>
 
+                                        <label for="edit-description">Description:</label>
+                                        <textarea v-model="editingAnnounce.description" id="edit-description" required></textarea>
+
+
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-XpST91Agn3uZd1QVq3JcNvLyA7uj13d3s9fQbY8bF2jW0JqJSFkh6DEVDJLbcQ8E" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy12aC9fv5+gM5bGgS7J2h2bjvZkmH4bY1" crossorigin="anonymous"></script>
                     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

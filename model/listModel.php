@@ -224,6 +224,47 @@ function fnGetAnnouncement(){
     echo json_encode($data);
 
 }
+function fnUpdateAnnounce(){
+    global $conn;
+    $id = $_POST['a_id'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+  
+
+    $sql = "UPDATE tbl_announcement SET title=?, description=?  WHERE a_id=?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'ssi', $title, $description, $id);
+    $result = mysqli_stmt_execute($stmt);
+
+    if ($result) {
+        echo 1; // Success
+    } else {
+        echo 0; // Failure
+       
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
+function fnDeleteAnnounce(){
+    global $conn;
+    $id = $_POST['a_id'];
+        $sql = "DELETE FROM tbl_announcement WHERE a_id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            echo 1; // Success
+        } else {
+            echo 0; // Failure
+            
+        }
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
+        
+}
 
 
 function fnSaveEvent(){

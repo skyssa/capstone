@@ -39,7 +39,7 @@ createApp({
                 comment: '',
                 date: ''
             },
-            a_id : '',
+                a_id : '',
                 title: '',
                 description: '',
             editingAnnounce: {
