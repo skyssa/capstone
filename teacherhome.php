@@ -93,7 +93,7 @@ if (!$_SESSION['fullname']) {
             <!-- navigation top-->
             <div class="nav-header bg-white shadow-xs border-0">
                 <div class="nav-top">
-                    <a href="teacherhome.html"><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm Homepage</span>
+                    <a href="teacherhome.html"><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm</span>
                     </a>
                     <a href="#" class="mob-menu ms-auto me-2" id="dropdownMenu4" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
                     <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu4">
@@ -226,7 +226,7 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
-                            <?php
+                                <?php
                                 $id = $_SESSION['user_id'];
                                 $query = "SELECT *
                                      FROM tbl_user AS tu
@@ -236,7 +236,7 @@ if (!$_SESSION['fullname']) {
                                 $row = mysqli_fetch_assoc($result);
                                 if ($row != 0) {
 
-                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
+                                    echo '<li><a  href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 50px; height: 50px; border-radius: 50px; margin-right: 10px;" ><span>' . $row["name"] . '</span></a></li>
                                         ';
                                 } else {
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
@@ -298,7 +298,7 @@ if (!$_SESSION['fullname']) {
                         <div class="row feed-body">
                             <div class="col-xl-8 col-xxl-9 col-lg-8">
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
-                                    <a href="#" class=" font-xssss fw-600 text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create
+                                    <a class=" font-xssss fw-600 text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create
                                         Post</a>
                                     <!-- post -->
                                     <form enctype="multipart/form-data" @submit="fnSavePost($event)">
@@ -308,15 +308,17 @@ if (!$_SESSION['fullname']) {
                                             <textarea name="description" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="What's on your mind?"></textarea>
 
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group form-inline">
 
-                                            <div id="imageInputsContainer">
-                                                <input type="file" name="productimage" id="fileimg" multiple>
+                                        <div style="margin-top: 10px;" id="imageInputsContainer">
+                                            <label for="fileimg"><a style="cursor: pointer;" class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><i class="font-md text-success feather-image me-2"></i><span class="d-none-xs">Photo</span></a></label>
+                                                <input style="display: none;" type="file" name="productimage" id="fileimg" multiple>
                                             </div>
-
-                                            <button type="submit" class="btn btn-primary">
-                                                Post
+                                            <div class="form-inline">
+                                            <button style="border: none; background-color: white; float:right; display:flexbox;" type="submit" class="btn btn-primary">
+                                                <a style="background-color: white; text-decoration: underline;" class=" font-xssss fw-600 text-blue-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-s text-primary fa-solid fa-feather me-2 bg-greylight"></i>Post</a>
                                             </button>
+                                            </div>
                                         </div>
                                     </form>
 
@@ -343,14 +345,16 @@ if (!$_SESSION['fullname']) {
                                     <div class="card-body d-block p-0">
                                         <div class="row ps-2 pe-2">
                                             <div class="col-xs-12 col-sm-12 p-1">
-                                                <img id="imahe" class="img-fluid" :src="'uploads/' + post.image" />
+                                                <img style="border-radius:7px;"  id="imahe" class="img-fluid" :src="'uploads/' + post.image" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body d-flex p-0 mt-3">
                                         <div class="container">
                                             <!-- Trigger the modal with a button -->
-                                            <button @click="fnCommentPost(post.post_id)" class="btn btn-info btn-m" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i>Comment</button>
+                                            <a style="cursor: pointer;" @click="fnCommentPost(post.post_id)" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss" data-toggle="modal" data-target="#commentModal"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">Comment</span></a>
+                                            
+
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="commentModal" role="dialog">
@@ -385,7 +389,7 @@ if (!$_SESSION['fullname']) {
                                         <div class="container">
 
                                             <!-- Trigger the modal with a button -->
-                                            <button type="button" class="btn btn-info btn-m" data-toggle="modal" data-target="#myReport"><i class="fas fa-cog"></i>Report</button>
+                                            <a style="cursor: pointer;" type="button" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss" data-toggle="modal" data-target="#myReport"><i class="feather-alert-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">Report</span></a>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="myReport" role="dialog">
@@ -429,9 +433,9 @@ if (!$_SESSION['fullname']) {
                                 <div class="card w-100 shadow rounded border-0 mb-3">
                                     <div class="card-body d-flex align-items-center p-4">
                                         <h4 class="fw-700 mb-0 font-xssss text-primary">Announcement</h4>
-                                        <button type="button" class="btn btn-info ml-auto" data-toggle="modal" data-target="#announceModal">
+                                        <!-- <button type="button" class="btn btn-info ml-auto" data-toggle="modal" data-target="#announceModal">
                                             See all
-                                        </button>
+                                        </button> --> <a style="cursor: pointer;" class="fw-600 ms-auto font-xssss text-primary" data-toggle="modal" data-target="#announceModal">See all</a>
 
                                         <!-- Announcement Modal -->
                                         <div class="modal fade" id="announceModal" tabindex="-1" role="dialog" aria-labelledby="announceModalLabel" aria-hidden="true">
@@ -471,7 +475,7 @@ if (!$_SESSION['fullname']) {
                                                             <div class="card-content p-3">
                                                                 <p class="font-xsssss mb-0">Content:</p>
                                                                 <p class="font-xss fw-600 mb-2">{{ announces.description }}</p>
-                                                    
+
 
                                                                 <div class="d-flex justify-content-end mt-3">
                                                                     <a @click="editAnnounce(announces)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editAnnounceModal">Edit</a>
@@ -487,99 +491,128 @@ if (!$_SESSION['fullname']) {
                                         </div>
                                     </div>
                                 </div>
-                                <div style="height:50%; overflow: scroll;" class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
-                                    <div class="card-body d-flex align-items-center  p-4">
+                                <!-- <div style="height:50%; overflow: scroll;" class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                    <div class="card-body d-flex align-items-center  p-4"> -->
 
-                                        <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
-
+                                <!-- <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4> -->
+                                <!-- 
                                         <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                             <div>
                                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                                                     CREATE EVENTS
-                                                </button>
+                                                </button> -->
 
-                                                <!-- event modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <form @submit="fnSaveEvent($event)">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="title" class="form-label">Title</label>
-                                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Title">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="date" class="form-label">Date</label>
-                                                                        <input type="date" class="form-control" name="date" id="date" placeholder="Date">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="events" class="form-label">Event</label>
-                                                                        <input type="text" class="form-control" name="events" id="events" placeholder="Event">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Create</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-
+                                <!-- event modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form @submit="fnSaveEvent($event)">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-
-                                                <!-- event cards -->
-                                                <div class="card mt-3" v-for="event in events">
-                                                    <div class="card-heading">
-                                                        <div class="card-title">
-                                                            <h5><span  style="font-weight:bold;">Event Title:</span> {{ event.title }}<br></h5>
-                                                            <h5><span  style="font-weight:bold;">Date:</span> {{ event.date }}</h5>
-                                                        </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="title" class="form-label">Title</label>
+                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="date" class="form-label">Date</label>
+                                                        <input type="date" class="form-control" name="date" id="date" placeholder="Date">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="events" class="form-label">Event</label>
+                                                        <input type="text" class="form-control" name="events" id="events" placeholder="Event">
                                                     </div>
                                                 </div>
-                                                <div id="calendar"></div>
-                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
 
                                 </div>
 
-                            </div>
-                            <!-- main content -->
-
-                            <!-- right chat -->
-                            <div class="right-chat nav-wrap mt-2 right-scroll-bar">
-                                <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
-
-
-                                    <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
-
-                                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
-                                        <ul class="list-group list-group-flush">
-
-                                            <?php
-                                            $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_type='Student' OR user_type='Teacher' ");
-                                            while ($data = mysqli_fetch_assoc($query_user)) {
-                                                if ($data['user_id'] != $_SESSION['user_id'])
-                                                    echo '<li><a href="chat.php?uid=' . $data["user_id"] . '">' . $data["name"] . ' - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '</a></li>';
-                                            }
-                                            ?>
-
-                                        </ul>
-                                    </div>
-
-
+                                <!-- event cards -->
+                                <!-- <div class="card mt-3" v-for="event in events"> -->
+                                    <!-- <div class="card-heading">
+                                                        <div class="card-title">
+                                                            <h5><span  style="font-weight:bold;">Event Title:</span> {{ event.title }}<br></h5>
+                                                            <h5><span  style="font-weight:bold;">Date:</span> {{ event.date }}</h5>
+                                                        </div>
+                                                    </div> -->
+                                    <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                        <div class="card-body d-flex align-items-center  p-4">
+                                            <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
+                                            <a style="cursor: pointer;" class="fw-600 ms-auto font-xssss text-primary" data-toggle="modal" data-target="#exampleModal">Add event</a>
+                                        </div>
+                                        <!-- <div v-for="event in events" class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
+                                            <div class="bg-success me-2 p-3 rounded-xxl">
+                                                <h4 class="fw-700 font-m ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600">Dec</span>21</h4>
+                                            </div>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-2">{{event.title}}<span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500">{{event.event}}</span> </h4>
+                                        </div> -->
+                                        <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
+                                    <div class="bg-success me-2 p-3 rounded-xxl"><h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600">FEB</span>22</h4></div>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-2">Acquaintance Party<span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500">Cordova, Sports Ccomplex</span> </h4>
                                 </div>
+
+                                <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
+                                    <div class="bg-success me-2 p-3 rounded-xxl"><h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600">DEC</span>24</h4></div>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-2">Christmas Party<span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500">Gym Gabi, Cordova Cebu City</span> </h4>
+                                </div>
+
+                                <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
+                                    <div class="bg-success me-2 p-3 rounded-xxl"><h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsss text-white fw-600">APR</span>23</h4></div>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-2">Enrollment<span class="d-block font-xsssss fw-500 mt-1 lh-4 text-grey-500">Cordva Public College</span> </h4>
+                                </div>
+
+                                    </div>
+                                </div>
+
+                                <div id="calendar"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
+                </div>
+
+            </div>
+
+            <!-- main content -->
+
+            <!-- right chat -->
+            <div class="right-chat nav-wrap mt-2 right-scroll-bar">
+                <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
+
+
+                    <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
+
+                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
+                        <ul class="list-group list-group-flush">
+
+                            <?php
+                            $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_type='Student' OR user_type='Teacher' ");
+                            while ($data = mysqli_fetch_assoc($query_user)) {
+                                if ($data['user_id'] != $_SESSION['user_id'])
+                                    echo '<li><a href="chat.php?uid=' . $data["user_id"] . '">' . $data["name"] . ' - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '</a></li>';
+                            }
+                            ?>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content border-0 bg-transparent">
                                 <button type="button" class="close mt-0 position-absolute top--30 right--10" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-900 font-xssss"></i></button>
@@ -597,108 +630,127 @@ if (!$_SESSION['fullname']) {
                             </div>
                         </div>
                     </div> -->
-                    <!-- edit post -->
-                    <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form @submit.prevent="updatePost">
-                                        <label for="edit-names">Name:</label>
-                                        <input v-model="editingPost.names" type="text" id="edit-names" required>
+    <!-- edit post -->
+    <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form @submit.prevent="updatePost" class="p-3">
+    <div class="mb-3">
+        <label for="edit-names" class="form-label">Name:</label>
+        <input v-model="editingPost.names" type="text" id="edit-names" class="form-control" placeholder="Enter your name" required>
+    </div>
 
-                                        <label for="edit-description">Description:</label>
-                                        <textarea v-model="editingPost.description" id="edit-description" required></textarea>
+    <div class="mb-3">
+        <label for="edit-description" class="form-label">Description:</label>
+        <textarea v-model="editingPost.description" id="edit-description" class="form-control" rows="6" placeholder="Enter post description" required></textarea>
+    </div>
 
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-block">Update Post</button>
+    </div>
+</form>
 
-                                        <button type="submit">Update Post</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- edit comment -->
-                    <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form @submit.prevent="updateComment">
-                                        <label for="edit-names">Name:</label>
-                                        <input v-model="editingComment.uname" type="text" id="edit-names" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit comment -->
+    <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+    <form @submit.prevent="updateComment" class="form">
+        <div class="mb-3">
+            <label for="edit-names" class="form-label">Name:</label>
+            <input v-model="editingComment.uname" type="text" id="edit-names" class="form-control" required>
+        </div>
 
-                                        <label for="edit-description">Description:</label>
-                                        <textarea v-model="editingComment.comment" id="edit-description" required></textarea>
+        <div class="mb-3">
+            <label for="edit-description" class="form-label">Description:</label>
+            <textarea v-model="editingComment.comment" id="edit-description" class="form-control" rows="4" required></textarea>
+        </div>
 
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Update Comment</button>
+        </div>
+    </form>
+</div>
 
-                                        <button type="submit">Update Comment</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- edit announce -->
-                    <div class="modal fade" id="editAnnounceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form @submit.prevent="updateAnnounce">
-                                        <label for="edit-names">Title:</label>
-                                        <input v-model="editingAnnounce.title" type="text" id="edit-names" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit announce -->
+    <div class="modal fade" id="editAnnounceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+    <form @submit.prevent="updateAnnounce" class="form">
+        <div class="form-group">
+            <label for="edit-names" class="form-label">Title:</label>
+            <input v-model="editingAnnounce.title" type="text" id="edit-names" class="form-control" required>
+        </div>
 
-                                        <label for="edit-description">Description:</label>
-                                        <textarea v-model="editingAnnounce.description" id="edit-description" required></textarea>
+        <div class="form-group">
+            <label for="edit-description" class="form-label">Description:</label>
+            <textarea v-model="editingAnnounce.description" id="edit-description" class="form-control" rows="4" required></textarea>
+        </div>
 
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+</div>
 
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-XpST91Agn3uZd1QVq3JcNvLyA7uj13d3s9fQbY8bF2jW0JqJSFkh6DEVDJLbcQ8E" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy12aC9fv5+gM5bGgS7J2h2bjvZkmH4bY1" crossorigin="anonymous"></script>
-                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-XpST91Agn3uZd1QVq3JcNvLyA7uj13d3s9fQbY8bF2jW0JqJSFkh6DEVDJLbcQ8E" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy12aC9fv5+gM5bGgS7J2h2bjvZkmH4bY1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-ZJ/saCJAGQ8idK7LEp+qLKn4J7BFlwIeehtv8P0zW4QVDu1oSmSdsJbAMBUVpXy0VJlA1Nel3+8eQ+ZdLfyhLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" integrity="sha512-E+4j1pwXlM+YJ5LreIj+SG/xMMzNBntZYx1Zc1fgP5Mt/EXi1z3r6D9uRw46bwnY4H7mogz74qrsjIQWwNHYFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                    <script></script>
-                    <script src="js/plugin.js"></script>
-                    <script src="js/lightbox.js"></script>
-                    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-ZJ/saCJAGQ8idK7LEp+qLKn4J7BFlwIeehtv8P0zW4QVDu1oSmSdsJbAMBUVpXy0VJlA1Nel3+8eQ+ZdLfyhLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" integrity="sha512-E+4j1pwXlM+YJ5LreIj+SG/xMMzNBntZYx1Zc1fgP5Mt/EXi1z3r6D9uRw46bwnY4H7mogz74qrsjIQWwNHYFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script></script>
+    <script src="js/plugin.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script src="js/scripts.js"></script>
 
-                    <script src="jsfiles/vue.3.js"></script>
-                    <script src="jsfiles/axios.js"></script>
-                    <script src="jsfiles/app.camp.js"></script>
-                    <!-- <script src="jsfiles/feature.js"></script> -->
+    <script src="jsfiles/vue.3.js"></script>
+    <script src="jsfiles/axios.js"></script>
+    <script src="jsfiles/app.camp.js"></script>
+    <!-- <script src="jsfiles/feature.js"></script> -->
 
 
 
