@@ -167,7 +167,7 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
-                            <?php
+                                <?php
                                 $id = $_SESSION['user_id'];
                                 $query = "SELECT *
                                      FROM tbl_user AS tu
@@ -177,22 +177,27 @@ if (!$_SESSION['fullname']) {
                                 $row = mysqli_fetch_assoc($result);
                                 if ($row != 0) {
 
-                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
+                                    echo '<li><a  href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 50px; height: 50px; border-radius: 50px; margin-right: 10px;" ><span>' . $row["name"] . '</span></a></li>
                                         ';
                                 } else {
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
-                                ?>                                                                                                                                            
+                                ?>
+
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
-                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
+                                <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
+                                <li><a href="logout.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
+
                             </ul>
                         </div>
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
-                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
+                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span>Others</div>
                             <ul class="mb-1">
-                                <li><a href="chat.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Message</span><span class="circle-count bg-warning mt-0"></span></a></li>
+                                <li><a href="https://www.facebook.com/cpcofficial2005" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-facebook me-3 text-grey-500"></i><span>Facebook</span></a></li>
+                                <li><a href="https://www.facebook.com/cpcofficial2005" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather- me-3 text-grey-500"></i><span></span></a></li>
 
-                                <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i></i><span>Log Out</span></span></a></li>
                             </ul>
                         </div>
                     </div>
