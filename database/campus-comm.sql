@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2023 at 10:37 PM
+-- Generation Time: Dec 21, 2023 at 02:41 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -179,6 +179,32 @@ CREATE TABLE `bsitannouncement` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bsitcomments`
+--
+
+CREATE TABLE `bsitcomments` (
+  `comment_id` int(11) NOT NULL,
+  `pos_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `uname` text NOT NULL,
+  `comment` text NOT NULL,
+  `date` datetime NOT NULL,
+  `isapprove` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bsitcomments`
+--
+
+INSERT INTO `bsitcomments` (`comment_id`, `pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`) VALUES
+(1, 7, 20, 'arnel lamanilao', 'dsadsadsa', '2023-12-20 11:25:45', 0),
+(2, 7, 20, 'arnel lamanilao', 'asdasaadsa', '2023-12-20 11:26:21', 0),
+(3, 7, 20, 'arnel lamanilao', 'azxcxzczxcxz', '2023-12-20 11:26:42', 0),
+(4, 7, 20, 'arnel lamanilao', 'hi', '2023-12-20 11:31:41', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bsitevents`
 --
 
@@ -226,7 +252,10 @@ INSERT INTO `tbl_announcement` (`a_id`, `title`, `description`, `date_created`, 
 (8, 'sadsa', 'asdsadsa', '2023-12-18 03:33:06', 1),
 (9, 'sadsa', 'sadsad', '2023-12-18 03:39:28', 1),
 (10, 'asdsad', 'sadsadsa', '2023-12-18 03:39:45', 1),
-(11, 'sadsad', 'sadsad', '2023-12-18 03:41:16', 1);
+(11, 'sadsad', 'sadsad', '2023-12-18 03:41:16', 1),
+(12, 'sadsa', 'dsdsdxcx', '2023-12-20 11:36:31', 1),
+(13, 'zxcmnx,mzc,nzx', ';ljopuj890213u21321', '2023-12-20 11:37:35', 1),
+(14, 'yrwiyuqeiuwq', 'ehqwiekqweuqw', '2023-12-20 11:38:58', 1);
 
 -- --------------------------------------------------------
 
@@ -252,7 +281,15 @@ INSERT INTO `tbl_comments` (`comment_id`, `pos_id`, `user_id`, `uname`, `comment
 (10, 0, 20, 'arnel lamanilao', 'sasadsa', '2023-12-18 01:17:00', 0),
 (11, 0, 20, 'arnel lamanilao', 'sadsadsadsad', '2023-12-18 04:27:26', 0),
 (12, 0, 20, 'arnel lamanilao', 'sadsadsa', '2023-12-19 00:48:14', 0),
-(13, 0, 20, 'arnel lamanilao', 'sadsadsa', '2023-12-19 03:59:55', 0);
+(13, 0, 20, 'arnel lamanilao', 'sadsadsa', '2023-12-19 03:59:55', 0),
+(14, 94, 20, 'arnel lamanilao', 'sadsadsadsa', '2023-12-20 10:56:46', 0),
+(15, 94, 20, 'arnel lamanilao', 'sASasaSA', '2023-12-20 11:32:16', 0),
+(16, 94, 20, 'arnel lamanilao', 'sadsadsadsadsad', '2023-12-20 11:32:27', 0),
+(17, 94, 20, 'arnel lamanilao', 'qwueiwqewioqewq', '2023-12-20 11:34:15', 0),
+(18, 95, 20, 'arnel lamanilao', 'hahaha', '2023-12-20 12:18:40', 0),
+(19, 95, 20, 'arnel lamanilao', 'asdsadsadsadsadsad', '2023-12-20 12:19:27', 0),
+(20, 96, 20, 'arnel lamanilao', 'what is that?', '2023-12-20 12:25:26', 0),
+(21, 97, 15, 'jezrael suliano', 'jgfydyijiuo', '2023-12-20 13:00:16', 0);
 
 -- --------------------------------------------------------
 
@@ -275,7 +312,10 @@ CREATE TABLE `tbl_events` (
 INSERT INTO `tbl_events` (`events_id`, `title`, `date`, `event`, `date_posted`) VALUES
 (12, 'aquintance party', '2023-11-25', 'aquintance party', '2023-12-18 02:36:28'),
 (13, '4rth year enrollment', '2023-12-26', 'enrollment for 4th year second sem', '2023-12-18 03:22:27'),
-(14, 'sdfsdfsd', '2023-12-29', 'sadsadsad', '2023-12-19 02:29:09');
+(14, 'sdfsdfsd', '2023-12-29', 'sadsadsad', '2023-12-19 02:29:09'),
+(15, 'dsadsadsa', '2023-12-01', 'xzcxzcxzcxz', '2023-12-20 11:43:26'),
+(16, 'sadsadsadsa', '2023-12-01', 'asdasdsadsa', '2023-12-20 11:43:46'),
+(17, 'sadsadsadsa', '2023-12-29', 'zxcxzcxzczxcxz', '2023-12-20 11:43:58');
 
 -- --------------------------------------------------------
 
@@ -299,7 +339,10 @@ CREATE TABLE `tbl_post` (
 --
 
 INSERT INTO `tbl_post` (`post_id`, `user_id`, `names`, `description`, `image`, `date_created`, `isdeleted`, `isapprove`) VALUES
-(92, 20, 'arnel lamanilao', 'yesss finally na edit na', '', '2023-12-19 03:21:35', 1, 0);
+(94, 20, 'arnel lamanilao', 'asdsadsadsa', '', '2023-12-20 10:51:48', 1, 0),
+(95, 20, 'arnel lamanilao', 'dgsdfasdfdsfsa', '', '2023-12-20 11:36:19', 1, 0),
+(96, 20, 'arnel lamanilao', 'what us in my mind', 'e-5.jpg', '2023-12-20 12:24:37', 1, 0),
+(97, 24, 'ranel soulyaknow', 'sasdsadsa', '~$mpuscomm sdd.docx', '2023-12-20 12:50:49', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -324,7 +367,10 @@ CREATE TABLE `tbl_postbsit` (
 
 INSERT INTO `tbl_postbsit` (`post_id`, `user_id`, `names`, `description`, `image`, `date_created`, `isdeleted`, `isapprove`) VALUES
 (7, '20', 'arnel lamanilao', 'sadsadsadsa', '', '2023-12-04 03:01:50', 1, 0),
-(8, '20', 'arnel lamanilao', 'dasdsadsa', '', '2023-12-04 03:01:53', 1, 0);
+(8, '20', 'arnel lamanilao', 'dasdsadsa', '', '2023-12-04 03:01:53', 1, 0),
+(9, '20', 'arnel lamanilao', 'hdshadsjadhasjashlkjsda', '', '2023-12-20 10:33:26', 1, 0),
+(10, '20', 'arnel lamanilao', 'jkljlkjjlk', '', '2023-12-20 11:06:11', 1, 0),
+(11, '20', 'arnel lamanilao', 'dsadsadsa', 'b-9.png', '2023-12-20 13:05:27', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -344,7 +390,7 @@ CREATE TABLE `tbl_reports` (
 --
 
 INSERT INTO `tbl_reports` (`report_id`, `post_id`, `report_type`, `date_reported`) VALUES
-(7, 0, 'inapproriate', '2023-12-18');
+(8, 95, 'spam', '2023-12-20');
 
 -- --------------------------------------------------------
 
@@ -373,7 +419,8 @@ INSERT INTO `tbl_user` (`user_id`, `name`, `username`, `password`, `user_type`, 
 (15, 'jezrael suliano', 'jezra', '123456', 'Student', 'BSIT', 1, '2023-12-02', 0, 0),
 (20, 'arnel lamanilao', 'arnel', '12345', 'Teacher', 'BSIT', 1, '2023-12-02', 0, 0),
 (21, 'admin', 'admin', 'admin123', 'admin', 'admin', 0, '0000-00-00', 0, 0),
-(23, 'Jhon Richard Bensi', 'bensi', '1234', 'Alumni', 'BSIT', 1, '2023-12-20', 0, 0);
+(23, 'Jhon Richard Bensi', 'bensi', '1234', 'Alumni', 'BSIT', 1, '2023-12-20', 0, 0),
+(24, 'ranel soulyaknow', 'ranel', '12345678', 'Teacher', 'BSIT', 1, '2023-12-20', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -405,7 +452,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `uid`, `school_id`, `fullname`, `email`, `address`, `number`, `yr_sec`, `acadyr`, `role_in_school`, `department`, `pic`, `cover`, `date_registered`, `status`, `approval`) VALUES
-(5, 20, 20200094, 'arnel lamanilao', 'carcelaarnel@gmail.com', 'soong 1', 2147483647, '', '', 'Faculty', 'BSIT', 'Screenshot 2023-12-02 010211.png', 'Screenshot (6).png', '2023-12-15', 'active', 'approve');
+(5, 20, 20200094, 'arnel lamanilao', 'carcelaarnel@gmail.com', 'soong 1', 2147483647, '', '', 'Faculty', 'BSIT', 'Screenshot 2023-12-02 010211.png', 'Screenshot (6).png', '2023-12-15', 'active', 'approve'),
+(6, 24, 232132131, 'ranel soulyaknow', 'ranel@gmail.com', 'marigondon', 2147483647, '', '', 'Part-time', 'BSIT', 'user-21.png', 'chip.png', '2023-12-20', 'active', 'approve');
 
 -- --------------------------------------------------------
 
@@ -433,7 +481,10 @@ INSERT INTO `user_msg` (`id`, `incoming_id`, `outgoing_id`, `messages`, `date_se
 (22, 20, 15, 'dsadsad', '2023-12-17 16:00:00'),
 (23, 20, 15, 'dasdsad', '2023-12-17 16:00:00'),
 (24, 20, 15, 'dsadsad', '2023-12-17 16:00:00'),
-(25, 20, 15, 'sasadsadsad', '2023-12-18 12:12:07');
+(25, 20, 15, 'sasadsadsad', '2023-12-18 12:12:07'),
+(27, 24, 15, 'kmhjvbyctyun', '2023-12-20 04:59:23'),
+(28, 20, 15, 'ndhaskldsadsa', '2023-12-20 05:02:33'),
+(29, 15, 20, 'ui unsa man', '2023-12-20 05:03:06');
 
 --
 -- Indexes for dumped tables
@@ -468,6 +519,12 @@ ALTER TABLE `alumnireport`
 --
 ALTER TABLE `bsitannouncement`
   ADD PRIMARY KEY (`a_id`);
+
+--
+-- Indexes for table `bsitcomments`
+--
+ALTER TABLE `bsitcomments`
+  ADD PRIMARY KEY (`comment_id`);
 
 --
 -- Indexes for table `bsitevents`
@@ -573,6 +630,12 @@ ALTER TABLE `bsitannouncement`
   MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `bsitcomments`
+--
+ALTER TABLE `bsitcomments`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `bsitevents`
 --
 ALTER TABLE `bsitevents`
@@ -588,55 +651,55 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `tbl_announcement`
 --
 ALTER TABLE `tbl_announcement`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_comments`
 --
 ALTER TABLE `tbl_comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_events`
 --
 ALTER TABLE `tbl_events`
-  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_post`
 --
 ALTER TABLE `tbl_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `tbl_postbsit`
 --
 ALTER TABLE `tbl_postbsit`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_reports`
 --
 ALTER TABLE `tbl_reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_msg`
 --
 ALTER TABLE `user_msg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables

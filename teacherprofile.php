@@ -34,33 +34,26 @@ if (!$_SESSION['fullname']) {
             <!-- navigation top-->
             <div class="nav-header bg-white shadow-xs border-0">
                 <div class="nav-top">
-                    <a href="teacherhome.php"><i class="feather- text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xl logo-text mb-0">CAMPUSCOMM </span> </a>
+                    <a href="teacherhome.html"><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm Profile Page</span>
+                    </a>
+                    <a href="#" class="mob-menu ms-auto me-2" id="dropdownMenu4" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu4">
+                        <h4 class="fw-700 font-xss mb-4">Notification</h4>
+
+                    </div>
+
                     <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="tdepartment.php" class="mob-menu me-2"><i class="feather-globe text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="teacherhome.php" class="mob-menu me-2"><i class="feather-home text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+
+                    <!-- <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a> -->
                     <button class="nav-menu me-0 ms-2"></button>
                 </div>
 
-                <form action="#" class="float-left header-search">
-                    <div class="form-group mb-0 icon-input">
-                        <i class="feather-search font-sm text-grey-400"></i>
-                        <input type="text" placeholder="Start typing to search.." class="bg-grey border-0 lh-32 pt-2 pb-2 ps-5 pe-3 font-xssss fw-500 rounded-xl w350 theme-dark-bg">
-                    </div>
-                </form>
-                <a href="homepage.html" class="p-2 text-center ms-3 menu-icon center-menu-icon"><i class="feather-home font-lg alert-primary btn-round-lg theme-dark-bg text-current "></i></a>
-                <a href="departmnent.html" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i class="feather-globe font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
-
-                <a href="userprofile.html" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i class="feather-user font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
-
-
-                <a href="#" class="p-2 text-center ms-auto menu-icon" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown"><span class="dot-count bg-warning"></span><i class="feather-bell font-xl text-current"></i></a>
+                <a href="#" class="p-2 text-center ms-auto menu-icon show" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell font-xl text-current"></i></a>
                 <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
-
                     <h4 class="fw-700 font-xss mb-4">Notification</h4>
 
                 </div>
-                <!-- <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
-                 -->
+                <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
                 <div class="p-2 text-center ms-3 position-relative dropdown-menu-icon menu-icon cursor-pointer">
                     <i class="feather-settings animation-spin d-inline-block font-xl text-current"></i>
                     <div class="dropdown-menu-settings switchcolor-wrap">
@@ -163,10 +156,7 @@ if (!$_SESSION['fullname']) {
 
                     </div>
                 </div>
-
-
-                <a href="default-settings.html" class="p-0 ms-3 menu-icon"><img src="images/profile-4.png" alt="user" class="w40 mt--1"></a>
-
+                <a href="default-settings.html" class="p-0 ms-3 menu-icon"></a>
             </div>
             <!-- navigation top -->
 
@@ -177,9 +167,22 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
-                                <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span><?php
-                                                                                                                                                                            echo $_SESSION['fullname'];
-                                                                                                                                                                            ?></span></a></li>
+                            <?php
+                                $id = $_SESSION['user_id'];
+                                $query = "SELECT *
+                                     FROM tbl_user AS tu
+                                     JOIN users AS u ON tu.user_id = u.uid
+                                     WHERE tu.user_id = $id;";
+                                $result = mysqli_query($conn, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                if ($row != 0) {
+
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
+                                        ';
+                                } else {
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
+                                }
+                                ?>                                                                                                                                            
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
                                 <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
                             </ul>
@@ -219,7 +222,7 @@ if (!$_SESSION['fullname']) {
                                         <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3 mt-3 overflow-hidden">
                                             <div class="card-body position-relative h240 bg-image-cover bg-image-center" style="background-image: url('<?php echo $coverPath; ?>');"></div>
                                             <div class="card-body d-block pt-4 text-center position-relative">
-                                                <figure class="avatar mt--6 position-relative w250 z-index-1 w100 z-index-1 ms-auto me-auto" style="border:1px solid black; border-radius:5px;"><img src="<?php echo $imagePath; ?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
+                                                <figure class="avatar mt--6 position-relative w250 z-index-1 w100 z-index-1 ms-auto me-auto" style="border-radius:5px;"><img src="<?php echo $imagePath; ?>" alt="image" class="p-1 bg-white rounded-xl w-100"></figure>
 
                                                 <h4 class="font-xs ls-1 fw-700 text-grey-900">
                                                     <?php

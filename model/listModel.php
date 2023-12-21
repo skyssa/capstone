@@ -382,6 +382,8 @@ function fnDeleteComment(){
         mysqli_close($conn);
         
 }
+
+
 function fnReportPost(){
     global $conn;
     $id=$_POST['post_id'];

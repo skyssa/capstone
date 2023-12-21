@@ -329,11 +329,6 @@ if (!$_SESSION['fullname']) {
                                         <figure class="avatar me-3"><i class="fa fa-user"></i></figure>
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{post.names}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{post.date_created}}</span>
                                         </h4>
-                                        <!-- <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a> -->
-                                        <!-- <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2" style="margin: 0px;">
-                                            <a @click="editPost(post)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editPostModal">Edit</a>
-                                            <a @click="fnDeletePost(post.post_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
-                                        </div> -->
                                     </div>
                                     <div class="card-body p-0 me-lg-5">
                                         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
@@ -445,23 +440,6 @@ if (!$_SESSION['fullname']) {
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-
-                                                    <!-- Modal Body -->
-                                                    <!-- <div class="modal-body">
-                                                        Form to submit announcements
-                                                        <form @submit="fnSaveAnnouncement($event)">
-                                                            <div class="form-group">
-                                                                <label for="title" class="font-xssss fw-600 text-grey-500">Title:</label>
-                                                                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="description" class="font-xssss fw-600 text-grey-500">Description:</label>
-                                                                <textarea class="form-control" name="description" id="description" placeholder="Description" rows="3" required></textarea>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary">Announce</button>
-                                                        </form>
-                                                    </div> -->
-
                                                     <!-- Display announcements in the modal -->
                                                     <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
                                                         <div class="card mt-3" v-for="announces in announce" :key="announces.a_id">
@@ -474,10 +452,6 @@ if (!$_SESSION['fullname']) {
                                                                 <p class="font-xss fw-600 mb-2">{{ announces.description }}</p>
                                                     
 
-                                                                <!-- <div class="d-flex justify-content-end mt-3">
-                                                                    <a @click="editAnnounce(announces)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editAnnounceModal">Edit</a>
-                                                                    <a @click="fnDeleteAnnounce(announces.a_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
-                                                                </div> -->
                                                             </div>
 
                                                         </div>
@@ -488,52 +462,13 @@ if (!$_SESSION['fullname']) {
                                         </div>
                                     </div>
                                 </div>
-                                <div style="height:100px;" class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                <div style="height:50%; overflow: scroll;" class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                     <div class="card-body d-flex align-items-center  p-4">
 
                                         <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
 
                                         <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                             <div>
-                                                <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-                                                    CREATE EVENTS
-                                                </button> -->
-
-                                                <!-- event modal -->
-                                                <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <form @submit="fnSaveEvent($event)">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="title" class="form-label">Title</label>
-                                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Title">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="date" class="form-label">Date</label>
-                                                                        <input type="date" class="form-control" name="date" id="date" placeholder="Date">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="events" class="form-label">Event</label>
-                                                                        <input type="text" class="form-control" name="events" id="events" placeholder="Event">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Create</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-
-                                                </div> -->
-
                                                 <!-- event cards -->
                                                 <div class="card mt-3" v-for="event in events">
                                                     <div class="card-heading">

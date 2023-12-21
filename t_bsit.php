@@ -22,6 +22,8 @@ if (!$_SESSION['fullname']) {
     <link rel="icon" type="image/png" sizes="16x16" href="img/CPC.jpg">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy12aC9fv5+gM5bGgS7J2h2bjvZkmH4bY1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" integrity="sha512-zvrDc8Yq+5dznp8gIbmlc92p+q3P7KJ5q0onmRPdDQHl8Im4mt5L9JlC+VZgu4N0XJ9I/tOIQ0giHtp/Uz2XpA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/emoji.css">
     <link rel="stylesheet" href="css/lightbox.css">
@@ -40,6 +42,44 @@ if (!$_SESSION['fullname']) {
             width: 50%;
             height: 30%;
         }
+
+        .comment-container {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+
+        .comment-input-container {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-top: 1px solid #ddd;
+        }
+
+        .comment-input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        .comment-button {
+
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 
 </head>
@@ -53,15 +93,25 @@ if (!$_SESSION['fullname']) {
             <!-- navigation top-->
             <div class="nav-header bg-white shadow-xs border-0">
                 <div class="nav-top">
-                    <a href="teacherhome.html"><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm</span>
+                    <a href="teacherhome.html"><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm Bsit Homepage</span>
                     </a>
+                    <a href="#" class="mob-menu ms-auto me-2" id="dropdownMenu4" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu4">
+                        <h4 class="fw-700 font-xss mb-4">Notification</h4>
+
+                    </div>
+
                     <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="default-video.html" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+
+                    <!-- <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a> -->
                     <button class="nav-menu me-0 ms-2"></button>
                 </div>
-                <a href="#" class="p-2 text-center ms-auto menu-icon show" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell font-xl text-current"></i></a>
 
+                <a href="#" class="p-2 text-center ms-auto menu-icon show" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell font-xl text-current"></i></a>
+                <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
+                    <h4 class="fw-700 font-xss mb-4">Notification</h4>
+
+                </div>
                 <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
                 <div class="p-2 text-center ms-3 position-relative dropdown-menu-icon menu-icon cursor-pointer">
                     <i class="feather-settings animation-spin d-inline-block font-xl text-current"></i>
@@ -176,19 +226,37 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
-                                <li><a href="profilerole.php" class="nav-content-bttn open-font"><i class="feather-user btn-round-md bg-primary-gradiant me-3"></i><span>Profile</span></a></li>
+                            <?php
+                                $id = $_SESSION['user_id'];
+                                $query = "SELECT *
+                                     FROM tbl_user AS tu
+                                     JOIN users AS u ON tu.user_id = u.uid
+                                     WHERE tu.user_id = $id;";
+                                $result = mysqli_query($conn, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                if ($row != 0) {
+
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
+                                        ';
+                                } else {
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
+                                }
+                                ?>
+
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
-                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
+                                <li><a href="" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
+                                <li><a href="logouts.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
+
                             </ul>
                         </div>
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
-                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
+                            <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span>Others</div>
                             <ul class="mb-1">
-                                <li><a href="messenger.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Message</span><span class="circle-count bg-warning mt-0"></span></a></li>
-                                <li><?php
-                                    echo $_SESSION['fullname'];
-                                    ?></li>
-                                <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i></i><span>Log Out</span></span></a></li>
+                                <li><a href="https://www.facebook.com/cpcofficial2005" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-facebook me-3 text-grey-500"></i><span>Facebook</span></a></li>
+                                <li><a href="https://www.facebook.com/cpcofficial2005" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather- me-3 text-grey-500"></i><span></span></a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -241,13 +309,12 @@ if (!$_SESSION['fullname']) {
 
                                         </div>
                                         <div class="form-group">
-                                           
+
                                             <div id="imageInputsContainer">
-                                                <input type="file" name="productimage" id="fileimg"  multiple >
-                                             
+                                                <input type="file" name="productimage" id="fileimg" multiple>
                                             </div>
-                                    
-                                            <button type="submit"  class="btn btn-primary">
+
+                                            <button type="submit" class="btn btn-primary">
                                                 Post
                                             </button>
                                         </div>
@@ -263,7 +330,8 @@ if (!$_SESSION['fullname']) {
                                         </h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2" style="margin: 0px;">
-                                        
+                                            <a @click="editPost(post)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editPostModal">Edit</a>
+                                            <a @click="fnDeletePost(post.post_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
                                         </div>
                                     </div>
                                     <div class="card-body p-0 me-lg-5">
@@ -282,7 +350,7 @@ if (!$_SESSION['fullname']) {
                                     <div class="card-body d-flex p-0 mt-3">
                                         <div class="container">
                                             <!-- Trigger the modal with a button -->
-                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i>Comment</button>
+                                            <button @click="fnCommentPost(post.post_id)" class="btn btn-info btn-m" data-toggle="modal" data-target="#commentModal"><i class="fas fa-comment"></i>Comment</button>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="commentModal" role="dialog">
@@ -293,24 +361,18 @@ if (!$_SESSION['fullname']) {
                                                             <h4 class="modal-title">Comments</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form @submit="fnSaveComment($event)">
-                                                                <input type="hidden" name="pid" value="{{ post.post_id }}">
-                                                                <input type="hidden" name="id" value="<?php echo $_SESSION['user_id'] ?>">
-                                                                <input type="hidden" name="uname" value="<?php echo $_SESSION['fullname'] ?>">
-                                                                <textarea name="comment" id="comment" cols="30" rows="10" placeholder="comment"></textarea>
-                                                                <button type="submit">save comment</button>
-                                                            </form>
-                                                            <div class="card" v-for="comment in comments">
-                                                                <div class="card-heading">
-                                                                    <div class="cardtitle">
-                                                                        <h6>{{ comment.uname}}</h6>
-                                                                    </div>
-                                                                </div>
+                                                            <div v-for="comment in comments" :key="comment.comment_id" class="comment-container">
 
-                                                                <div class="card-content">
-                                                                    <p>{{ comment.comment }}<br></p> <br><br>
-                                                                </div>
+                                                                <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{ comment.uname }}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{ comment.date }}</span>
+                                                                    <p class="comment-author">{{ comment.comment }}</p>
+                                                                    <a @click="editComment(comment)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editCommentModal">Edit</a>
+                                                                    <a @click="fnDeleteComment(comment.comment_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
                                                             </div>
+                                                            <div class="comment-input-container">
+                                                                <input v-model="commentText" class="comment-input" type="text" placeholder="Type your comment here" />
+                                                                <button @click="fnAddComment(post.post_id, commentText)" class="comment-button fw-600 text-success ms-2">Comment</button>
+                                                            </div>
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -323,10 +385,10 @@ if (!$_SESSION['fullname']) {
                                         <div class="container">
 
                                             <!-- Trigger the modal with a button -->
-                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="fas fa-cog"></i>Report</button>
+                                            <button type="button" class="btn btn-info btn-m" data-toggle="modal" data-target="#myReport"><i class="fas fa-cog"></i>Report</button>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal fade" id="myReport" role="dialog">
                                                 <div class="modal-dialog modal-sm">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -334,19 +396,14 @@ if (!$_SESSION['fullname']) {
                                                             <h4 class="modal-title">Reports</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form @submit="fnSaveReport($event)">
-                                                                <?php $pid = "{{ post.post_id }}"; ?>
-                                                                <input type="text" name="postid" v-if="post.post_id" value="{{ post.post_id }}">
-                                                                <input type="hidden" name="id" value="<?php echo $_SESSION['user_id'] ?>">
-                                                                <select name="report_type">
-                                                                    <option disabled>report Type</option>
-                                                                    <option>sexuall content</option>
-                                                                    <option>inapproriate</option>
-                                                                    <option>illegal content</option>
-                                                                    <option>illegal trading</option>
-                                                                </select>
-                                                                <button type="submit">submit report</button>
-                                                            </form>
+
+                                                            <select v-model="reportReason">
+                                                                <option value="spam">Spam</option>
+                                                                <option value="inappropriate">Inappropriate content</option>
+                                                                <option value="sexuall content">sexuall content</option>
+                                                                <option value="illegal content">illegal content</option>
+                                                            </select>
+                                                            <button @click="fnReportPost(post.post_id, reportReason)" class="fw-600 text-warning ms-2">Report</button>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -369,85 +426,129 @@ if (!$_SESSION['fullname']) {
 
                             </div>
                             <div class="col-xl-4 col-xxl-3 col-lg-4 ps-lg-0">
-                                <div class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                <div class="card w-100 shadow rounded border-0 mb-3">
                                     <div class="card-body d-flex align-items-center p-4">
-                                        <h4 class="fw-700 mb-0 font-xssss text-grey-900">Announcement</h4>
-
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#announceModal">
+                                        <h4 class="fw-700 mb-0 font-xssss text-primary">Announcement</h4>
+                                        <button type="button" class="btn btn-info ml-auto" data-toggle="modal" data-target="#announceModal">
                                             See all
                                         </button>
 
-                                        <!-- announcement -->
+                                        <!-- Announcement Modal -->
                                         <div class="modal fade" id="announceModal" tabindex="-1" role="dialog" aria-labelledby="announceModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
-                                                    <form @submit="fnSaveAnnouncement($event)">
-                                                        <input type="text" name="title" id="" placeholder="Title">
-                                                        <input type="text" name="description" id="" placeholder="description">
-                                                        <button type="submit">announce</button>
-                                                    </form>
-                                                    <div class="card" v-for="announces in announce">
-                                                        <div class="card-heading">
-                                                            <div class="cardtitle">
-                                                                <h6>{{ announces.date_created}}</h6>
-                                                                <h5>Title: {{ announces.title }}<br></h5>
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title" id="announceModalLabel">Announcement</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Modal Body -->
+                                                    <div class="modal-body">
+                                                        <!-- Form to submit announcements -->
+                                                        <form @submit="fnAnnounceBsit($event)">
+                                                            <div class="form-group">
+                                                                <label for="title" class="font-xssss fw-600 text-grey-500">Title:</label>
+                                                                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="description" class="font-xssss fw-600 text-grey-500">Description:</label>
+                                                                <textarea class="form-control" name="description" id="description" placeholder="Description" rows="3" required></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Announce</button>
+                                                        </form>
+                                                    </div>
+
+                                                    <!-- Display announcements in the modal -->
+                                                    <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+                                                        <div class="card mt-3" v-for="announces in announce" :key="announces.a_id">
+                                                            <div class="card-heading bg-primary text-white p-3">
+                                                                <h6 class="font-xsssss mb-0">{{ announces.date_created }}</h6>
+                                                                <h5 class="font-xs fw-600 mb-2">Title: {{ announces.title }}</h5>
+                                                            </div>
+                                                            <div class="card-content p-3">
+                                                                <p class="font-xsssss mb-0">Content:</p>
+                                                                <p class="font-xss fw-600 mb-2">{{ announces.description }}</p>
+                                                    
+
+                                                                <div class="d-flex justify-content-end mt-3">
+                                                                    <a @click="editAnnounce(announces)" href="#" class="fw-600 text-primary ms-2" data-toggle="modal" data-target="#editAnnounceModal">Edit</a>
+                                                                    <a @click="fnDeleteAnnounce(announces.a_id)" href="#" class="fw-600 text-danger ms-2">Delete</a>
+                                                                </div>
                                                             </div>
 
                                                         </div>
-
-                                                        <div class="card-content">
-                                                            <p>Content: {{ announces.description }}<br></p> <br><br>
-                                                        </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div style="height:100px;" class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                     <div class="card-body d-flex align-items-center  p-4">
 
                                         <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
-                                        <a href="default-event.html" class="fw-600 ms-auto font-xssss text-primary">See
-                                            all</a>
-                                        <div class="card" v-for="event in events">
-                                            <div class="card-heading">
-                                                <div class="cardtitle">
-                                                    <h5>Event Title: {{ event.title }}<br></h5>
-                                                    <h5>Date: {{ event.date }}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden">
                                             <div>
-
-
                                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                                                     CREATE EVENTS
                                                 </button>
 
-                                                <!-- event -->
+                                                <!-- event modal -->
                                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
-                                                            <form @submit="fnSaveEvent($event)">
-                                                                <input type="text" name="title" id="" placeholder="Title">
-                                                                <input type="date" name="date" id="" placeholder="date">
-                                                                <input type="text" name="events" id="" placeholder="Event">
-                                                                <button type="submit">create</button>
+                                                            <form @submit="fnEventBsit($event)">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="title" class="form-label">Title</label>
+                                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="date" class="form-label">Date</label>
+                                                                        <input type="date" class="form-control" name="date" id="date" placeholder="Date">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="events" class="form-label">Event</label>
+                                                                        <input type="text" class="form-control" name="events" id="events" placeholder="Event">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                                </div>
                                                             </form>
-
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
 
+                                                <!-- event cards -->
+                                                <div class="card mt-3" v-for="event in events">
+                                                    <div class="card-heading">
+                                                        <div class="card-title">
+                                                            <h5>Event Title: {{ event.title }}<br></h5>
+                                                            <h5>Date: {{ event.date }}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="calendar"></div>
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
+
                             </div>
                             <!-- main content -->
 
@@ -455,128 +556,152 @@ if (!$_SESSION['fullname']) {
                             <div class="right-chat nav-wrap mt-2 right-scroll-bar">
                                 <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 
-                                    <!-- loader wrapper -->
-                                    <!-- <div class="preloader-wrap p-3" style="display: none;">
-                                        <div class="box shimmer">
-                                            <div class="lines">
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                            </div>
-                                        </div>
-                                        <div class="box shimmer mb-3">
-                                            <div class="lines">
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                            </div>
-                                        </div>
-                                        <div class="box shimmer">
-                                            <div class="lines">
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                                <div class="line s_shimmer"></div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!-- loader wrapper -->
 
                                     <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
+
                                         <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
                                         <ul class="list-group list-group-flush">
-                                            <!-- <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-8.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Hurin
-                                        Seary</a>
-                                </h3>
-                                <span class="badge badge-primary text-white badge-pill fw-500 mt-0">2</span>
-                            </li>
-                            -->
+
+                                            <?php
+                                            $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE user_type='Student' OR user_type='Teacher' ");
+                                            while ($data = mysqli_fetch_assoc($query_user)) {
+                                                if ($data['user_id'] != $_SESSION['user_id'])
+                                                    echo '<li><a href="chat.php?uid=' . $data["user_id"] . '">' . $data["name"] . ' - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '</a></li>';
+                                            }
+                                            ?>
 
                                         </ul>
                                     </div>
-                                    <!-- <div class="section full pe-3 ps-4 pt-4 pb-4 position-relative feed-body">
-                                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">GROUPS</h4>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-
-                                                <span class="btn-round-sm bg-primary-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                                <h3 class="fw-700 mb-0 mt-0">
-                                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Studio
-                                                        Express</a>
-                                                </h3>
-                                                <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">2 min</span>
-                                            </li>
-                                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-
-                                                <span class="btn-round-sm bg-gold-gradiant me-3 ls-3 text-white font-xssss fw-700">AR</span>
-                                                <h3 class="fw-700 mb-0 mt-0">
-                                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Armany
-                                                        Design</a>
-                                                </h3>
-                                                <span class="bg-warning ms-auto btn-round-xss"></span>
-                                            </li>
-                                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-
-                                                <span class="btn-round-sm bg-mini-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                                <h3 class="fw-700 mb-0 mt-0">
-                                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">De
-                                                        fabous</a>
-                                                </h3>
-                                                <span class="bg-success ms-auto btn-round-xss"></span>
-                                            </li>
-                                        </ul>
-                                    </div> -->
 
 
                                 </div>
                             </div>
-
-
-                            <!-- right chat -->
-
-                            <div class="app-footer border-0 shadow-lg bg-primary-gradiant">
-                                <a href="default.html" class="nav-content-bttn nav-center"><i class="feather-home"></i></a>
-                                <a href="default-video.html" class="nav-content-bttn"><i class="feather-package"></i></a>
-                                <a href="default-live-stream.html" class="nav-content-bttn" data-tab="chats"><i class="feather-layout"></i></a>
-                                <a href="shop-2.html" class="nav-content-bttn"><i class="feather-layers"></i></a>
-                                <a href="default-settings.html" class="nav-content-bttn"><img src="images/female-profile.png" alt="user" class="w30 shadow-xss"></a>
-                            </div>
-
-                            <div class="app-header-search">
-                                <form class="search-form">
-                                    <div class="form-group searchbox mb-0 border-0 p-1">
-                                        <input type="text" class="form-control border-0" placeholder="Search...">
-                                        <i class="input-icon">
-                                            <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
-                                        </i>
-                                        <a href="#" class="ms-1 mt-1 d-inline-block close searchbox-close">
-                                            <i class="ti-close font-xs"></i>
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
-
                         </div>
                     </div>
 
-                    <script src="js/plugin.js"></script>
-                    <script src="js/lightbox.js"></script>
-                    <script src="js/scripts.js"></script>
-                    <script src="jsfiles/vue.3.js"></script>
-                    <script src="jsfiles/axios.js"></script>
-                    <script src="jsfiles/app.teacher.js"></script>
-                    <!-- <script src="jsfiles/feature.js"></script> -->
+                    <!-- <div class="modal bottom side fade" id="Modalstory" tabindex="-1" role="dialog" style=" overflow-y: auto;">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content border-0 bg-transparent">
+                                <button type="button" class="close mt-0 position-absolute top--30 right--10" data-dismiss="modal" aria-label="Close"><i class="ti-close text-grey-900 font-xssss"></i></button>
+                                <div class="modal-body p-0">
+                                    <div class="card w-100 border-0 rounded-3 overflow-hidden bg-gradiant-bottom bg-gradiant-top">
+                                        <div class="owl-carousel owl-theme dot-style3 story-slider owl-dot-nav nav-none owl-loaded owl-drag">
+                                            <div class="owl-stage-outer">
+                                              sadsad
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- edit post -->
+                    <!-- <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="updatePost">
+                                        <label for="edit-names">Name:</label>
+                                        <input v-model="editingPost.names" type="text" id="edit-names" required>
 
-                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                                        <label for="edit-description">Description:</label>
+                                        <textarea v-model="editingPost.description" id="edit-description" required></textarea>
+
+
+                                        <button type="submit">Update Post</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- edit comment -->
+                    <!-- <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="updateComment">
+                                        <label for="edit-names">Name:</label>
+                                        <input v-model="editingComment.uname" type="text" id="edit-names" required>
+
+                                        <label for="edit-description">Description:</label>
+                                        <textarea v-model="editingComment.comment" id="edit-description" required></textarea>
+
+
+                                        <button type="submit">Update Comment</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- edit announce -->
+                    <!-- <div class="modal fade" id="editAnnounceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit your comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form @submit.prevent="updateAnnounce">
+                                        <label for="edit-names">Title:</label>
+                                        <input v-model="editingAnnounce.title" type="text" id="edit-names" required>
+
+                                        <label for="edit-description">Description:</label>
+                                        <textarea v-model="editingAnnounce.description" id="edit-description" required></textarea>
+
+
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-XpST91Agn3uZd1QVq3JcNvLyA7uj13d3s9fQbY8bF2jW0JqJSFkh6DEVDJLbcQ8E" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy12aC9fv5+gM5bGgS7J2h2bjvZkmH4bY1" crossorigin="anonymous"></script>
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-ZJ/saCJAGQ8idK7LEp+qLKn4J7BFlwIeehtv8P0zW4QVDu1oSmSdsJbAMBUVpXy0VJlA1Nel3+8eQ+ZdLfyhLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" integrity="sha512-E+4j1pwXlM+YJ5LreIj+SG/xMMzNBntZYx1Zc1fgP5Mt/EXi1z3r6D9uRw46bwnY4H7mogz74qrsjIQWwNHYFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                 
+                  
+        <script src="js/plugin.js"></script>
+
+<script src="js/lightbox.js"></script>
+<script src="js/scripts.js"></script>
+<script src="jsfiles/vue.3.js"></script>
+<script src="jsfiles/axios.js"></script>
+<script src="jsfiles/app.teacher.js"></script>
+                    <!-- <script src="jsfiles/feature.js"></script> -->
+
+
 
 
 
@@ -584,328 +709,3 @@ if (!$_SESSION['fullname']) {
 </body><!-- Mirrored from uitheme.net/sociala/default.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 17:15:45 GMT -->
 
 </html>
-
-
-<!-- <?php
-session_start();
-include "includes/config.php";
-if (!$_SESSION['fullname']) {
-     echo '<script>window.location.href="sign-in.php";</script>';
-     exit();
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>CampusComm</title>
-     <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
-
-     <script src="https://kit.fontawesome.com/b06a377e67.js" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="cssfiles/home.css">
-     <link rel="stylesheet" href="cssfiles/responsive.css">
-     <link rel="stylesheet" href="cssfiles/navbarrespon.css">
-     
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-     <script src="https://kit.fontawesome.com/b06a377e67.js" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="/cssfiles/home.css">
-     <link rel="stylesheet" href="/cssfiles/responsive.css">
-     <link rel="stylesheet" href="/cssfiles/navbarrespon.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-</head>
-<style>
-
-     body {
-          font-family: Arial, sans-serif;
-     }
-
-     .post {
-          background-color: #f5f6f7;
-          padding: 10px;
-          border-radius: 5px;
-          margin-bottom: 20px;
-          box-shadow: 3px 2px 2px gray;
-     }
-
-     .post-header {
-          display: flex;
-          align-items: center;
-          margin-bottom: 10px;
-     }
-
-     .post-avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          margin-right: 10px;
-     }
-
-     .post-username {
-          font-weight: bold;
-     }
-
-     .post-timestamp {
-          color: #808080;
-          font-size: 12px;
-          margin-left: auto;
-     }
-
-     .post-content {
-          margin-bottom: 10px;
-     }
-
-     .post-image {
-          max-width: 10%;
-          margin-bottom: 10px;
-     }
-     #imahe{
-          width: 100%;
-          padding: 10px;
-     }
-     .post-actions {
-          display: flex;
-          align-items: center;
-          color: #606770;
-          font-size: 14px;
-     }
-
-     .post-action {
-          margin-right: 20px;
-     }
-
-     .post-action i {
-          margin-right: 5px;
-     }
-     
-     #post {
-          width: 457px;
-          height: 70px;
-          border: 1px solid black;
-          background-position: center;
-          background-size: cover;
-     }
-</style>
-
-<body>
-     <div id="teach-app">
-          <div id="mainbox">
-               <div id="navbar">
-                    <h1>Cc.</h1>
-                    <h2></h2>
-                    <ul>
-                         <li><a href="role.php"><i class="fa-solid fa-house fa-fade fa-sm"></i><span> Home</span> </a></li>
-
-                         <li><a href="chatbox.php"><i class="fa-brands fa-facebook-messenger fa-fade fa-sm"></i><span> Messages</span></a></li>
-                         <li id="fa-heart"><a href="department.php"><i class="fa-solid fa-fade fa-school"></i><span> Department</span></a>
-                         </li>
-                    </ul>
-                    <div id="nav2">
-                       
-                         <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              MORE
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                   <a class="dropdown-item" href="myprofile.html">My Profile</a><br>
-                                   <a class="dropdown-item" href="#"><?php
-                                        echo $_SESSION['fullname'];
-                                        ?></a><br>
-                                   <a class="dropdown-item" href="#"><?php
-                                   echo $_SESSION['dep_type'];
-                                   ?></a><br>
-                                   <a class="dropdown-item" href="logout.php">Log Out</a>
-                              </div>
-                         </div>
-                   
-                    </div>
-
-               </div>
-               <hr>
-               <div id="main">
-                    <div id="cards" style="border: 1px solid black; padding: 20px;">
-                         <div>
-                              <h3>BSIT PAGE</h3>
-                           
-                              <form @submit="fnSavebsit($event)">
-                                   <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>" id="">
-                                   <input type="hidden" name="name" value="<?php echo $_SESSION['fullname']; ?>" id="">
-                                   <div class="form-group">
-                                        <label for="description">What's on your mind?</label>
-                                        <textarea id="post" rows="5" class="form-control" name="description"></textarea>
-
-                                   </div>
-                                   <div class="form-group">
-                                        <div>
-                                             <input type="file"  name="productimage">                                             
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">
-                                             Post
-                                        </button>
-                                   </div>
-                              </form>
-                              <div class="card" v-for="post in posts">
-                                   <div class="post">
-                                        <div class="post-header">
-                                             <img class="post-avatar" src="avatar.jpg" alt="Avatar">
-                                             <h4 style="font-size: 17px;">{{ post.names }}<br></h4>
-                                             <div class="post-timestamp">
-                                                  <p>{{ post.date_created }}</p>
-                                             </div>
-                                        </div>
-                                        <div class="card-content">
-                                             <p>{{ post.description }}<br></p>
-                                        </div>
-                                        
-                                        <img id="imahe" class="img-fluid" :src="'uploads/' + post.image" />
-                                        <div class="post-actions">
-                                         
-                                             <div class="post-action"> <button type="button" data-toggle="modal" data-target="#mym" style="border: none;"><i class="fas fa-comment"></i>Comment</button></div>
-                                             <div class="modal fade" id="mym" role="dialog">
-                                                  <div class="modal-dialog">
-                                                       <div class="modal-content">
-                                                            <span class="close">&times;</span>
-                                                            <form @submit="fnSaveComment($event)">
-                                                                 <input type="hidden" name="pid" value="{{ bsits.post_id }}">
-                                                                 <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']?>">
-                                                                 <input type="hidden" name="uname" value="<?php echo $_SESSION['fullname']?>">
-                                                                 <textarea name="comment" id="comment" cols="30" rows="10" placeholder="comment"></textarea>
-                                                                 <button type="submit">save comment</button>
-                                                            </form>
-                                                            <div class="card" v-for="comment in comments">
-                                                                 <div class="card-heading">
-                                                                      <div class="cardtitle">
-                                                                           <h6>{{ comment.uname}}</h6>
-                                                                      </div>
-                                                                 </div>
-                                        
-                                                                 <div class="card-content">
-                                                                      <p>{{ comment.comment }}<br></p> <br><br>
-                                                                 </div>
-                                                            </div>
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                   
-                                             <div class="post-action"> <button type="button" data-toggle="modal" data-target="#mymreport" style="border: none;"><i class="fas fa-cog"></i>Report</button></div>
-                                             <div class="modal fade" id="mymreport" role="dialog">
-                                                  <div class="modal-dialog">
-                                                       <div class="modal-content">
-                                                            <span class="close">&times;</span>
-                                                            <form @submit="fnSaveReport($event)">
-                                                            <?php $pid="{{ post.post_id }}";?>
-                                                                 <input type="text" name="postid" v-if="post.post_id" value="{{ post.post_id }}">
-                                                                 <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']?>">
-                                                                 <select name="report_type">
-                                                                      <option disabled>report Type</option>
-                                                                      <option>sexuall content</option>
-                                                                      <option>inapproriate</option>
-                                                                      <option>illegal content</option>
-                                                                      <option>illegal trading</option>
-                                                                 </select>
-                                                                 <button type="submit">submit report</button>
-                                                            </form>
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                        </div>
-                                   </div>
-                                   
-                              </div>
-                         </div>
-                    </div>
-               </div>
-               <div id="main2">
-                    <div>
-                        
-                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-                         CREATE EVENTS
-                         </button>
-
-                     
-                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                         <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                   <form @submit="fnEventBsit($event)">
-                                        <input type="text" name="title" id="" placeholder="Title">
-                                        <input type="date" name="date" id="" placeholder="date">
-                                        <input type="text" name="events" id="" placeholder="Event">
-                                        <button type="submit">create</button>
-                                   </form>
-
-                                   <div class="card" v-for="event in events">
-                                        <div class="card-heading">
-                                             <div class="cardtitle">
-                                                  <h5>Event Title: {{ event.title }}<br></h5>
-                                                  <h5>Date: {{ event.date }}</h5>
-                                             </div>
-                                        </div>
-                                        <div class="card-content">
-                                             <p>Content: {{ event.event }}<br></p><br>
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-
-                    </div>
-
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-         
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#announceModal">
-                    CREATE ANNOUNCEMENT
-                    </button>
-
-                    <div class="modal fade" id="announceModal" tabindex="-1" role="dialog" aria-labelledby="announceModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                         <div class="modal-content">
-                              <form @submit="fnAnnounceBsit($event)">
-                                   <input type="text" name="title" id="" placeholder="Title">
-                                   <input type="text" name="description" id="" placeholder="description">
-                                   <button type="submit">announce</button>
-                              </form>
-                              <div class="card" v-for="announces in announce">
-                                   <div class="card-heading">
-                                        <div class="cardtitle">
-                                             <h6>{{ announces.date_created}}</h6>
-                                             <h5>Title: {{ announces.title }}<br></h5>
-                                        </div>
-                                        
-                                   </div>
-          
-                                   <div class="card-content">
-                                        <p>Content: {{ announces.description }}<br></p> <br><br>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-                 
-
-               </div>
-          </div>
-
-     </div>
-     <script src="jsfiles/script.js"></script>
-     <script src="jsfiles/vue.3.js"></script>
-     <script src="jsfiles/axios.js"></script>
-     <script src="jsfiles/app.teacher.js"></script>
-</body>
-<script src="jsfiles/home.js"></script>
-
-</html> -->

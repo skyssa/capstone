@@ -226,7 +226,7 @@ if (!$_SESSION['fullname']) {
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2 mt-2">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
-                                <?php
+                            <?php
                                 $id = $_SESSION['user_id'];
                                 $query = "SELECT *
                                      FROM tbl_user AS tu
@@ -235,16 +235,19 @@ if (!$_SESSION['fullname']) {
                                 $result = mysqli_query($conn, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 if ($row != 0) {
+
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
                                         ';
+                                } else {
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
                                 ?>
 
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
                                 <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
                                 <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
-                                <li><a href="" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
-                                <li><a href="logouts.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
+                                <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
+                                <li><a href="logout.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
 
                             </ul>
                         </div>
@@ -484,7 +487,7 @@ if (!$_SESSION['fullname']) {
                                         </div>
                                     </div>
                                 </div>
-                                <div style="height:100px;" class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
+                                <div style="height:50%; overflow: scroll;" class="card w-100 shadow-xss rounded-xxl border-0 mb-3">
                                     <div class="card-body d-flex align-items-center  p-4">
 
                                         <h4 class="fw-700 mb-0 font-xssss text-grey-900">Event</h4>
@@ -534,8 +537,8 @@ if (!$_SESSION['fullname']) {
                                                 <div class="card mt-3" v-for="event in events">
                                                     <div class="card-heading">
                                                         <div class="card-title">
-                                                            <h5>Event Title: {{ event.title }}<br></h5>
-                                                            <h5>Date: {{ event.date }}</h5>
+                                                            <h5><span  style="font-weight:bold;">Event Title:</span> {{ event.title }}<br></h5>
+                                                            <h5><span  style="font-weight:bold;">Date:</span> {{ event.date }}</h5>
                                                         </div>
                                                     </div>
                                                 </div>

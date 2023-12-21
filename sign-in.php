@@ -30,7 +30,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-5 d-none d-xl-block"><img style="margin-left:30px; margin-top:80px; height:750px;" src="img/CPC.jpg" alt=""></div>
+            <div style="width: 41.66666667%; float: left;" class="d-none d-xl-block">
+  <img style="margin-left: 30px; margin-top: 80px; width: 95%; height: auto;" src="img/CPC.jpg" alt="">
+</div>
                 <div class="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
                     <div class="card shadow-none border-0 ms-auto me-auto login-card">
                         <div class="card-body rounded-0 text-left">

@@ -21,7 +21,7 @@
 <body class="color-theme-blue">
 
     <div class="preloader"></div>
-    <div id="camp-app"z >
+    <div id="camp-app" z>
         <div class="main-wrap">
             <div class="nav-header bg-transparent shadow-none border-0">
                 <div class="nav-top w-100">
@@ -30,12 +30,17 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-5 d-none d-xl-block"><img style="margin-left:30px; margin-top:80px; height:750px;" src="img/CPC.jpg" alt=""></div>
+                <!-- <div class="col-xl-5 d-none d-xl-block"><img style="margin-left:30px; margin-top:80px; height:750px;" src="img/CPC.jpg" alt=""></div>
+                 -->
+                <div style="width: 41.66666667%; float: left;" class="d-none d-xl-block">
+                    <img style="margin-left: 30px; margin-top: 80px; width: 95%; height: auto;" src="img/CPC.jpg" alt="">
+                </div>
+
                 <div class="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
                     <div class="card shadow-none border-0 ms-auto me-auto login-card">
                         <div class="card-body rounded-0 text-left">
                             <h2 class="fw-700 display1-size display2-md-size mb-4">Create <br>your account</h2>
-                            <form action="sign-up.php" method="POST" class="register" ><!-- @submit="fnSaveRegister($event)" -->
+                            <form action="sign-up.php" method="POST" class="register"><!-- @submit="fnSaveRegister($event)" -->
 
                                 <div class="form-group icon-input mb-3">
                                     <i class="font-sm ti-user text-grey-500 pe-0"></i>
@@ -66,7 +71,7 @@
                                         <option>BEED</option>
                                     </select>
                                 </div>
-                        
+
                                 <br>
                                 <div class="col-sm-12 p-0 text-left">
                                     <div class="form-group mb-1"><button type="submit" name="register" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 ">Register</button></div>
@@ -80,28 +85,27 @@
         </div>
     </div>
     <?php
-        include './includes/config.php';
-        if(isset($_POST['register'])){
-            $fname=$_POST['fullname'];
-            $username=$_POST['username'];
-            $password=$_POST['password'];
-            $user_type=$_POST['user_type'];
-            $dep_type=$_POST['dep_type'];
+    include './includes/config.php';
+    if (isset($_POST['register'])) {
+        $fname = $_POST['fullname'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $user_type = $_POST['user_type'];
+        $dep_type = $_POST['dep_type'];
 
-            $query = $conn->prepare('INSERT INTO tbl_user(name,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');;
-            $query->bind_param('sssss',$fname,$username,$password,$user_type,$dep_type);
+        $query = $conn->prepare('INSERT INTO tbl_user(name,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');;
+        $query->bind_param('sssss', $fname, $username, $password, $user_type, $dep_type);
 
-            if($query->execute()){
-                echo '<script type="text/javascript">';
-                echo 'alert("User successfully saved");';
-                echo 'window.location.href="sign-in.php";';
-                echo '</script>';
-            }
-            else{
-                echo json_encode(mysqli_error($conn));
-                echo '<script>console.log(query)</script>';
-            }
+        if ($query->execute()) {
+            echo '<script type="text/javascript">';
+            echo 'alert("User successfully saved");';
+            echo 'window.location.href="sign-in.php";';
+            echo '</script>';
+        } else {
+            echo json_encode(mysqli_error($conn));
+            echo '<script>console.log(query)</script>';
         }
+    }
     ?>
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>
@@ -109,18 +113,5 @@
     <script src="js/axios.js"></script>
     <script src="js/app.camp.js"></script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

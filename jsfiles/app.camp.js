@@ -66,7 +66,7 @@ createApp({
                     console.log(r);
                     if (r.data == 1) {
                         alert("Your request is being processed..");
-                        window.location.href = "alumniprofile.php";
+                        location.replace();
                        
                     }
                     else {
@@ -86,7 +86,7 @@ createApp({
                     console.log(r);
                     if (r.data == 1) {
                         alert("Your request is being processed..");
-                        window.location.href = "teacherprofile.php";
+                        location.replace();
                         // vm.fnGetUsers();
                     }
                     else {
@@ -148,9 +148,8 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Post successfully posted");
-                        window.location.href = "teacherhome.php";
-                        vm.fnGetPost();
                         
+                        vm.fnGetPost();
                     }
                     else {
                         // window.location.href = "teacherhome.php";
@@ -433,8 +432,8 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Announcement successfully saved");
-                       
-                        vm.fnGetAnnouncement();
+                        location.replace();
+                        // vm.fnGetAnnouncement();
                     }
                     else {
                         alert('There was an error.');

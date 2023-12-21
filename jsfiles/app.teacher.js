@@ -9,7 +9,11 @@ createApp({
             pictures: [],
             announce: [],
             events: [],
-            comments:[]
+            comments:[],
+
+            commentText: '',
+            id: '',
+            uname: '',
         }
     },
     methods:{
@@ -129,7 +133,30 @@ createApp({
                 })
             })
         },
+        fnAddComment(postId, commentText) {
 
+            const vm = this;
+            const data = new FormData();
+            data.append('method', 'fnAddComment');
+            data.append('post_id', postId);
+            data.append('comment_text', commentText);
+
+            axios.post('model/bsit.php', data)
+                .then(function (response) {
+                    if (response.data === 1) {
+                        alert('Comment added successfully.');
+                        // Optionally, you can refresh the post list or update the comments locally
+                        vm.commentText = ''; 
+                        vm.fnGetPost();
+                        $('#commentModal').modal('hide');
+                    } else {
+                        alert('Failed to add comment. Please try again later.');
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error during fnAddComment:', error);
+                });
+        },
        
     },
     created:function(){
