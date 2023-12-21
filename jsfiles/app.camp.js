@@ -148,12 +148,12 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Post successfully posted");
-                        
-                        vm.fnGetPost();
+                        // vm.fnGetPost();
+                        window.location.href = "teacherhome.php";
                     }
                     else {
                         // window.location.href = "teacherhome.php";
-                        // alert('There was an error.');
+                        alert("Error occured during post.");
                         console.log(r);
                     }
                 })
@@ -205,8 +205,8 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Post successfully updated");
-                        vm.fnGetPost(); // Refresh the post list
-                        // Optionally, close the form/modal or perform other actions
+                        vm.editingPost.description = '';
+                        vm.fnGetPost(); 
                     } else {
                         console.log(r);
                     }
@@ -227,7 +227,7 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert('Post successfully deleted');
-                        vm.fnGetPost(); // Refresh the post list
+                        vm.fnGetPost(); 
                     } else {
                         console.log(r);
                     }
@@ -319,8 +319,7 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Comment successfully updated");
-                        vm.fnGetPost(); // Refresh the post list
-                        // Optionally, close the form/modal or perform other actions
+                        vm.fnGetPost(); 
                     } else {
                         console.log(r);
                     }
@@ -341,7 +340,7 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert('Comment successfully deleted');
-                        vm.fnGetPost(); // Refresh the post list
+                        vm.fnGetPost(); 
                     } else {
                         console.log(r);
                     }
@@ -350,77 +349,7 @@ createApp({
                     console.error('Error during fnDeletePost:', error);
                 });
         },
-        // fnGetcomment:function(){
-        //     const vm = this;
-            
-        //     const data = new FormData();
-        //     data.append("method","fnGetcomment");
-            
-        //     data.append('post_id', vm.postId);
-        //     axios.post('model/listModel.php',data)
-        //     .then(function(r){
-        //         console.log(r);
-        //         vm.comments = [];
-        //         r.data.forEach(function(v){
-        //             vm.comments.push({
-        //                 post_id: v.post_id,
-        //                 pos_id:v.pos_id,
-        //                 comment_id:v.comment_id,
-        //                 uname: v.uname,
-        //                 comment: v.comment,
-        //                 date: v.date
-                        
-        //             })
-        //         })
-        //     })
-        // },
-        // fnGetComments: function () {
-
-        //     const vm = this;
-        //     const data = new FormData();
-        //     data.append("method", "fnGetComments");
-        //     data.append('post_id', vm.postId);
-        //     axios.post('model/listModel.php', data)
-        //         .then(function (response) {
-        //             console.log(response);
-
-        //             if (Array.isArray(response.data)) {
-        //                 vm.comments = response.data.map(function (comment) {
-        //                     return {
-        //                         comment_id: comment.comment_id,
-        //                         pos_id: comment.pos_id,
-        //                         user_id: comment.user_id,
-        //                         user_name: comment.user_name,
-        //                         comment_text: comment.comment_text,
-        //                         date_created: comment.date_created,
-        //                     };
-        //                 });
-        //             } else {
-        //                 console.error("Response data is not an array:", response.data);
-        //             }
-        //         })
-        //         .catch(function (error) {
-        //             console.error('Error during fnGetComments:', error);
-        //         });
-        // },
-        // fnSaveReport:function(e){
-        //     const vm = this;
-        //     e.preventDefault();    
-        //     var form = e.currentTarget;
-        //     const data = new FormData(form);
-        //     data.append('method','fnSaveReport');
-        //     axios.post('model/listModel.php',data)
-        //     .then(function(r){
-        //         if(r.data == 1){
-        //             alert("report successfully saved");
-        //             window.location.href = "teacherhome.php";
-        //         }
-        //         else{
-        //             alert('There was an error.');
-        //             console.log(r);
-        //         }
-        //     })
-        // },
+     
         // announcement
         fnSaveAnnouncement: function (e) {
             const vm = this;

@@ -344,6 +344,7 @@ if (!$_SESSION['fullname']) {
                                         <div class="row ps-2 pe-2">
                                             <div class="col-xs-12 col-sm-12 p-1">
                                                 <img id="imahe" class="img-fluid" :src="'uploads/' + post.image" />
+                                                
                                             </div>
                                         </div>
                                     </div>

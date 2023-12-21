@@ -109,7 +109,7 @@ function fnSavePost(){
     $id=$_POST['id'];
     $user=$_POST['name'];
     $description= $_POST['description']; 
-    
+    $type="homepage";
 
     $filename = $_FILES['productimage']['name'];
     $folder = '../uploads/';
@@ -118,8 +118,8 @@ function fnSavePost(){
     move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
 
 
-    $query = $conn->prepare('INSERT INTO tbl_post(user_id,names,`description`,image,date_created,isdeleted) values(?,?,?,?,now(),1)');
-    $query->bind_param('isss',$id,$user,$description,$filename);
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
     
     if($query->execute()){
         echo 1;
@@ -132,7 +132,7 @@ function fnSavePost(){
 function fnGetPost(){
     global $conn;
 
-    $query = $conn->prepare("call sp_displayPost");
+    $query = $conn->prepare('SELECT * FROM post WHERE type="homepage" ORDER BY date_created DESC');
     $query->execute();
     $result = $query->get_result();
     $data = array();
@@ -152,7 +152,7 @@ function fnUpdatePost(){
     $description = $_POST['description'];
     $image = $_POST['image'];
 
-    $sql = "UPDATE tbl_post SET names=?, description=?, image=? WHERE post_id=?";
+    $sql = "UPDATE post SET names=?, description=?, image=? WHERE post_id=?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'sssi', $names, $description, $image, $post_id);
     $result = mysqli_stmt_execute($stmt);
@@ -171,11 +171,11 @@ function fnUpdatePost(){
 function fnDeletePost(){
     global $conn;
         $post_id = $_POST['post_id'];
-        $sql = "DELETE tbl_post, tbl_reports, tbl_comments
-        FROM tbl_post
-        LEFT JOIN tbl_comments ON tbl_post.post_id = tbl_comments.pos_id
-        LEFT JOIN tbl_reports ON tbl_post.post_id = tbl_reports.post_id
-        WHERE tbl_post.post_id = ?";
+        $sql = "DELETE post, tbl_reports, tbl_comments
+        FROM post
+        LEFT JOIN tbl_comments ON post.post_id = tbl_comments.pos_id
+        LEFT JOIN tbl_reports ON post.post_id = tbl_reports.post_id
+        WHERE post.post_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'i', $post_id);
 
@@ -481,21 +481,46 @@ function fnChat(){
 }
 
 // department side
+// function fnSavebsit(){
+//     global $conn;
+//     $id=$_POST['id'];
+//     $name=$_POST['name'];
+//     // $title= $_POST['title'];
+//     $description= $_POST['description']; 
+    
+
+//     $filename = $_FILES['productimage']['name'];
+//     $folder = '../uploads/';
+//     $destination = $folder . $filename;
+//     move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+
+//     $query = $conn->prepare('INSERT INTO tbl_postbsit(user_id,names,`description`,image,date_created,isdeleted) values(?,?,?,?,now(),1)');
+//     $query->bind_param('isss',$id,$name,$description,$filename);
+    
+//     if($query->execute()){
+//         echo 1;
+//     }
+//     else{
+//         echo json_encode(mysqli_error($conn));
+//     }
+
+// }
 function fnSavebsit(){
     global $conn;
     $id=$_POST['id'];
-    $name=$_POST['name'];
-    // $title= $_POST['title'];
+    $user=$_POST['name'];
     $description= $_POST['description']; 
-    
+    $type="bsit";
 
     $filename = $_FILES['productimage']['name'];
     $folder = '../uploads/';
+    
     $destination = $folder . $filename;
     move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
 
-    $query = $conn->prepare('INSERT INTO tbl_postbsit(user_id,names,`description`,image,date_created,isdeleted) values(?,?,?,?,now(),1)');
-    $query->bind_param('isss',$id,$name,$description,$filename);
+
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
     
     if($query->execute()){
         echo 1;
@@ -509,16 +534,17 @@ function fnSavebsit(){
 function fnGetbsit(){
     global $conn;
 
-    $query = $conn->prepare("SELECT * FROM tbl_postbsit");
+    $query = $conn->prepare('SELECT * FROM post WHERE type="bsit" ORDER BY date_created DESC');
     $query->execute();
     $result = $query->get_result();
     $data = array();
-    while($row = $result->fetch_array()){
+    while($row = $result->fetch_assoc()){
         
         $data[] = $row;
     }
 
     echo json_encode($data);
+
 
 }
 

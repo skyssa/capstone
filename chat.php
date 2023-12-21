@@ -104,7 +104,10 @@ if (!$_SESSION['fullname']) {
             max-width: 450px;
             align-items: flex-end;
             position: relative;
+
         }
+
+       
     </style>
     <script src="./js/jquery.js"></script>
     <script src="./js/bootstrap.min.js"></script>
@@ -315,7 +318,14 @@ if (!$_SESSION['fullname']) {
 
                                     <div class="chat-footer">
                                         <div class="form-inline mt-1 input-group p-1">
-                                            <input type="text" class="send-msg form-control" placeholder="Send message" id="send-msg-inp">
+                                            <input type="text" class="send-msg " placeholder="Send message" id="send-msg-inp">
+
+                                    
+                                                <label for="fileInput">File:</label>
+                                                <input type="file" id="fileInput" name="file">
+                                         
+
+                                            <!-- <input type="file" name="file" id="file"> -->
                                             <?php
                                             $user_id = isset($_GET['uid']) ? $_GET['uid'] : null;
 
@@ -358,7 +368,8 @@ if (!$_SESSION['fullname']) {
                     <ul class="list-group list-group-flush">
 
                         <?php
-                        $query_user = mysqli_query($conn, "SELECT * FROM tbl_user ");
+                        $u_type = "bsit";
+                        $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE dep_type='$u_type'");
                         while ($data = mysqli_fetch_assoc($query_user)) {
                             if ($data['user_id'] != $_SESSION['user_id'])
                                 echo '<li><a href="?uid=' . $data["user_id"] . '">' . $data["name"] . ' - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '</a></li>';
