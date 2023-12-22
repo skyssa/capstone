@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CPC - cc Online</title>
+    <title>Sign Up</title>
 
     <link rel="stylesheet" href="css/themify-icons.css">
     <link rel="stylesheet" href="css/feather.css">
@@ -94,7 +94,7 @@
         $dep_type = $_POST['dep_type'];
 
         $query = $conn->prepare('INSERT INTO tbl_user(name,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');;
-        $query->bind_param('sssss', $fname, $username, $password, $user_type, $dep_type);
+        $query->bind_param('sssss', $fname, $username, md5($password), $user_type, $dep_type);
 
         if ($query->execute()) {
             $user_id = $query->insert_id;
@@ -102,8 +102,9 @@
             VALUES(?,?,?,?,now(),"active","pending")');
             $query2->bind_param('isss',$user_id, $fname, $user_type, $dep_type);
             if ($query2->execute()) {
-                echo 1; // Success
-                echo '<script>console.log(query)</script>';
+                
+                echo '<script>alert("Registered Successfully");</script>';
+                echo '<script>window.location.href = "sign-in.php";</script>';
             } else {
                 echo json_encode(mysqli_error($conn));
                 echo '<script>console.log(query)</script>';

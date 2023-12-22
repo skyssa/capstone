@@ -361,7 +361,7 @@ $row = mysqli_fetch_assoc($result);
                                                                 <textarea v-model="commentText" cols="30" rows="1" class="form-control comment-textfield" style="resize:none" placeholder="Press enter to post comment"></textarea>
                                                             </div>
                                                             <div class="col-xs-12 col-sm-2 p-1">
-                                                                <button @click="fnAddCbsit(post.post_id, commentText)" class="comment-button fw-600 text-primary">Comment</button>
+                                                                <button @click="fnAddComment(post.post_id, commentText)" class="comment-button fw-600 text-primary">Comment</button>
                                                             </div>
                                                         </div>
 
@@ -370,7 +370,7 @@ $row = mysqli_fetch_assoc($result);
                                     <div class="card-body d-flex p-0 mt-3">
                                         <div class="container">
                                             <!-- Trigger the modal with a button -->
-                                            <a style="cursor: pointer;" @click="fncommentBsit(post.post_id)" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss" data-toggle="modal" data-target="#commentModal"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">Comment</span></a>
+                                            <a style="cursor: pointer;" @click="fnCommentPost(post.post_id)" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss" data-toggle="modal" data-target="#commentModal"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">Comment</span></a>
 
 
                                             <!-- Modal -->
@@ -386,7 +386,7 @@ $row = mysqli_fetch_assoc($result);
                                                         </div>
                                                         <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
                                                             <div class="card mt-3">
-                                                                <div v-for="comment in cbsit" :key="comment.comment_id" class="comment-container">
+                                                                <div v-for="comment in comments" :key="comment.comment_id" class="comment-container">
 
                                                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{ comment.uname }}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{ comment.date }}</span>
                                                                         <p class="comment-author">{{ comment.comment }}</p>

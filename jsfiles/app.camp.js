@@ -15,15 +15,24 @@ createApp({
             pictures: [],
             announce: [],
             absit:[],
+            abeed:[],
             announceCount: 0,
             previousAnnounceCount: 0,
             events: [],
             ebsit:[],
+            ebeed:[],
             comments: [],
             cbsit:[],
             clickPost: {},
             bsit:[],
             beed:[],
+            bshm:[],
+            abshm:[],
+            ebshm:[],
+            bsed:[],
+            absed:[],
+            ebsed:[],
+            bsitalumni:[],
 
             editingPost: {
                 post_id: null,
@@ -119,30 +128,7 @@ createApp({
                     }
                 })
         },
-        // fnGetUsers:function(){
-        //     const vm = this;
-        //     const data = new FormData();
-        //     data.append("method","fnGetUsers");
-        //     axios.post('model/listModel.php',data)
-        //     .then(function(r){
-        //         vm.users = [];
-        //         r.data.forEach(function(v){
-        //             vm.users.push({
-        //                 last_name: v.last_name,
-        //                 first_name: v.first_name,
-        //                 middle_name: v.middle_name,
-        //                 usernmae: v.username,
-        //                 gender: v.gender,
-        //                 address: v.address,
-        //                 phone_number: v.phone_number,
-        //                 email: v.email,
-        //                 user_type: v.user_type
-
-        //             })
-        //         })
-        //     })
-        // },
-
+        
         //post
         fnSavePost: function (e) {
             const vm = this;
@@ -155,8 +141,9 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Post successfully posted");
-                        // vm.fnGetPost();
-                        window.location.href = "teacherhome.php";
+                        
+                        form.reset();
+                        vm.fnGetPost();
                     }
                     else {
                         // window.location.href = "teacherhome.php";
@@ -210,7 +197,7 @@ createApp({
             .then(function(r){
                 if(r.data == 1){
                     alert("Post successfully posted");
-                    window.location.href = "t_bsit.php";
+                    form.reset();
                     vm.fnGetbsit();
                 }
                 else{
@@ -250,8 +237,8 @@ createApp({
             .then(function(r){
                 if(r.data == 1){
                     alert("Post successfully posted");
-                    window.location.href = "t_bsit.php";
-                    vm.fnGetbsit();
+                    form.reset();
+                    vm.fnGetbeed();
                 }
                 else{
                     alert('There was an error.');
@@ -280,6 +267,86 @@ createApp({
                 })
             })
         },
+        fnSaveBshm:function(e){
+            const vm = this;
+            e.preventDefault();    
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method','fnSaveBshm');
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                if(r.data == 1){
+                    alert("Post successfully posted");
+                    form.reset();
+                    vm.fnGetbshm();
+                }
+                else{
+                    alert('There was an error.');
+                    console.log(r);
+                }
+            })
+        },
+
+        fnGetbshm:function(){
+            const vm = this;
+            const data = new FormData();
+            data.append("method","fnGetbshm");
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                vm.bshm = [];
+                r.data.forEach(function(v){
+                    vm.bshm.push({
+                        post_id: v.post_id,
+                        user_id: v.user_id,
+                        names: v.names,
+                        description: v.description,
+                        image: v.image,
+                        date_created: v.date_created
+                        
+                    })
+                })
+            })
+        },
+        fnSaveBsed:function(e){
+            const vm = this;
+            e.preventDefault();    
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method','fnSaveBsed');
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                if(r.data == 1){
+                    alert("Post successfully posted");
+                    form.reset();
+                    vm.fnGetbsed();
+                }
+                else{
+                    alert('There was an error.');
+                    console.log(r);
+                }
+            })
+        },
+
+        fnGetbsed:function(){
+            const vm = this;
+            const data = new FormData();
+            data.append("method","fnGetbsed");
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                vm.bsed = [];
+                r.data.forEach(function(v){
+                    vm.bsed.push({
+                        post_id: v.post_id,
+                        user_id: v.user_id,
+                        names: v.names,
+                        description: v.description,
+                        image: v.image,
+                        date_created: v.date_created
+                        
+                    })
+                })
+            })
+        },
 
         fnSavealumni:function(e){
             const vm = this;
@@ -291,7 +358,7 @@ createApp({
             .then(function(r){
                 if(r.data == 1){
                     alert("Post successfully posted");
-                    window.location.href = "t_bsit.php";
+                    form.reset();
                     vm.fnGetAlumni();
                 }
                 else{
@@ -305,6 +372,45 @@ createApp({
             const vm = this;
             const data = new FormData();
             data.append("method","fnGetAlumni");
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                vm.bsitalumni = [];
+                r.data.forEach(function(v){
+                    vm.bsitalumni.push({
+                        post_id: v.post_id,
+                        user_id: v.user_id,
+                        names: v.names,
+                        description: v.description,
+                        image: v.image,
+                        date_created: v.date_created 
+                    })
+                })
+            })
+        },
+        Alumni:function(e){
+            const vm = this;
+            e.preventDefault();    
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method','Alumni');
+            axios.post('model/listModel.php',data)
+            .then(function(r){
+                if(r.data == 1){
+                    alert("Post successfully posted");
+                    form.reset();
+                    vm.GetAlumni();
+                }
+                else{
+                    alert('There was an error.');
+                    console.log(r);
+                }
+            })
+        },
+
+        GetAlumni:function(){
+            const vm = this;
+            const data = new FormData();
+            data.append("method","GetAlumni");
             axios.post('model/listModel.php',data)
             .then(function(r){
                 vm.alumni = [];
@@ -403,7 +509,7 @@ createApp({
                 .then(function (response) {
                     if (response.data === 1) {
                         alert('Comment added successfully.');
-                        // Optionally, you can refresh the post list or update the comments locally
+                       
                         vm.commentText = ''; 
                         vm.fnCommentPost();
                        
@@ -415,28 +521,7 @@ createApp({
                     console.error('Error during fnAddComment:', error);
                 });
         },
-        // fnCommentPost(postId){
-        //     const vm = this;
-        //     const data = new FormData();
-        //     data.append('method', 'fnGetcomment');
-        //     data.append('post_id', postId);
-        //     axios.post('model/listModel.php', data)
-        //     .then(function(r){
-        //         console.log(r);
-        //         vm.comments = [];
-        //         r.data.forEach(function(v){
-        //             vm.comments.push({
-        //                 pos_id:v.pos_id,
-        //                 user_id: v.user_id,
-        //                 comment_id:v.comment_id,
-        //                 uname: v.uname,
-        //                 comment: v.comment,
-        //                 date: v.date
-                        
-        //             })
-        //         })
-        //     })
-        // },
+       
         fnCommentPost(postId) {
             const vm = this;
             const data = new FormData();
@@ -461,53 +546,7 @@ createApp({
                 console.error('Error fetching comments:', error);
               });
           },
-          
-        fnAddCbsit(postId, commentText) {
-
-            const vm = this;
-            const data = new FormData();
-            data.append('method', 'fnAddCbsit');
-            data.append('post_id', postId);
-            data.append('comment_text', commentText);
-
-            axios.post('model/listModel.php', data)
-                .then(function (response) {
-                    if (response.data === 1) {
-                        alert('Comment added successfully.');
-                        // Optionally, you can refresh the post list or update the comments locally
-                        vm.commentText = ''; 
-                        vm.fnGetcBsit();
-                       
-                    } else {
-                        alert('Failed to add comment. Please try again later.');
-                    }
-                })
-                .catch(function (error) {
-                    console.error('Error during fnAddComment:', error);
-                });
-        },
-        fncommentBsit(postId){
-            const vm = this;
-            const data = new FormData();
-            data.append('method', 'fnGetcBsit');
-            data.append('post_id', postId);
-            axios.post('model/listModel.php', data)
-            .then(function(r){
-                console.log(r);
-                vm.cbsit = [];
-                r.data.forEach(function(v){
-                    vm.cbsit.push({
-                        pos_id:v.pos_id,
-                        user_id: v.user_id,
-                        comment_id:v.comment_id,
-                        uname: v.uname,
-                        comment: v.comment,
-                        date: v.date
-                        
-                    })
-                })
-            })
-        },
+        
         editComment(comment) {
             this.editingComment = { ...comment };
         },
@@ -650,6 +689,146 @@ createApp({
                     console.error('Error fetching announcements:', error);
                   });
         },
+
+        fnSavebeedAnnounce: function (e) {
+            const vm = this;
+            e.preventDefault();
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method', 'fnSavebeedAnnounce');
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Announcement successfully saved");
+                        form.reset();
+                        vm.fnGetbeedAnnounce();
+                    }
+                    else {
+                        alert('There was an error.');
+                        console.log(r);
+                    }
+                })
+        },
+        fnGetbeedAnnounce: function () {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnGetbeedAnnounce");
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    vm.abeed = [];
+                    r.data.forEach(function (v) {
+                        vm.abeed.push({
+                            a_id: v.a_id,
+                            title: v.title,
+                            description: v.description,
+                            date_created: v.date_created,
+                            
+                        })
+                        
+                    });
+                        vm.previousAnnounceCount = vm.announceCount;
+                        vm.announceCount = vm.announce.length - vm.previousAnnounceCount;
+
+                        // Update the total count of announcements
+                        vm.announceCount = vm.announce.length;
+                })
+                .catch(function (error) {
+                    console.error('Error fetching announcements:', error);
+                  });
+        },
+
+        fnSavebshmAnnounce: function (e) {
+            const vm = this;
+            e.preventDefault();
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method', 'fnSavebshmAnnounce');
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Announcement successfully saved");
+                        form.reset();
+                        vm.fnGetbshmAnnounce();
+                    }
+                    else {
+                        alert('There was an error.');
+                        console.log(r);
+                    }
+                })
+        },
+        fnGetbshmAnnounce: function () {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnGetbshmAnnounce");
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    vm.abshm = [];
+                    r.data.forEach(function (v) {
+                        vm.abshm.push({
+                            a_id: v.a_id,
+                            title: v.title,
+                            description: v.description,
+                            date_created: v.date_created,
+                            
+                        })
+                        
+                    });
+                        vm.previousAnnounceCount = vm.announceCount;
+                        vm.announceCount = vm.announce.length - vm.previousAnnounceCount;
+
+                        // Update the total count of announcements
+                        vm.announceCount = vm.announce.length;
+                })
+                .catch(function (error) {
+                    console.error('Error fetching announcements:', error);
+                  });
+        },
+        fnSavebsedAnnounce: function (e) {
+            const vm = this;
+            e.preventDefault();
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method', 'fnSavebsedAnnounce');
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Announcement successfully saved");
+                        form.reset();
+                        vm.fnGetbsedAnnounce();
+                    }
+                    else {
+                        alert('There was an error.');
+                        console.log(r);
+                    }
+                })
+        },
+        fnGetbsedAnnounce: function () {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnGetbsedAnnounce");
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    vm.absed = [];
+                    r.data.forEach(function (v) {
+                        vm.absed.push({
+                            a_id: v.a_id,
+                            title: v.title,
+                            description: v.description,
+                            date_created: v.date_created,
+                            
+                        })
+                        
+                    });
+                        vm.previousAnnounceCount = vm.announceCount;
+                        vm.announceCount = vm.announce.length - vm.previousAnnounceCount;
+
+                        // Update the total count of announcements
+                        vm.announceCount = vm.announce.length;
+                })
+                .catch(function (error) {
+                    console.error('Error fetching announcements:', error);
+                  });
+        },
         editAnnounce(announces) {
             this.editingAnnounce = { ...announces };
         },
@@ -670,7 +849,8 @@ createApp({
                         alert("Announce successfully updated");
                         vm.vm.editingAnnounce.title='';
                         vm.vm.editingAnnounce.description='';
-                        vm.fnGetAnnouncement(); // Refresh the post list
+                        vm.fnGetAnnouncement();
+                        vm.fnGetbeedAnnounce(); // Refresh the post list
                         // Optionally, close the form/modal or perform other actions
                     } else {
                         console.log(r);
@@ -690,7 +870,8 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert('Announce successfully deleted');
-                        vm.fnGetAnnouncement(); // Refresh the post list
+                        vm.fnGetAnnouncement();
+                        vm.fnGetbeedAnnounce(); // Refresh the post list
                     } else {
                         console.log(r);
                     }
@@ -712,7 +893,7 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Event successfully posted");
-                        window.location.href = "teacherhome.php";
+                        form.reset();
                         vm.fnGetEvent();
                     }
                     else {
@@ -752,7 +933,7 @@ createApp({
                 .then(function (r) {
                     if (r.data == 1) {
                         alert("Event successfully posted");
-                        
+                        form.reset();
                         vm.fnGetEbsit();
                     }
                     else {
@@ -783,43 +964,126 @@ createApp({
                     })
                 })
         },
-        // fnSaveComment:function(e){
-        //     const vm = this;
-        //     e.preventDefault();    
-        //     var form = e.currentTarget;
-        //     const data = new FormData(form);
-        //     data.append('method','fnSaveComment');
-        //     axios.post('model/listModel.php',data)
-        //     .then(function(r){
-        //         if(r.data == 1){
-        //             alert("comment successfully saved");
-        //             window.location.href = "teacherhome.php";
-        //             // vm.fnGetPost();
-        //         }
-        //         else{
-        //             alert('There was an error.');
-        //             console.log(r);
-        //         }
-        //     })
-        // },
-        // fnGetcomment:function(){
-        //     const vm = this;
-        //     const data = new FormData();
-        //     data.append("method","fnGetcomment");
-        //     axios.post('model/listModel.php',data)
-        //     .then(function(){
-        //         vm.comments = [];
-        //         data.forEach(function(v){
-        //             vm.comments.push({
-        //                 uname: v.uname,
-        //                 comment: v.comment,
-        //                 date: v.date
+        fnSaveEbeed: function (e) {
+            const vm = this;
+            e.preventDefault();
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method', 'fnSaveEbeed');
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Event successfully posted");
+                        form.reset();
+                        vm.fnGetEbeed();
+                    }
+                    else {
+                        alert('There was an error.');
+                        console.log(r);
+                    }
+                })
+        },
+        fnGetEbeed: function () {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnGetEbeed");
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    vm.ebeed = [];
+                    r.data.forEach(function (v) {
+                        vm.ebeed.push({
+                            events_id:v.events_id,
+                            title: v.title,
+                            month: v.month,
+                            day: v.day,
+                            year: v.year,
+                            event: v.event,
+                            date_posted: v.date_posted
 
-        //             })
-        //         })
-        //     })
-        // },
+                        })
+                    })
+                })
+        },
+        fnSaveEbshm: function (e) {
+            const vm = this;
+            e.preventDefault();
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method', 'fnSaveEbshm');
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Event successfully posted");
+                        form.reset();
+                        vm.fnGetEbshm();
+                    }
+                    else {
+                        alert('There was an error.');
+                        console.log(r);
+                    }
+                })
+        },
+        fnGetEbshm: function () {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnGetEbshm");
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    vm.ebshm = [];
+                    r.data.forEach(function (v) {
+                        vm.ebshm.push({
+                            events_id:v.events_id,
+                            title: v.title,
+                            month: v.month,
+                            day: v.day,
+                            year: v.year,
+                            event: v.event,
+                            date_posted: v.date_posted
 
+                        })
+                    })
+                })
+        },
+        fnSaveEbsed: function (e) {
+            const vm = this;
+            e.preventDefault();
+            var form = e.currentTarget;
+            const data = new FormData(form);
+            data.append('method', 'fnSaveEbsed');
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Event successfully posted");
+                        form.reset();
+                        vm.fnGetEbsed();
+                    }
+                    else {
+                        alert('There was an error.');
+                        console.log(r);
+                    }
+                })
+        },
+        fnGetEbsed: function () {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnGetEbsed");
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    vm.ebsed = [];
+                    r.data.forEach(function (v) {
+                        vm.ebsed.push({
+                            events_id:v.events_id,
+                            title: v.title,
+                            month: v.month,
+                            day: v.day,
+                            year: v.year,
+                            event: v.event,
+                            date_posted: v.date_posted
+
+                        })
+                    })
+                })
+        },
 
         fnSaveRegister: function (e) {
             const vm = this;
@@ -879,10 +1143,18 @@ createApp({
         this.fnCommentPost();
         this.fnGetbsit();
         this.fnGetEbsit();
+        this.fnGetEbeed();
         this.fnGetitAnnounce();
-        this.fncommentBsit();
         this.fnGetAlumni();
         this.fnGetbeed();
+        this.fnGetbeedAnnounce();
+        this.fnGetbshm();
+        this.fnGetbshmAnnounce();
+        this.fnGetEbshm();
+        this.fnGetbsed();
+        this.fnGetbsedAnnounce();
+        this.fnGetEbsed();
+        this.GetAlumni();
  
 
     }

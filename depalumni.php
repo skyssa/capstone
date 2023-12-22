@@ -245,7 +245,7 @@ $row = mysqli_fetch_assoc($result);
                                 }
                                 ?>
                                 <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Home</span></a></li>
-
+                                <li><a href="alumni.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Alumni Group</span></a></li>
                                 <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
                                 <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
                                 <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
@@ -327,7 +327,7 @@ $row = mysqli_fetch_assoc($result);
                                 </div>
 
 
-                                <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3" v-for="post in alumni">
+                                <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3" v-for="post in bsitalumni">
                                     <div class="card-body p-0 d-flex">
                                         <figure class="avatar me-3"><i class="fa fa-user"></i></figure>
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{post.names}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-900">{{post.date_created}}</span>

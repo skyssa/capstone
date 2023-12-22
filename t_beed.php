@@ -20,7 +20,7 @@ $row = mysqli_fetch_assoc($result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bsit</title>
+    <title>BEED</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -361,7 +361,7 @@ $row = mysqli_fetch_assoc($result);
                                                                 <textarea v-model="commentText" cols="30" rows="1" class="form-control comment-textfield" style="resize:none" placeholder="Press enter to post comment"></textarea>
                                                             </div>
                                                             <div class="col-xs-12 col-sm-2 p-1">
-                                                                <button @click="fnAddCbsit(post.post_id, commentText)" class="comment-button fw-600 text-primary">Comment</button>
+                                                                <button @click="fnAddComment(post.post_id, commentText)" class="comment-button fw-600 text-primary">Comment</button>
                                                             </div>
                                                         </div>
 
@@ -370,7 +370,7 @@ $row = mysqli_fetch_assoc($result);
                                     <div class="card-body d-flex p-0 mt-3">
                                         <div class="container">
                                             <!-- Trigger the modal with a button -->
-                                            <a style="cursor: pointer;" @click="fncommentBsit(post.post_id)" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss" data-toggle="modal" data-target="#commentModal"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">Comment</span></a>
+                                            <a style="cursor: pointer;" @click="fnCommentPost(post.post_id)" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss" data-toggle="modal" data-target="#commentModal"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">Comment</span></a>
 
 
                                             <!-- Modal -->
@@ -386,7 +386,7 @@ $row = mysqli_fetch_assoc($result);
                                                         </div>
                                                         <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
                                                             <div class="card mt-3">
-                                                                <div v-for="comment in cbsit" :key="comment.comment_id" class="comment-container">
+                                                                <div v-for="comment in comments" :key="comment.comment_id" class="comment-container">
 
                                                                     <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{ comment.uname }}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{ comment.date }}</span>
                                                                         <p class="comment-author">{{ comment.comment }}</p>
@@ -470,7 +470,7 @@ $row = mysqli_fetch_assoc($result);
                                                     <!-- Modal Body -->
                                                     <div class="modal-body">
                                                         <!-- Form to submit announcements -->
-                                                        <form @submit="fnSaveitAnnounce($event)">
+                                                        <form @submit="fnSavebeedAnnounce($event)">
                                                             <div class="form-group">
                                                                 <label for="title" class="font-xssss fw-600 text-grey-500">Title:</label>
                                                                 <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
@@ -485,7 +485,7 @@ $row = mysqli_fetch_assoc($result);
 
                                                     <!-- Display announcements in the modal -->
                                                     <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
-                                                        <div class="card mt-3" v-for="announces in absit" :key="announces.a_id">
+                                                        <div class="card mt-3" v-for="announces in abeed" :key="announces.a_id">
                                                             <div class="card-heading bg-primary text-white p-3">
                                                                 <h6 class="font-xsssss mb-0">{{ announces.date_created }}</h6>
                                                                 <h5 class="font-xs fw-600 mb-2">Title: {{ announces.title }}</h5>
@@ -517,7 +517,7 @@ $row = mysqli_fetch_assoc($result);
                                                 <a style="cursor: pointer;" class="fw-600 ms-auto font-xss text-primary" data-toggle="modal" data-target="#eventModal">See All Event</a>
                                                 <a style="cursor: pointer;" class="fw-600 ms-auto font-xss text-primary" data-toggle="modal" data-target="#exampleModal">Add Event</a>
                                             </div>
-                                            <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden " v-for="event in ebsit">
+                                            <div class="card-body d-flex pt-0 ps-4 pe-4 pb-3 overflow-hidden " v-for="event in ebeed">
                                                 <div class="bg-success me-2 p-3 rounded-xxl">
                                                     <h4 class="fw-700 font-lg ls-3 lh-1 text-white mb-0"><span class="ls-1 d-block font-xsssss text-white fw-600">{{ event.month }}</span>{{ event.day }}</h4>
                                                 </div>
@@ -531,7 +531,7 @@ $row = mysqli_fetch_assoc($result);
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
-                                                            <div class="card mt-3" v-for="event in ebsit">
+                                                            <div class="card mt-3" v-for="event in ebeed">
                                                                 <div class="card-heading bg-primary text-white p-1" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                                                                     <h3 class=" font-xss fw-600 mb-0">{{ event.month }} - {{ event.day }} - {{ event.year }}</h3>
                                                                     <h4 class="fw-700  font-xss mt-2">{{ event.title }}</h4>
@@ -553,7 +553,7 @@ $row = mysqli_fetch_assoc($result);
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
-                                                    <form @submit="fnEventBsit($event)">
+                                                    <form @submit="fnSaveEbeed($event)">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -614,7 +614,7 @@ $row = mysqli_fetch_assoc($result);
                                 <ul class="list-group list-group-flush">
 
                                     <?php
-                                    $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE dep_type='BSIT' ORDER BY dep_type='BSIT' DESC");
+                                    $query_user = mysqli_query($conn, "SELECT * FROM tbl_user WHERE dep_type='BEED' ORDER BY dep_type='BEED' DESC");
                                     while ($data = mysqli_fetch_assoc($query_user)) {
                                         if ($data['user_id'] != $_SESSION['user_id'])
                                             echo '<li style="list-style-type: none; margin-bottom: 10px; background-color: #f0f0f0; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">

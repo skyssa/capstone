@@ -130,9 +130,16 @@ function fnSavePost(){
     $query->bind_param('issss',$id,$user,$description,$filename,$type);
     
     if($query->execute()){
-        
+        $query = $conn->prepare('INSERT INTO notif(user_id,names,`description`,image,date_created,isdeleted,type,n_read) values(?,?,?,?,now(),1,?,1)');
+        $query->bind_param('issss',$id,$user,$description,$filename,$type);
+        if($query->execute()){
+            echo 1;
+        }
+        else{
+            echo json_encode(mysqli_error($conn));
+        }
 
-        echo 1;
+        
     }
     else{
         echo json_encode(mysqli_error($conn));
@@ -225,7 +232,7 @@ function fnSavebsed(){
 }
 
 
-function fnSavebeed(){
+function fnSaveBeed (){
     global $conn;
     $id=$_POST['id'];
     $user=$_POST['name'];
@@ -250,7 +257,7 @@ function fnSavebeed(){
     }
 
 }
-function fnSavebshm(){
+function fnSaveBshm(){
     global $conn;
     $id=$_POST['id'];
     $user=$_POST['name'];
@@ -280,6 +287,31 @@ function fnSavealumni(){
     $id=$_POST['id'];
     $user=$_POST['name'];
     $description= $_POST['description']; 
+    $type="bsitalumni";
+
+    $filename = $_FILES['productimage']['name'];
+    $folder = '../uploads/';
+    
+    $destination = $folder . $filename;
+    move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+
+
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function Alumni(){
+    global $conn;
+    $id=$_POST['id'];
+    $user=$_POST['name'];
+    $description= $_POST['description']; 
     $type="alumni";
 
     $filename = $_FILES['productimage']['name'];
@@ -303,7 +335,67 @@ function fnSavealumni(){
 function fnGetAlumni(){
     global $conn;
 
+    $query = $conn->prepare('SELECT * FROM post WHERE type="bsitalumni" ORDER BY date_created DESC');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function GetAlumni(){
+    global $conn;
+
     $query = $conn->prepare('SELECT * FROM post WHERE type="alumni" ORDER BY date_created DESC');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnGetbeed(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM post WHERE type="beed" ORDER BY date_created DESC');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnGetbshm(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM post WHERE type="bshm" ORDER BY date_created DESC');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnGetbsed(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM post WHERE type="bsed" ORDER BY date_created DESC');
     $query->execute();
     $result = $query->get_result();
     $data = array();
@@ -412,10 +504,104 @@ function fnSaveitAnnounce(){
     }
 
 }
+
 function fnGetitAnnounce(){
     global $conn;
 
     $query = $conn->prepare('SELECT * FROM `announcement` WHERE type="bsit" ORDER BY date_created DESC LIMIT 5');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnSavebeedAnnounce(){
+    global $conn;
+    $title= $_POST['title'];
+    $description= $_POST['description'];
+    $type="beed";
+
+    $query = $conn->prepare('INSERT INTO announcement(title,`description`,date_created,isdeleted,type) values(?,?,now(),1,?)');
+    $query->bind_param('sss',$title,$description,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnGetbeedAnnounce(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM `announcement` WHERE type="beed" ORDER BY date_created DESC LIMIT 5');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnSavebshmAnnounce(){
+    global $conn;
+    $title= $_POST['title'];
+    $description= $_POST['description'];
+    $type="bshm";
+
+    $query = $conn->prepare('INSERT INTO announcement(title,`description`,date_created,isdeleted,type) values(?,?,now(),1,?)');
+    $query->bind_param('sss',$title,$description,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnGetbshmAnnounce(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM `announcement` WHERE type="bshm" ORDER BY date_created DESC LIMIT 5');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnSavebsedAnnounce(){
+    global $conn;
+    $title= $_POST['title'];
+    $description= $_POST['description'];
+    $type="bsed";
+
+    $query = $conn->prepare('INSERT INTO announcement(title,`description`,date_created,isdeleted,type) values(?,?,now(),1,?)');
+    $query->bind_param('sss',$title,$description,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnGetbsedAnnounce(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM `announcement` WHERE type="bsed" ORDER BY date_created DESC LIMIT 5');
     $query->execute();
     $result = $query->get_result();
     $data = array();
@@ -505,6 +691,114 @@ function fnGetEvent(){
     echo json_encode($data);
 
 }
+function fnSaveEbeed(){
+    global $conn;
+    $title= $_POST['title'];
+    $events= $_POST['events'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
+    $type="beed";
+
+
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+
+}
+function fnGetEbeed(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM `events` WHERE type="beed" ORDER BY date_posted DESC LIMIT 5');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnSaveEbshm(){
+    global $conn;
+    $title= $_POST['title'];
+    $events= $_POST['events'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
+    $type="bshm";
+
+
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+
+}
+function fnGetEbshm(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM `events` WHERE type="bshm" ORDER BY date_posted DESC LIMIT 5');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnSaveEbsed(){
+    global $conn;
+    $title= $_POST['title'];
+    $events= $_POST['events'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
+    $type="bsed";
+
+
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+
+}
+function fnGetEbsed(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM `events` WHERE type="bsed" ORDER BY date_posted DESC LIMIT 5');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
 
 
 function fnAddComment() {
@@ -513,52 +807,29 @@ function fnAddComment() {
     $uname = $_SESSION['fullname'];
     $post_id = $_POST['post_id'];
     $comment_text = $_POST['comment_text'];
-    $type = "homepage";
-
-    $sql = "INSERT INTO `comments`(`pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`, `type`) VALUES (?,?,?,?, NOW(),0,?)";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'iisss', $post_id, $id, $uname, $comment_text, $type);
-
-    $result = mysqli_stmt_execute($stmt);
-    if ($result) {
-        echo 1; // Success
-    } else {
-        echo 0; // Failure
-    }
-
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
-}
-function fnAddCbsit(){
-    global $conn;
-    $id=$_SESSION['user_id'];
-    $uname=$_SESSION['fullname'];
-    $post_id = $_POST['post_id'];
-    $comment_text = $_POST['comment_text'];
-    $type="bsit";
-
-    $sql = "INSERT INTO `comments`( `pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`,type) VALUES (?,?,?,?, NOW(),0,?)";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'iisss', $post_id,$id,$uname, $comment_text, $type);
-
-    $result = mysqli_stmt_execute($stmt);
-    if ($result) {
-        echo 1; // Success
-    } else {
-        echo 0; // Failure
-    }
-
-
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
    
+
+    $sql = "INSERT INTO `comments`(`pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`) VALUES (?,?,?,?, NOW(),0)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'iiss', $post_id, $id, $uname, $comment_text);
+
+    $result = mysqli_stmt_execute($stmt);
+    if ($result) {
+        echo 1; // Success
+    } else {
+        echo 0; // Failure
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
 }
+
 
 function fnGetcomment(){
     global $conn;
     $post_id = $_POST['post_id'];
 
-    $query = $conn->prepare('SELECT * FROM comments WHERE pos_id=? AND type="homepage" ORDER BY `date` DESC');
+    $query = $conn->prepare('SELECT * FROM comments WHERE pos_id=? ORDER BY `date` DESC');
     $query->bind_param('i',$post_id);
     $query->execute();
     $result = $query->get_result();
@@ -570,22 +841,7 @@ function fnGetcomment(){
     echo json_encode($data);
 
 }
-function fnGetcBsit(){
-    global $conn;
-    $post_id = $_POST['post_id'];
 
-    $query = $conn->prepare('SELECT * FROM comments WHERE pos_id=? AND type="bsit" ORDER BY `date` DESC');
-    $query->bind_param('i',$post_id);
-    $query->execute();
-    $result = $query->get_result();
-    $data = array();
-    while($row = $result->fetch_array()){
-        $data[] = $row;
-    }
-
-    echo json_encode($data);
-
-}
 function fnUpdateComment(){
     global $conn;
     $comment_id = $_POST['comment_id'];
