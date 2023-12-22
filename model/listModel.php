@@ -22,7 +22,7 @@ function fnSaveProfile(){
     $email= $_POST['email'];
     $address = $_POST['address'];
     $number = $_POST['number'];
-    $acadyr=$_POST['acadyr'];
+   
     $role_in_school= $_POST['role_in_school'];
     $department= $_POST['department'];
     // $pic= $_POST['pic'];
@@ -51,10 +51,12 @@ function fnSaveProfile(){
         }   
 
    }else if($_SESSION['user_type']=='Student'){
+        $yrsec=$_POST['yrsec'];
+        $acadyr=$_POST['acadyr'];
         $query = $conn->prepare('INSERT INTO users(`uid`,school_id,fullname,email,`address`,`number`,yr_sec,acadyr,role_in_school,department,pic,cover,date_registered,`status`,approval) 
-        VALUES(?,?,?,?,?,?,?,?,?,?,now(),"active","pending")');
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,now(),"active","pending")');
         var_dump($query);
-        $query->bind_param('iisssissss',$id,$school_id,$fullname,$email,$address,$number,$role_in_school,$department,$pic,$cover);
+        $query->bind_param('iisssissssss',$id,$school_id,$fullname,$email,$address,$number,$yrsec,$acadyr,$role_in_school,$department,$pic,$cover);
             
         if($query->execute()){
             echo 1;
@@ -64,9 +66,12 @@ function fnSaveProfile(){
         }
 
    }else if($_SESSION['user_type']=='Alumni'){
-        $query = $conn->prepare('INSERT INTO users(`uid`,school_id,fullname,email,`address`,`number`,acadyr,role_in_school,department,pic,cover,date_registered,`status`,approval) 
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,now(),"active","pending")');
-        var_dump($query);
+        
+        $acadyr=$_POST['acadyr'];
+        $query = $conn->prepare('UPDATE users SET school_id=?, fullname=?, email=?, address=?, number=?, acadyr=?, role_in_school=?, department=?, pic=?, cover=?, date_registered=now(), status="active", approval="pending" WHERE uid=?');
+       
+     
+
         $query->bind_param('iisssisssss',$id,$school_id,$fullname,$email,$address,$number,$acadyr,$role_in_school,$department,$pic,$cover);
         
         if($query->execute()){
@@ -77,6 +82,8 @@ function fnSaveProfile(){
         }
     }  
 }
+
+
 function fnSaveUser(){
     global $conn;
     $last_name= $_POST['last_name'];
@@ -95,6 +102,7 @@ function fnSaveUser(){
     $query->bind_param('sssssssiss',$last_name,$first_name,$middle_name,$username,$pword,$gender,$addr,$phone_number,$email,$user_type);
     
     if($query->execute()){
+       
         echo 1;
     }
     else{
@@ -122,6 +130,8 @@ function fnSavePost(){
     $query->bind_param('issss',$id,$user,$description,$filename,$type);
     
     if($query->execute()){
+        
+
         echo 1;
     }
     else{
@@ -133,6 +143,167 @@ function fnGetPost(){
     global $conn;
 
     $query = $conn->prepare('SELECT * FROM post WHERE type="homepage" ORDER BY date_created DESC');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+
+function fnSavebsit(){
+    global $conn;
+    $id=$_POST['id'];
+    $user=$_POST['name'];
+    $description= $_POST['description']; 
+    $type="bsit";
+
+    $filename = $_FILES['productimage']['name'];
+    $folder = '../uploads/';
+    
+    $destination = $folder . $filename;
+    move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+
+
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+
+function fnGetbsit(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM post WHERE type="bsit" ORDER BY date_created DESC');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_assoc()){
+        
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+
+}
+
+function fnSavebsed(){
+    global $conn;
+    $id=$_POST['id'];
+    $user=$_POST['name'];
+    $description= $_POST['description']; 
+    $type="bsed";
+
+    $filename = $_FILES['productimage']['name'];
+    $folder = '../uploads/';
+    
+    $destination = $folder . $filename;
+    move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+
+
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+
+
+function fnSavebeed(){
+    global $conn;
+    $id=$_POST['id'];
+    $user=$_POST['name'];
+    $description= $_POST['description']; 
+    $type="beed";
+
+    $filename = $_FILES['productimage']['name'];
+    $folder = '../uploads/';
+    
+    $destination = $folder . $filename;
+    move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+
+
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnSavebshm(){
+    global $conn;
+    $id=$_POST['id'];
+    $user=$_POST['name'];
+    $description= $_POST['description']; 
+    $type="bshm";
+
+    $filename = $_FILES['productimage']['name'];
+    $folder = '../uploads/';
+    
+    $destination = $folder . $filename;
+    move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+
+
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnSavealumni(){
+    global $conn;
+    $id=$_POST['id'];
+    $user=$_POST['name'];
+    $description= $_POST['description']; 
+    $type="alumni";
+
+    $filename = $_FILES['productimage']['name'];
+    $folder = '../uploads/';
+    
+    $destination = $folder . $filename;
+    move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
+
+
+    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
+    $query->bind_param('issss',$id,$user,$description,$filename,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnGetAlumni(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM post WHERE type="alumni" ORDER BY date_created DESC');
     $query->execute();
     $result = $query->get_result();
     $data = array();
@@ -171,9 +342,9 @@ function fnUpdatePost(){
 function fnDeletePost(){
     global $conn;
         $post_id = $_POST['post_id'];
-        $sql = "DELETE post, tbl_reports, tbl_comments
+        $sql = "DELETE post, tbl_reports, comments
         FROM post
-        LEFT JOIN tbl_comments ON post.post_id = tbl_comments.pos_id
+        LEFT JOIN comments ON post.post_id = comments.pos_id
         LEFT JOIN tbl_reports ON post.post_id = tbl_reports.post_id
         WHERE post.post_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
@@ -196,11 +367,11 @@ function fnDeletePost(){
 function fnSaveAnnouncement(){
     global $conn;
     $title= $_POST['title'];
-    $description= $_POST['description']; 
+    $description= $_POST['description'];
+    $type="homepage";
 
-    $query = $conn->prepare('call sp_saveAnnounce(?,?,now(),1)');
-    //$query = $conn->prepare('INSERT INTO tbl_announcement(title,`description`,date_created,isdeleted) values(?,?,now(),1)');
-    $query->bind_param('ss',$title,$description);
+    $query = $conn->prepare('INSERT INTO announcement(title,`description`,date_created,isdeleted,type) values(?,?,now(),1,?)');
+    $query->bind_param('sss',$title,$description,$type);
     
     if($query->execute()){
         echo 1;
@@ -213,7 +384,38 @@ function fnSaveAnnouncement(){
 function fnGetAnnouncement(){
     global $conn;
 
-    $query = $conn->prepare("call sp_displayAnnounce");
+    $query = $conn->prepare('SELECT * FROM `announcement` WHERE type="homepage" ORDER BY date_created DESC LIMIT 5');
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnSaveitAnnounce(){
+    global $conn;
+    $title= $_POST['title'];
+    $description= $_POST['description'];
+    $type="bsit";
+
+    $query = $conn->prepare('INSERT INTO announcement(title,`description`,date_created,isdeleted,type) values(?,?,now(),1,?)');
+    $query->bind_param('sss',$title,$description,$type);
+    
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnGetitAnnounce(){
+    global $conn;
+
+    $query = $conn->prepare('SELECT * FROM `announcement` WHERE type="bsit" ORDER BY date_created DESC LIMIT 5');
     $query->execute();
     $result = $query->get_result();
     $data = array();
@@ -231,7 +433,7 @@ function fnUpdateAnnounce(){
     $description = $_POST['description'];
   
 
-    $sql = "UPDATE tbl_announcement SET title=?, description=?  WHERE a_id=?";
+    $sql = "UPDATE announcement SET title=?, description=?  WHERE a_id=?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'ssi', $title, $description, $id);
     $result = mysqli_stmt_execute($stmt);
@@ -249,7 +451,7 @@ function fnUpdateAnnounce(){
 function fnDeleteAnnounce(){
     global $conn;
     $id = $_POST['a_id'];
-        $sql = "DELETE FROM tbl_announcement WHERE a_id = ?";
+        $sql = "DELETE FROM announcement WHERE a_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'i', $id);
 
@@ -271,11 +473,14 @@ function fnSaveEvent(){
     global $conn;
     $title= $_POST['title'];
     $events= $_POST['events'];
-    $date=$_POST['date'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
+    $type="homepage";
 
-    $query=$conn->prepare('call sp_saveEvents(?,?,?,now())');
-    //$query = $conn->prepare('INSERT INTO tbl_events(title,date,`event`,date_posted) values(?,?,?,now())');
-    $query->bind_param('sss',$title,$date,$events);
+
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
     
     if($query->execute()){
         echo 1;
@@ -284,11 +489,12 @@ function fnSaveEvent(){
         echo json_encode(mysqli_error($conn));
     }
 
+
 }
 function fnGetEvent(){
     global $conn;
 
-    $query = $conn->prepare("call sp_displayEvents()");
+    $query = $conn->prepare('SELECT * FROM `events` WHERE type="homepage" ORDER BY date_posted DESC LIMIT 5');
     $query->execute();
     $result = $query->get_result();
     $data = array();
@@ -301,16 +507,39 @@ function fnGetEvent(){
 }
 
 
-function fnAddComment(){
+function fnAddComment() {
+    global $conn;
+    $id = $_SESSION['user_id'];
+    $uname = $_SESSION['fullname'];
+    $post_id = $_POST['post_id'];
+    $comment_text = $_POST['comment_text'];
+    $type = "homepage";
+
+    $sql = "INSERT INTO `comments`(`pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`, `type`) VALUES (?,?,?,?, NOW(),0,?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'iisss', $post_id, $id, $uname, $comment_text, $type);
+
+    $result = mysqli_stmt_execute($stmt);
+    if ($result) {
+        echo 1; // Success
+    } else {
+        echo 0; // Failure
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
+function fnAddCbsit(){
     global $conn;
     $id=$_SESSION['user_id'];
     $uname=$_SESSION['fullname'];
     $post_id = $_POST['post_id'];
     $comment_text = $_POST['comment_text'];
+    $type="bsit";
 
-    $sql = "INSERT INTO `tbl_comments`( `pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`) VALUES (?,?,?, ?, NOW(),0)";
+    $sql = "INSERT INTO `comments`( `pos_id`, `user_id`, `uname`, `comment`, `date`, `isapprove`,type) VALUES (?,?,?,?, NOW(),0,?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'iiss', $post_id,$id,$uname, $comment_text);
+    mysqli_stmt_bind_param($stmt, 'iisss', $post_id,$id,$uname, $comment_text, $type);
 
     $result = mysqli_stmt_execute($stmt);
     if ($result) {
@@ -329,7 +558,23 @@ function fnGetcomment(){
     global $conn;
     $post_id = $_POST['post_id'];
 
-    $query = $conn->prepare("SELECT * FROM tbl_comments WHERE pos_id=? ORDER BY tbl_comments.date DESC");
+    $query = $conn->prepare('SELECT * FROM comments WHERE pos_id=? AND type="homepage" ORDER BY `date` DESC');
+    $query->bind_param('i',$post_id);
+    $query->execute();
+    $result = $query->get_result();
+    $data = array();
+    while($row = $result->fetch_array()){
+        $data[] = $row;
+    }
+
+    echo json_encode($data);
+
+}
+function fnGetcBsit(){
+    global $conn;
+    $post_id = $_POST['post_id'];
+
+    $query = $conn->prepare('SELECT * FROM comments WHERE pos_id=? AND type="bsit" ORDER BY `date` DESC');
     $query->bind_param('i',$post_id);
     $query->execute();
     $result = $query->get_result();
@@ -348,7 +593,7 @@ function fnUpdateComment(){
     $description = $_POST['comment'];
   
 
-    $sql = "UPDATE tbl_comments SET uname=?, comment=?  WHERE comment_id=?";
+    $sql = "UPDATE comments SET uname=?, comment=?  WHERE comment_id=?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'ssi', $names, $description, $comment_id);
     $result = mysqli_stmt_execute($stmt);
@@ -366,7 +611,7 @@ function fnUpdateComment(){
 function fnDeleteComment(){
     global $conn;
         $comment_id = $_POST['comment_id'];
-        $sql = "DELETE FROM tbl_comments WHERE comment_id = ?";
+        $sql = "DELETE FROM comments WHERE comment_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'i', $comment_id);
 
@@ -428,9 +673,7 @@ function fnSaveRegister(){
         
     }
 }
- //
-
-
+ 
 function fnLogin(){
     global $conn;
     $username = $_POST['username'];
@@ -462,7 +705,6 @@ function fnLogin(){
 }
 
 
-
 function fnChat(){
     global $conn;
     $toUser = $_POST['to'];
@@ -481,47 +723,22 @@ function fnChat(){
 }
 
 // department side
-// function fnSavebsit(){
-//     global $conn;
-//     $id=$_POST['id'];
-//     $name=$_POST['name'];
-//     // $title= $_POST['title'];
-//     $description= $_POST['description']; 
-    
 
-//     $filename = $_FILES['productimage']['name'];
-//     $folder = '../uploads/';
-//     $destination = $folder . $filename;
-//     move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
 
-//     $query = $conn->prepare('INSERT INTO tbl_postbsit(user_id,names,`description`,image,date_created,isdeleted) values(?,?,?,?,now(),1)');
-//     $query->bind_param('isss',$id,$name,$description,$filename);
-    
-//     if($query->execute()){
-//         echo 1;
-//     }
-//     else{
-//         echo json_encode(mysqli_error($conn));
-//     }
 
-// }
-function fnSavebsit(){
+
+function fnEventBsit(){
     global $conn;
-    $id=$_POST['id'];
-    $user=$_POST['name'];
-    $description= $_POST['description']; 
+    $title= $_POST['title'];
+    $events= $_POST['events'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
     $type="bsit";
 
-    $filename = $_FILES['productimage']['name'];
-    $folder = '../uploads/';
-    
-    $destination = $folder . $filename;
-    move_uploaded_file($_FILES['productimage']['tmp_name'],$destination);
 
-
-    $query = $conn->prepare('INSERT INTO post(user_id,names,`description`,image,date_created,isdeleted,type) values(?,?,?,?,now(),1,?)');
-    $query->bind_param('issss',$id,$user,$description,$filename,$type);
-    
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
     if($query->execute()){
         echo 1;
     }
@@ -530,34 +747,58 @@ function fnSavebsit(){
     }
 
 }
-
-function fnGetbsit(){
-    global $conn;
-
-    $query = $conn->prepare('SELECT * FROM post WHERE type="bsit" ORDER BY date_created DESC');
-    $query->execute();
-    $result = $query->get_result();
-    $data = array();
-    while($row = $result->fetch_assoc()){
-        
-        $data[] = $row;
-    }
-
-    echo json_encode($data);
-
-
-}
-
-
-function fnEventBsit(){
+function fnEventBsed(){
     global $conn;
     $title= $_POST['title'];
     $events= $_POST['events'];
-    $date=$_POST['date'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
+    $type="bsed";
 
-    $query = $conn->prepare('INSERT INTO bsitevents(title,date,`event`,date_posted) values(?,?,?,now())');
-    $query->bind_param('sss',$title,$date,$events);
-    
+
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnEventBeed(){
+    global $conn;
+    $title= $_POST['title'];
+    $events= $_POST['events'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
+    $type="beed";
+
+
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
+    if($query->execute()){
+        echo 1;
+    }
+    else{
+        echo json_encode(mysqli_error($conn));
+    }
+
+}
+function fnEventBshm(){
+    global $conn;
+    $title= $_POST['title'];
+    $events= $_POST['events'];
+    $month=$_POST['month'];
+    $day=$_POST['day'];
+    $year=$_POST['year'];
+    $type="bshm";
+
+
+    $query = $conn->prepare('INSERT INTO events(title,`month`,`day`,`year`,`event`,date_posted,type) values(?,?,?,?,?,now(),?)');
+    $query->bind_param('ssiiss',$title,$month,$day,$year,$events,$type);
     if($query->execute()){
         echo 1;
     }
@@ -569,7 +810,7 @@ function fnEventBsit(){
 function fnGetEbsit(){
     global $conn;
 
-    $query = $conn->prepare("SELECT * FROM bsitevents");
+    $query = $conn->prepare('SELECT * FROM events WHERE type="bsit" ORDER BY date_posted DESC LIMIT 5');
     $query->execute();
     $result = $query->get_result();
     $data = array();

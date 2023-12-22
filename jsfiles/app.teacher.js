@@ -57,7 +57,50 @@ createApp({
                 })
             })
         },
+        updatePost() {
+            const vm = this;
+            const data = new FormData();
+            data.append("method", "fnUpdatePost");
+            data.append("post_id", vm.editingPost.post_id);
+            data.append("names", vm.editingPost.names);
+            data.append("description", vm.editingPost.description);
+            data.append("image", vm.editingPost.image);
 
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert("Post successfully updated");
+                        vm.editingPost.description = '';
+                        vm.fnGetPost(); 
+                    } else {
+                        console.log(r);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error during updatePost:', error);
+                });
+
+            $('#editPostModal').modal('hide');
+        },
+        fnDeletePost(postId) {
+            const vm = this;
+            const data = new FormData();
+            data.append('method', 'fnDeletePost');
+            data.append('post_id', postId);
+
+            axios.post('model/listModel.php', data)
+                .then(function (r) {
+                    if (r.data == 1) {
+                        alert('Post successfully deleted');
+                        vm.fnGetPost(); 
+                    } else {
+                        console.log(r);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error during fnDeletePost:', error);
+                });
+        },
         fnEventBsit:function(e){
             const vm = this;
             e.preventDefault();    
@@ -86,9 +129,12 @@ createApp({
             .then(function(r){
                 vm.events = [];
                 r.data.forEach(function(v){
+                    console.log(r);
                     vm.events.push({
                         title: v.title,
-                        date: v.date,
+                        month: v.month,
+                        day: v.day,
+                        year: v.year,
                         event: v.event,
                         date_posted: v.date_posted
                         
@@ -96,6 +142,8 @@ createApp({
                 })
             })
         },
+
+
         fnAnnounceBsit:function(e){
             const vm = this;
             e.preventDefault();    

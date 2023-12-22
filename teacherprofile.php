@@ -5,6 +5,13 @@ if (!$_SESSION['fullname']) {
     echo '<script>window.location.href="sign-in.php";</script>';
     exit();
 }
+$id = $_SESSION['user_id'];
+$query = "SELECT *
+                                    FROM tbl_user AS tu
+                                    JOIN users AS u ON tu.user_id = u.uid
+                                    WHERE tu.user_id = $id;";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
 ?>
 <html lang="en" class=" sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers"><!-- Mirrored from uitheme.net/sociala/author-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Sep 2023 02:40:20 GMT -->
 
@@ -168,32 +175,27 @@ if (!$_SESSION['fullname']) {
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
                             <?php
-                                $id = $_SESSION['user_id'];
-                                $query = "SELECT *
-                                     FROM tbl_user AS tu
-                                     JOIN users AS u ON tu.user_id = u.uid
-                                     WHERE tu.user_id = $id;";
-                                $result = mysqli_query($conn, $query);
-                                $row = mysqli_fetch_assoc($result);
                                 if ($row != 0) {
 
-                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 50px; height: 50px; border-radius: 50px; margin-right: 10px;" ><span>' . $row["name"] . '</span></a></li>
                                         ';
                                 } else {
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
                                 ?>                                                                                                                                            
-                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
-                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
+                                            <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
+                                            <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
+                                            <li><a href="logout.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
                             </ul>
                         </div>
                         <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
                             <ul class="mb-1">
-                                <li><a href="chat.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-message-square me-3 text-grey-500"></i><span>Message</span><span class="circle-count bg-warning mt-0"></span></a></li>
+                                            <li><a href="https://www.facebook.com/cpcofficial2005" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i class="font-sm feather-facebook me-3 text-grey-500"></i><span>Facebook</span></a></li>
+                                           
 
-                                <li><a href="logout.php" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i></i><span>Log Out</span></span></a></li>
-                            </ul>
+                                        </ul>
                         </div>
                     </div>
                 </div>
@@ -423,108 +425,33 @@ if (!$_SESSION['fullname']) {
             <!-- main content -->
 
             <!-- right chat -->
-            <!-- <div class="right-chat nav-wrap mt-2 right-scroll-bar">
-                <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
+            <div class="right-chat nav-wrap mt-2 right-scroll-bar">
+                                    <div class="middle-sidebar-right-content bg-white shadow-xss rounded-xxl">
 
-                    loader wrapper
-                    <div class="preloader-wrap p-3" style="display: none;">
-                        <div class="box shimmer">
-                            <div class="lines">
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                            </div>
-                        </div>
-                        <div class="box shimmer mb-3">
-                            <div class="lines">
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                            </div>
-                        </div>
-                        <div class="box shimmer">
-                            <div class="lines">
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                                <div class="line s_shimmer"></div>
-                            </div>
-                        </div>
-                    </div>
-                    loader wrapper
 
-                    <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
-                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
-                        <ul class="list-group list-group-flush">
-                            
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-                                <figure class="avatar float-left mb-0 me-2">
-                                    <img src="images/user-12.png" alt="image" class="w35">
-                                </figure>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#"></a>
-                                </h3>
-                               
-                            </li>
+                                        <div class="section full pe-3 ps-4 pt-4 position-relative feed-body">
 
-                        </ul>
-                    </div>
-                    <div class="section full pe-3 ps-4 pt-4 pb-4 position-relative feed-body">
-                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">GROUPS</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+                                            <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">CONTACTS</h4>
+                                            <ul class="list-group list-group-flush">
 
-                                <span class="btn-round-sm bg-primary-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Studio Express</a>
-                                </h3>
-                                <span class="badge mt-0 text-grey-500 badge-pill pe-0 font-xsssss">2 min</span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+                                                <?php
+                                                $query_user = mysqli_query($conn, "SELECT * FROM tbl_user ORDER BY dep_type='BSIT' DESC");
+                                                while ($data = mysqli_fetch_assoc($query_user)) {
+                                                    if ($data['user_id'] != $_SESSION['user_id'])
+                                                        echo '<li style="list-style-type: none; margin-bottom: 10px; background-color: #f0f0f0; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                                    <a href="chat.php?uid=' . $data["user_id"] . '" style="text-decoration: none; color: #000;">
+                                                    <span style="font-weight: bold;">' . $data["name"] . '</span> - ' . $data["user_type"] . ' of ' . $data["dep_type"] . '
+                                                    </a>
+                                                </li>';
+                                                }
+                                                ?>
 
-                                <span class="btn-round-sm bg-gold-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Armany Design</a>
-                                </h3>
-                                <span class="bg-warning ms-auto btn-round-xss"></span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
+                                            </ul>
+                                        </div>
 
-                                <span class="btn-round-sm bg-mini-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">De fabous</a>
-                                </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="section full pe-3 ps-4 pt-0 pb-4 position-relative feed-body">
-                        <h4 class="font-xsssss text-grey-500 text-uppercase fw-700 ls-3">Pages</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
 
-                                <span class="btn-round-sm bg-primary-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Armany Seary</a>
-                                </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
-                            </li>
-                            <li class="bg-transparent list-group-item no-icon pe-0 ps-0 pt-2 pb-2 border-0 d-flex align-items-center">
-
-                                <span class="btn-round-sm bg-gold-gradiant me-3 ls-3 text-white font-xssss fw-700">UD</span>
-                                <h3 class="fw-700 mb-0 mt-0">
-                                    <a class="font-xssss text-grey-600 d-block text-dark model-popup-chat" href="#">Entropio Inc</a>
-                                </h3>
-                                <span class="bg-success ms-auto btn-round-xss"></span>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div>
-            </div> -->
+                                    </div>
+                                </div>
 
 
             <!-- right chat -->

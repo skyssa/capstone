@@ -1,14 +1,7 @@
 <?php
 session_start();
 include "../includes/config.php"; 
-// include "../admin/assets/config/config.php"; 
-// $con = mysqli_connect("localhost","root","","campus-comm");
 
-//     // Check connection
-//     if (mysqli_connect_errno()) {
-//         echo "Failed to connect to MySQL: " . mysqli_connect_error();
-//         exit();
-//     }
 
 if (isset($_POST['approve'])) {
     $userId = $_POST['user_id'];

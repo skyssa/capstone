@@ -91,7 +91,7 @@ subbtn.on("click", (e) => {
   e.preventDefault();
 
   if (chatInp.val() == "") {
-    alert("Input cannot be empty");
+    alert("No Message is being sent");
     return false;
   }
 

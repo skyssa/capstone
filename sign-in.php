@@ -40,10 +40,10 @@
                             <form class="register" @submit="fnLogin($event)">
                                 <div class="form-group icon-input mb-3">
                                     <i class="font-sm ti-user text-grey-500 pe-0"></i>
-                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="username" placeholder="username">
+                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="username" placeholder="username" required>
                                 </div>
                                 <div class="form-group icon-input mb-3">
-                                    <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" name="password" placeholder="password">
+                                    <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" name="password" placeholder="password" required>
                                     <i class="font-sm ti-lock text-grey-500 pe-0"></i>
                                 </div>
                                 <br>

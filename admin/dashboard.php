@@ -87,7 +87,7 @@ if (!$_SESSION['fullname']) {
                     <div class="row">
                         <div class="col-md-12 page-header">
                             <div class="page-pretitle">Overview</div>
-                            <h2 class="page-title">Students</h2>
+                            <h2 class="page-title"></h2>
                         </div>
                     </div>
                     <div class="row">

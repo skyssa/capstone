@@ -5,6 +5,14 @@ if (!$_SESSION['fullname']) {
     echo '<script>window.location.href="sign-in.php";</script>';
     exit();
 }
+
+$id = $_SESSION['user_id'];
+$query = "SELECT *
+                                                FROM tbl_user AS tu
+                                                JOIN users AS u ON tu.user_id = u.uid
+                                                WHERE tu.user_id = $id;";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
 ?>
 <html lang="en" class=" sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers"><!-- Mirrored from uitheme.net/sociala/default.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 17:10:12 GMT -->
 
@@ -30,16 +38,12 @@ if (!$_SESSION['fullname']) {
     <script src="https://kit.fontawesome.com/b06a377e67.js" crossorigin="anonymous"></script>
     <style media="screen">
         .style2 {
-            /* margin-top:150px;
-            margin-left:200px; */
+         
             width: 1200px;
             height: 600px;
-            background: url(img/Untitled.png);
+            background: url(img/school.png);
             background-repeat: no-repeat;
-            /*            -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover; 
-        background-size: cover;*/
+       
 
         }
     </style>
@@ -189,24 +193,18 @@ if (!$_SESSION['fullname']) {
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
                                 <?php
-                                $id = $_SESSION['user_id'];
-                                $query = "SELECT *
-                                     FROM tbl_user AS tu
-                                     JOIN users AS u ON tu.user_id = u.uid
-                                     WHERE tu.user_id = $id;";
-                                $result = mysqli_query($conn, $query);
-                                $row = mysqli_fetch_assoc($result);
+
                                 if ($row != 0) {
 
-                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
-                                        ';
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 50px; height: 50px; border-radius: 50px; margin-right: 10px;" ><span>' . $row["name"] . '</span></a></li>
+                                                    ';
                                 } else {
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
                                 ?>
 
-                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
-                                <li><a href="depalumni.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Home</span></a></li>
+                                <li><a href="studdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
                                 <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
                                 <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
                                 <li><a href="logouts.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
@@ -261,7 +259,7 @@ if (!$_SESSION['fullname']) {
                                                 <div class="col-md-1" style=" "></div>
                                                 <div class="col-md-1" style=" "></div>
                                                 <div class="col-md-3" style=" "></div>
-                                                <div type="button" data-toggle="modal" data-target="#guardhousemodal" class="col-md-7" style="height:30px; border:2px solid black;  width:50px; background-color:white;margin-top:30px;">
+                                                <div type="button" data-toggle="modal" data-target="#guardhousemodal" class="col-md-7" style="font-size:8px; font-weight:bold; height:30px; border:2px solid black;  width:50px; background-color:white;margin-top:30px;">
                                                     guard house
                                                     <div class="modal fade" id="guardhousemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -320,7 +318,7 @@ if (!$_SESSION['fullname']) {
                                             <!-- six row -->
                                             <div class="col-lg-12 row">
 
-                                                <div class="col-md-4 longonBorder" style="height:30px; border:2px solid black;  width:80px; background-color:white; margin-left:315px; margin-top:85px;">Stair</div>
+                                                <div class="col-md-4 longonBorder" style="height:30px; font-weight:bold; border:2px solid black;  width:80px; background-color:white; margin-left:315px; margin-top:85px;">Stair</div>
 
                                             </div>
                                             <!-- end  -->
@@ -328,7 +326,7 @@ if (!$_SESSION['fullname']) {
                                             <!-- fifth row -->
 
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-9 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:315px;  font-size:11px;">
+                                                <div class="col-md-9 longonBorder" style="height:60px; font-weight:bold; border:2px solid black;  width:80px; background-color:white; margin-left:315px;  font-size:11px;">
                                                     Comlab 1 & front-office
 
                                                 </div>
@@ -339,34 +337,24 @@ if (!$_SESSION['fullname']) {
                                             <!-- forth row -->
 
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:315px; font-size:11px;">Comlab 2</div>
+                                                <div class="col-md-4 longonBorder" style="height:60px; font-weight:bold; border:2px solid black;  width:80px; background-color:white; margin-left:315px; font-size:11px;">Comlab 2</div>
 
 
                                             </div>
-                                            <!-- end -->
-                                            <!-- 	<div class="col-md-12 thirdway longonBorder" style="height: 5px;  "> 
-			</div>  -->
-
-                                            <!-- 	<div class="col-md-6 thirdway longonBorder" style="height: 5px;  "> 
-			</div> 
-			<div class="col-md-6 thirdway longonBorder" style="height: 5px;  "> 
-			</div>  -->
-
-
-                                            <!-- third row -->
+           
                                             <div class="col-lg-12 row">
 
                                                 <!-- <div class="col-md-2 longonBorder" style="height:30px; border:2px solid black;  width:50px; background-color:white;">21</div> -->
-                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:205px; font-size:11px;">canteen</div>
-                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black;  width:80px; background-color:white; margin-left:30px; font-size:11px;">Comlab 3</div>
+                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black; font-weight:bold;  width:80px; background-color:white; margin-left:205px; font-size:11px;">canteen</div>
+                                                <div class="col-md-4 longonBorder" style="height:60px; border:2px solid black;  font-weight:bold; width:80px; background-color:white; margin-left:30px; font-size:11px;">Comlab 3</div>
 
                                             </div>
                                             <!-- end -->
                                             <!-- second row -->
                                             <div class="col-lg-12 row">
                                                 <!-- <div class="col-md-2 longonBorder">24</div> -->
-                                                <div class="col-md-4 longonBorder" style="height:50px; border:2px solid black;  width:80px; background-color:white; margin-left:205px;">room</div>
-                                                <div class="col-md-4 longonBorder" style="height:30px; border:2px solid black;  width:80px; background-color:white; margin-left:30px;">stair</div>
+                                                <div class="col-md-4 longonBorder" style="height:50px; border:2px solid black; font-weight:bold;  width:80px; background-color:white; margin-left:205px;">room</div>
+                                                <div class="col-md-4 longonBorder" style="height:30px; border:2px solid black; font-weight:bold; width:80px; background-color:white; margin-left:30px;">stair</div>
 
                                             </div>
                                             <!-- end -->
@@ -384,20 +372,20 @@ if (!$_SESSION['fullname']) {
                                             <!-- twelve row -->
                                             <div class="col-lg-12 row">
 
-                                                <div class="col-md-6 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; margin-top:10px; margin-left:300px; font-size:11px;">clinic</div>
+                                                <div class="col-md-6 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:40px; background-color:white; margin-top:10px; margin-left:300px; font-size:11px;">clinic</div>
                                             </div>
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-1 longonBorder " style="height:50px; border:2px solid black;  width:40px; background-color:white; margin-left:300px; font-size:11px;">room</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:70px; background-color:white; margin-left:25px; font-size:11px;">Chair office</div>
+                                                <div class="col-md-1 longonBorder " style="height:50px; border:2px solid black; font-weight:bold; width:40px; background-color:white; margin-left:300px; font-size:11px;">room</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:70px; background-color:white; margin-left:25px; font-size:11px;">Chair office</div>
 
                                             </div>
 
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:60px; background-color:white; font-size:11px;">admin</div>
-                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:80px; background-color:white; ">avr</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px;">regsitrar</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; ">faculty</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px;">room</div>
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black; font-weight:bold; width:60px; background-color:white; font-size:11px;">admin</div>
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black; font-weight:bold; width:80px; background-color:white; ">avr</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:80px; background-color:white; font-size:11px;">regsitrar</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:80px; background-color:white; ">faculty</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:40px; background-color:white; font-size:11px;">room</div>
 
                                             </div>
 
@@ -405,64 +393,21 @@ if (!$_SESSION['fullname']) {
                                             <!-- twelve row -->
                                             <div class="col-lg-12 row">
                                                 <div class="col-md-3 longonBorder "></div>
-                                                <div class="col-md-3 longonBorder" style="height:50px; border:2px solid black;  width:99px; background-color:white; margin-top:30px;">tent</div>
-                                                <div class="col-md-1 longonBorder" style="height:100px; border:2px solid black;  width:70px; background-color:white; margin-left:155px; margin-top:30px;">tent</div>
+                                                <div class="col-md-3 longonBorder" style="height:50px; border:2px solid black; font-weight:bold; width:99px; background-color:white; margin-top:30px;">tent</div>
+                                                <div class="col-md-1 longonBorder" style="height:100px; border:2px solid black; font-weight:bold; width:70px; background-color:white; margin-left:155px; margin-top:30px;">tent</div>
                                             </div>
 
                                             <!-- end -->
                                             <!-- eleven row -->
                                             <div class="col-lg-12 row">
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px; margin-top:50px;">SAO</div>
-                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px; margin-top:30px;">stair</div>
-                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px; margin-top:30px;">room 3</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px; margin-top:30px;">room 2</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:80px; background-color:white; font-size:11px; margin-top:30px;">room 1</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:40px; background-color:white; font-size:11px; margin-top:30px;">stair</div>
-                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black;  width:60px; background-color:white; font-size:11px; margin-top:30px;">Guidance</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:40px; background-color:white; font-size:9px; margin-top:50px;">SAO</div>
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black; font-weight:bold; width:40px; background-color:white; font-size:11px; margin-top:30px;">stair</div>
+                                                <div class="col-md-1 longonBorder" style="height:50px; border:2px solid black; font-weight:bold; width:80px; background-color:white; font-size:11px; margin-top:30px;">room 3</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:80px; background-color:white; font-size:11px; margin-top:30px;">room 2</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:80px; background-color:white; font-size:11px; margin-top:30px;">room 1</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:40px; background-color:white; font-size:11px; margin-top:30px;">stair</div>
+                                                <div class="col-md-1 longonBorder partition " style="height:50px; border:2px solid black; font-weight:bold; width:60px; background-color:white; font-size:11px; margin-top:30px;">Guidance</div>
                                             </div>
-
-                                            <!-- end -->
-                                            <!-- ten row -->
-                                            <!-- <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder ">35</div>
-                                                <div class="col-md-1 longonBorder partition">36</div>
-                                                <div class="col-md-2 longonBorder ">37</div>
-                                                <div class="col-md-1 longonBorder partition">38</div>
-                                                <div class="col-md-4 longonBorder ">39</div>
-                                            </div> -->
-
-                                            <!-- end -->
-                                            <!-- nine row -->
-                                            <!-- <div class="col-lg-12 row">
-
-                                                <div class="col-md-3 longonBorder partition">40</div>
-                                                <div class="col-md-1 longonBorder">41</div>
-                                                <div class="col-md-1 longonBorder partition">42</div>
-                                                <div class="col-md-2 longonBorder">43</div>
-                                                <div class="col-md-1 longonBorder partition">44</div>
-                                                <div class="col-md-4 longonBorder">45</div>
-                                            </div> -->
-
-                                            <!-- end -->
-                                            <!-- eight row -->
-                                            <!-- <div class="col-lg-12 row">
-                                                <div class="col-md-4 longonBorder ">46</div>
-                                                <div class="col-md-1 longonBorder partition">47</div>
-                                                <div class="col-md-2 longonBorder ">48</div>
-                                                <div class="col-md-1 longonBorder partition">49</div>
-                                                <div class="col-md-4 longonBorder ">50</div>
-                                            </div> -->
-
-                                            <!-- end -->
-                                            <!-- seven row -->
-                                            <!-- <div class="col-lg-12 row">
-                                                <div class="col-md-8 longonBorder partition">51</div>
-                                                <div class="col-md-4 longonBorder">52</div>
-                                            </div> -->
-
-                                            <!-- end -->
-                                            <!-- six row -->
-
                                         </div>
                                     </div>
                                 </div>

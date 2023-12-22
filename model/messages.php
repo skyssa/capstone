@@ -43,7 +43,7 @@ if(isset($_POST['fetch_msg']) && isset($_POST['incoming_id']) && isset($_SESSION
     $outgoing_id = mysqli_real_escape_string($conn, $user_id);
     $incoming_id = mysqli_real_escape_string($conn, $_POST['incoming_id']);
 
-    $query_user = mysqli_query($conn, "SELECT * FROM user_msg INNER JOIN tbl_user ON tbl_user.user_id = user_msg.incoming_id WHERE outgoing_id='$outgoing_id' AND incoming_id='$incoming_id' OR outgoing_id='$incoming_id' AND incoming_id='$outgoing_id' ORDER BY 1 ASC");
+    $query_user = mysqli_query($conn, "SELECT * FROM user_msg INNER JOIN tbl_user ON tbl_user.user_id = user_msg.outgoing_id WHERE outgoing_id='$outgoing_id' AND incoming_id='$incoming_id' OR outgoing_id='$incoming_id' AND incoming_id='$outgoing_id' ORDER BY 1 ASC");
 
     $count = mysqli_num_rows($query_user);
     if($count > 0){
@@ -54,13 +54,13 @@ if(isset($_POST['fetch_msg']) && isset($_POST['incoming_id']) && isset($_SESSION
                 <div id="chat" class="msg incoming">
                     <div class="details" >';
                     if (!empty($data['files'])) {
-                        echo'<p data-id="'.$data['user_id'].'">'.$data['messages'].' 
+                        echo'<span>' .timeAgo(strtotime($data['date_send'])) .'</span><p data-id="'.$data['user_id'].'">'.$data['messages'].' 
                         
-                        <br><a href="uploads/' . $data['files'] . '" download>Download File</a></p>
-                        <span>' .timeAgo(strtotime($data['date_send'])) .'</span>';
+                        <br><a href="uploads/' . $data['files'] . '" download style="color: white; text-decoration: none; font-weight: bold;">'.$data['files'].'</a></p>
+                        ';
                     }else{
-                        echo '<p data-id="'.$data['user_id'].'">'.$data['messages'].'</p>
-                        <span>' .timeAgo(strtotime($data['date_send'])) .'</span>';
+                        echo '<span>' .timeAgo(strtotime($data['date_send'])) .'</span><p data-id="'.$data['user_id'].'">'.$data['messages'].'</p>
+                        ';
                     }
 
                     
@@ -69,17 +69,20 @@ if(isset($_POST['fetch_msg']) && isset($_POST['incoming_id']) && isset($_SESSION
                 </div>
                 ';
             }else{//this will be receiver by default
+                
                 echo '
                 <div id="chat" class="msg outgoing">
                     <div class="details">';
                     if (!empty($data['files'])) {
-                        echo'<p data-id="'.$data['user_id'].'">'.$data['messages'].' 
+                        echo'<span>' .timeAgo(strtotime($data['date_send'])) .'</span><p data-id="'.$data['user_id'].'">'.$data['name'].': '.$data['messages'].' 
                         
-                        <br><a href="uploads/' . $data['files'] . '" download>Download File</a></p>
-                        <span>' .timeAgo(strtotime($data['date_send'])) .'</span>';
+                        <br><a style="text-decoration: none; color: white; href="uploads/' . $data['files'] . '" download ">'.$data['files'].'</a></p>
+                        ';
                     }else{
-                        echo '<p data-id="'.$data['user_id'].'">'.$data['messages'].'</p>
-                        <span>' .timeAgo(strtotime($data['date_send'])) .'</span>';
+                        echo '<span>' .timeAgo(strtotime($data['date_send'])) .'</span><br>
+                        <span>'.$data['name'].'</span>
+                        <p data-id="'.$data['user_id'].'">'.$data['messages'].'</p>
+                        ';
                     }
 
                     

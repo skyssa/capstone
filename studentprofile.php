@@ -5,6 +5,13 @@ if (!$_SESSION['fullname']) {
     echo '<script>window.location.href="sign-in.php";</script>';
     exit();
 }
+$id = $_SESSION['user_id'];
+$query = "SELECT *
+                                                FROM tbl_user AS tu
+                                                JOIN users AS u ON tu.user_id = u.uid
+                                                WHERE tu.user_id = $id;";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
 ?>
 <html lang="en" class=" sizes customelements history pointerevents postmessage webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers"><!-- Mirrored from uitheme.net/sociala/author-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Sep 2023 02:40:20 GMT -->
 
@@ -34,33 +41,26 @@ if (!$_SESSION['fullname']) {
             <!-- navigation top-->
             <div class="nav-header bg-white shadow-xs border-0">
                 <div class="nav-top">
-                    <a href="teacherhome.php"><i class="feather- text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xl logo-text mb-0">CAMPUSCOMM </span> </a>
+                    <a href="teacherhome.html"><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">CampusComm Profile</span>
+                    </a>
+                    <a href="#" class="mob-menu ms-auto me-2" id="dropdownMenu4" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu4">
+                        <h4 class="fw-700 font-xss mb-4">Notification</h4>
+
+                    </div>
+
                     <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="tdepartment.php" class="mob-menu me-2"><i class="feather-globe text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                    <a href="teacherhome.php" class="mob-menu me-2"><i class="feather-home text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+
+                    <!-- <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a> -->
                     <button class="nav-menu me-0 ms-2"></button>
                 </div>
 
-                <form action="#" class="float-left header-search">
-                    <div class="form-group mb-0 icon-input">
-                        <i class="feather-search font-sm text-grey-400"></i>
-                        <input type="text" placeholder="Start typing to search.." class="bg-grey border-0 lh-32 pt-2 pb-2 ps-5 pe-3 font-xssss fw-500 rounded-xl w350 theme-dark-bg">
-                    </div>
-                </form>
-                <a href="homepage.html" class="p-2 text-center ms-3 menu-icon center-menu-icon"><i class="feather-home font-lg alert-primary btn-round-lg theme-dark-bg text-current "></i></a>
-                <a href="departmnent.html" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i class="feather-globe font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
-
-                <a href="userprofile.html" class="p-2 text-center ms-0 menu-icon center-menu-icon"><i class="feather-user font-lg bg-greylight btn-round-lg theme-dark-bg text-grey-500 "></i></a>
-
-
-                <a href="#" class="p-2 text-center ms-auto menu-icon" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown"><span class="dot-count bg-warning"></span><i class="feather-bell font-xl text-current"></i></a>
+                <a href="#" class="p-2 text-center ms-auto menu-icon show" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="true"><i class="feather-bell font-xl text-current"></i></a>
                 <div class="dropdown-menu dropdown-menu-end p-4 rounded-3 border-0 shadow-lg" aria-labelledby="dropdownMenu3">
-
                     <h4 class="fw-700 font-xss mb-4">Notification</h4>
 
                 </div>
-                <!-- <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
-                 -->
+                <a href="#" class="p-2 text-center ms-3 menu-icon chat-active-btn"><i class="feather-message-square font-xl text-current"></i></a>
                 <div class="p-2 text-center ms-3 position-relative dropdown-menu-icon menu-icon cursor-pointer">
                     <i class="feather-settings animation-spin d-inline-block font-xl text-current"></i>
                     <div class="dropdown-menu-settings switchcolor-wrap">
@@ -163,10 +163,7 @@ if (!$_SESSION['fullname']) {
 
                     </div>
                 </div>
-
-
-                <a href="default-settings.html" class="p-0 ms-3 menu-icon"><img src="images/profile-4.png" alt="user" class="w40 mt--1"></a>
-
+                <a href="default-settings.html" class="p-0 ms-3 menu-icon"></a>
             </div>
             <!-- navigation top -->
 
@@ -178,25 +175,17 @@ if (!$_SESSION['fullname']) {
                             <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                             <ul class="mb-1 top-content">
                                 <?php
-                                $id = $_SESSION['user_id'];
-                                $query = "SELECT *
-                                     FROM tbl_user AS tu
-                                     JOIN users AS u ON tu.user_id = u.uid
-                                     WHERE tu.user_id = $id;";
-                                $result = mysqli_query($conn, $query);
-                                $row = mysqli_fetch_assoc($result);
+
                                 if ($row != 0) {
-                                    
-                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 60px; height: 40px;"><span>' . $row["name"] . '</span></a></li>
-                                        ';
-                                    
-                                }else{
+
+                                    echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><img src="uploads/' . $row["pic"] . '" alt="" style="width: 50px; height: 50px; border-radius: 50px; margin-right: 10px;" ><span>' . $row["name"] . '</span></a></li>
+                                                    ';
+                                } else {
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
                                 ?>
-                               
-                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a></li>
-                                <li><a href="bsit.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
+                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Home</span></a></li>
+                                <li><a href="studdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
                                 <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
                                 <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
                                 <li><a href="logout.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Log Out</span></a></li>
@@ -403,6 +392,10 @@ if (!$_SESSION['fullname']) {
                                             <input type="text" class="form-control" name="number">
                                         </div>
                                         <div class="mb-3">
+                                            <label class="form-label">Year And Section</label>
+                                            <input type="text" class="form-control" name="yrsec" >
+                                        </div>
+                                        <div class="mb-3">
                                             <label class="form-label">Academic Year</label>
                                             <input type="date" class="form-control" name="acadyr">
                                         </div>
@@ -457,88 +450,6 @@ if (!$_SESSION['fullname']) {
     <script src="jsfiles/axios.js"></script>
     <script src="jsfiles/app.camp.js"></script>
 
-
-
-    <div id="lightboxOverlay" tabindex="-1" class="lightboxOverlay" style="display: none;"></div>
-    <div id="lightbox" tabindex="-1" class="lightbox" style="display: none;">
-        <div class="lb-outerContainer">
-            <div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt="">
-                <div class="lb-nav"><a class="lb-prev" aria-label="Previous image" href=""></a><a class="lb-next" aria-label="Next image" href=""></a></div>
-                <div class="lb-loader"><a class="lb-cancel"></a></div>
-            </div>
-        </div>
-        <div class="lb-dataContainer">
-            <div class="lb-data">
-                <div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div>
-                <div class="lb-closeContainer"><a class="lb-close"></a></div>
-            </div>
-        </div>
-        <div class="right-comment chat-left scroll-bar theme-dark-bg">
-            <div class="card-body ps-2 pe-4 pb-0 d-flex">
-                <figure class="avatar me-3"><img src="images/user-8.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                <h4 class="fw-700 text-grey-900 font-xssss mt-1 text-left">Hurin Seary <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">2 hour ago</span></h4> <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-            </div>
-            <div class="card-body d-flex ps-2 pe-4 pt-0 mt-0"> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss me-3 text-dark"><i class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like</a> <a href="#" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss text-dark"><i class="feather-message-circle text-grey-900 btn-round-sm font-lg text-dark"></i>22 Comment</a></div>
-            <div class="card w-100 border-0 shadow-none right-scroll-bar">
-                <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Surfiya Zakir <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Goria Coast <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Hurin Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5 ms-5 position-relative">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-3.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">David Goria <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Seary Victor <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Ana Seary <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-                <div class="card-body pt-0 pb-3 pe-4 d-block ps-5">
-                    <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-4.png" alt="image" class="shadow-sm rounded-circle w35"></figure>
-                    <div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg">
-                        <h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Studio Express <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4>
-                        <p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body><!-- Mirrored from uitheme.net/sociala/author-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Sep 2023 02:40:20 GMT -->
 
 </html>

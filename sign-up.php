@@ -44,14 +44,14 @@
 
                                 <div class="form-group icon-input mb-3">
                                     <i class="font-sm ti-user text-grey-500 pe-0"></i>
-                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="fullname" placeholder="Fullname">
+                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="fullname" placeholder="Fullname" required>
                                 </div>
                                 <div class="form-group icon-input mb-3">
                                     <i class="font-sm ti-user text-grey-500 pe-0"></i>
-                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="username" placeholder="username">
+                                    <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="username" placeholder="username" required>
                                 </div>
                                 <div class="form-group icon-input mb-3">
-                                    <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" name="password" placeholder="password">
+                                    <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" name="password" placeholder="password" required>
                                     <i class="font-sm ti-lock text-grey-500 pe-0"></i>
                                 </div>
                                 <div class="form-group icon-input mb-3">
@@ -97,10 +97,18 @@
         $query->bind_param('sssss', $fname, $username, $password, $user_type, $dep_type);
 
         if ($query->execute()) {
-            echo '<script type="text/javascript">';
-            echo 'alert("User successfully saved");';
-            echo 'window.location.href="sign-in.php";';
-            echo '</script>';
+            $user_id = $query->insert_id;
+            $query2 = $conn->prepare('INSERT INTO users(uid,fullname,role_in_school,department,date_registered,status,approval) 
+            VALUES(?,?,?,?,now(),"active","pending")');
+            $query2->bind_param('isss',$user_id, $fname, $user_type, $dep_type);
+            if ($query2->execute()) {
+                echo 1; // Success
+                echo '<script>console.log(query)</script>';
+            } else {
+                echo json_encode(mysqli_error($conn));
+                echo '<script>console.log(query)</script>';
+            }
+           
         } else {
             echo json_encode(mysqli_error($conn));
             echo '<script>console.log(query)</script>';
@@ -111,7 +119,7 @@
     <script src="js/scripts.js"></script>
     <script src="js/vue.3.js"></script>
     <script src="js/axios.js"></script>
-    <script src="js/app.camp.js"></script>
+   
 </body>
 
 </html>
