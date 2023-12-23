@@ -81,11 +81,29 @@ if (!$_SESSION['fullname']) {
                     <div class="row">
                         <div class="col-md-12 page-header">
                             <div class="page-pretitle">Overview</div>
-                            <h2 class="page-title">Teachers Request</h2>
+                            
                         </div>
                         <form action="../model/approve.php" method="post">
                             <table class="table table-striped" style="width:100%">
-
+                            <thead>
+                                        <tr>
+                                            <th>School Id</th>
+                                            <th>Full Name</th>
+                                            <th>Gender</th>
+                                            <th>email</th>
+                                            <th>address</th>
+                                            <th>number</th>
+                                            <th>year and section</th>
+                                            <th>academic year</th>
+                                            <th>role in school</th>
+                                            <th>department type</th>
+                                            <th>Profile Photo</th>
+                                            <th>cover Photo</th>
+                                            <th>date registered</th>
+                                            <th>status</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </thead>
                                 <?php
                                 $query = "SELECT * FROM users WHERE approval = 'pending' ";
                                 $result = mysqli_query($con, $query);
@@ -97,29 +115,17 @@ if (!$_SESSION['fullname']) {
                                     $coverPath = '../uploads/' . $row['cover'];
                             
                                     ?>
-                                    <thead>
-                                        <tr>
-                                            <th>School Id</th>
-                                            <th>Full Name</th>
-                                            <th>email</th>
-                                            <th>address</th>
-                                            <th>number</th>
-                                            <th>role in school</th>
-                                            <th>department type</th>
-                                            <th>Profile Photo</th>
-                                            <th>cover Photo</th>
-                                            <th>date registered</th>
-                                            <th>status</th>
-                                            <th>action</th>
-                                        </tr>
-                                    </thead>
+                                    
                                     <tbody>
                                         <tr>
                                             <td><?php echo $row['school_id']; ?></td>
                                             <td><?php echo $row['fullname']; ?></td>
+                                            <td><?php echo $row['gender']; ?></td>
                                             <td><?php echo $row['email']; ?></td>
                                             <td><?php echo $row['address']; ?></td>
                                             <td><?php echo $row['number']; ?></td>
+                                            <td><?php echo $row['yr_sec']; ?></td>
+                                            <td><?php echo $row['acadyr']; ?></td>
                                             <td><?php echo $row['role_in_school']; ?></td>
                                             <td><?php echo $row['department']; ?></td>
                                             <td><img src="<?php echo $imagePath; ?>" class="img-fluid" alt="Image description"></td>

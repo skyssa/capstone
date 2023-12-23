@@ -94,7 +94,7 @@
         $dep_type = $_POST['dep_type'];
 
         $query = $conn->prepare('INSERT INTO tbl_user(name,username,password,user_type,dep_type,isdeleted,date_created) values(?,?,?,?,?,1,now())');;
-        $query->bind_param('sssss', $fname, $username, md5($password), $user_type, $dep_type);
+        $query->bind_param('sssss', $fname, $username, $password, $user_type, $dep_type);
 
         if ($query->execute()) {
             $user_id = $query->insert_id;

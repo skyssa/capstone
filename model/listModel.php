@@ -65,22 +65,7 @@ function fnSaveProfile(){
             echo json_encode(mysqli_error($conn));
         }
 
-   }else if($_SESSION['user_type']=='Alumni'){
-        
-        $acadyr=$_POST['acadyr'];
-        $query = $conn->prepare('UPDATE users SET school_id=?, fullname=?, email=?, address=?, number=?, acadyr=?, role_in_school=?, department=?, pic=?, cover=?, date_registered=now(), status="active", approval="pending" WHERE uid=?');
-       
-     
-
-        $query->bind_param('iisssisssss',$id,$school_id,$fullname,$email,$address,$number,$acadyr,$role_in_school,$department,$pic,$cover);
-        
-        if($query->execute()){
-            echo 1;
-        }
-        else{
-            echo json_encode(mysqli_error($conn));
-        }
-    }  
+   }
 }
 
 
@@ -934,7 +919,7 @@ function fnLogin(){
     global $conn;
     $username = $_POST['username'];
     $password = $_POST['password'];
-    
+    // $pass=md5($password);
     $query = $conn->prepare("call sp_savelogin(?,?)");
     // call sp_savelogin(?,?)
     $query->bind_param('ss',$username,$password);

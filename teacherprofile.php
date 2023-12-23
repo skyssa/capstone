@@ -182,7 +182,8 @@ $row = mysqli_fetch_assoc($result);
                                 } else {
                                     echo '<li><a href="profilerole.php" class="nav-content-bttn open-font"><span>Create Profile</span></a></li>';
                                 }
-                                ?>                                                                                                                                            
+                                ?>
+                                <li><a href="role.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Home</span></a></li>                                                                                                                                            
                                 <li><a href="tdepartment.php" class="nav-content-bttn open-font"><i class="feather-home btn-round-md bg-blue-gradiant me-3"></i><span>Department</span></a></li>
                                             <li><a href="chat.php" class="nav-content-bttn open-font"><i class="feather-inbox btn-round-md bg-blue-gradiant me-3"></i><span>Message</span></a></li>
                                             <li><a href="schoolmap.php" class="nav-content-bttn open-font"><i class="feather-map-pin btn-round-md bg-blue-gradiant me-3"></i><span>School Map</span></a></li>
@@ -255,6 +256,10 @@ $row = mysqli_fetch_assoc($result);
                                                 <i class="feather-user text-grey-500 me-3 font-lg"></i>
                                                 <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['fullname']; ?></h4>
                                             </div>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['gender']; ?></h4>
+                                            </div>
                                             <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
                                             <div class="card-body d-flex pt-0">
                                                 <i class="feather-mail text-grey-500 me-3 font-lg"></i>
@@ -320,6 +325,10 @@ $row = mysqli_fetch_assoc($result);
                                             <i class="feather-mail text-grey-500 me-3 font-lg"></i>
                                             <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
                                         </div>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
                                         <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
                                         <div class="card-body d-flex pt-0">
                                             <i class="feather-user text-grey-500 me-3 font-lg"></i>
@@ -352,9 +361,9 @@ $row = mysqli_fetch_assoc($result);
                             <div class="col-xl-4 col-xxl-3 col-lg-4">
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
                                     <!-- <div v-for="post in posts">
-                                        <h4>{{post.names}}</h4>
+                                        <h4>{{post.names}}</h4>@submit="fnSaveProfile($event)"
                                     </div> -->
-                                    <form class="profile" @submit="fnSaveProfile($event)" method="post" enctype="multipart/form-data">
+                                    <form class="profile" action="model/update_teacher.php" method="post" enctype="multipart/form-data">
 
 
                                         <h4 class="fw-700 mb-3 font-xsss text-grey-900">Edit Your Profile</h4>
@@ -367,7 +376,14 @@ $row = mysqli_fetch_assoc($result);
                                             <label class="form-label">Full Name</label>
                                             <input type="text" class="form-control" name="fullname" value="<?php echo $_SESSION['fullname'] ?>">
                                         </div>
-
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <select name="gender" class="form-control">
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                                <option>Others</option>
+                                            </select>
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
                                             <input type="email" class="form-control" name="email">
@@ -522,45 +538,7 @@ $row = mysqli_fetch_assoc($result);
         </div>
     </div>
 
-    <!-- <div class="modal-popup-chat">
-        <div class="modal-popup-wrap bg-white p-0 shadow-lg rounded-3">
-            <div class="modal-popup-header w-100 border-bottom">
-                <div class="card p-3 d-block border-0 d-block">
-                    <figure class="avatar mb-0 float-left me-2">
-                        <img src="images/user-12.png" alt="image" class="w35 me-1">
-                    </figure>
-                    <h5 class="fw-700 text-primary font-xssss mt-1 mb-1">Hendrix Stamp</h5>
-                    <h4 class="text-grey-500 font-xsssss mt-0 mb-0"><span class="d-inline-block bg-success btn-round-xss m-0"></span> Available</h4>
-                    <a href="#" class="font-xssss position-absolute right-0 top-0 mt-3 me-4"><i class="ti-close text-grey-900 mt-2 d-inline-block"></i></a>
-                </div>
-            </div>
-            <div class="modal-popup-body w-100 p-3 h-auto">
-                <div class="message">
-                    <div class="message-content font-xssss lh-24 fw-500">Hi, how can I help you?</div>
-                </div>
-                <div class="date-break font-xsssss lh-24 fw-500 text-grey-500 mt-2 mb-2">Mon 10:20am</div>
-                <div class="message self text-right mt-2">
-                    <div class="message-content font-xssss lh-24 fw-500">I want those files for you. I want you to send 1 PDF and 1 image file.</div>
-                </div>
-                <div class="snippet pt-3 ps-4 pb-2 pe-3 mt-2 bg-grey rounded-xl float-right" data-title=".dot-typing">
-                    <div class="stage">
-                        <div class="dot-typing"></div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="modal-popup-footer w-100 border-top">
-                <div class="card p-3 d-block border-0 d-block">
-                    <div class="form-group icon-right-input style1-input mb-0"><input type="text" placeholder="Start typing.." class="form-control rounded-xl bg-greylight border-0 font-xssss fw-500 ps-3"><i class="feather-send text-grey-500 font-md"></i></div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- 
-    <script src="js/plugin.js"></script>
-    <script src="js/lightbox.js"></script>
-    <script src="js/scripts.js"></script> -->
+   
     <script src="js/plugin.js"></script>
     <script src="js/lightbox.js"></script>
     <script src="js/scripts.js"></script>

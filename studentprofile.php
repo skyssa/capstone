@@ -258,6 +258,10 @@ $row = mysqli_fetch_assoc($result);
                                                 <i class="feather-user text-grey-500 me-3 font-lg"></i>
                                                 <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['fullname']; ?></h4>
                                             </div>
+                                            <div class="card-body d-flex pt-0">
+                                                <i class="feather-user text-grey-500 me-3 font-lg"></i>
+                                                <h4 class="fw-700 text-grey-900 font-s mt-1"><?php echo $row['gender']; ?></h4>
+                                            </div>
                                             <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
                                             <div class="card-body d-flex pt-0">
                                                 <i class="feather-mail text-grey-500 me-3 font-lg"></i>
@@ -327,6 +331,10 @@ $row = mysqli_fetch_assoc($result);
                                             <i class="feather-mail text-grey-500 me-3 font-lg"></i>
                                             <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
                                         </div>
+                                        <div class="card-body d-flex pt-0">
+                                            <i class="feather-mail text-grey-500 me-3 font-lg"></i>
+                                            <h4 class="fw-700 text-grey-900 font-xssss mt-1"></h4>
+                                        </div>
                                         <h4 class="text-center fw-700 mb-3 font-xsss text-black-900"><i class="feather-phone text-black-100 font-sm">Contact Info</i></h4>
                                         <div class="card-body d-flex pt-0">
                                             <i class="feather-user text-grey-500 me-3 font-lg"></i>
@@ -365,7 +373,7 @@ $row = mysqli_fetch_assoc($result);
                                     <!-- <div v-for="post in posts">
                                         <h4>{{post.names}}</h4>
                                     </div> -->
-                                    <form class="profile" @submit="fnAlumniProfile($event)" method="post" enctype="multipart/form-data">
+                                    <form class="profile" action="model/update_student.php" method="post" enctype="multipart/form-data">
 
 
                                         <h4 class="fw-700 mb-3 font-xsss text-grey-900">Edit Your Profile</h4>
@@ -378,7 +386,14 @@ $row = mysqli_fetch_assoc($result);
                                             <label class="form-label">Full Name</label>
                                             <input type="text" class="form-control" name="fullname" value="<?php echo $_SESSION['fullname'] ?>">
                                         </div>
-
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <select name="gender" class="form-control">
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                                <option>Others</option>
+                                            </select>
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
                                             <input type="email" class="form-control" name="email">

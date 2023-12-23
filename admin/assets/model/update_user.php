@@ -11,12 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $user_type = $_POST["user_type"];
 
+    $isdeleted = $_POST["isdeleted"];
+    $status = $_POST["status"];
+
     // Validate the data if needed
 
     // Prepare and execute the update query
-    $sql = "UPDATE tbl_user SET name=?, user_type=? WHERE user_id=?";
+    $sql = "UPDATE tbl_user SET name=?,  user_type=? isdeleted=?, status=?  WHERE user_id=?";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ssi", $name, $user_type, $user_id);
+    $stmt->bind_param("ssiii", $name, $user_type, $isdeleted, $status, $user_id);
     
     if ($stmt->execute()) {
         // Update successful

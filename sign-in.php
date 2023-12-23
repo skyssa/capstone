@@ -51,7 +51,7 @@
                                     <div class="form-group mb-1"><button type="submit" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 ">Sign In</button></div>
                                 </div>
                             </form>
-                            <a href="forgot-password.php">Forgot password?</a>
+                          
                             <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Dont have account <a href="sign-up.php" class="fw-700 ms-1">Register</a></h6>
                         </div>
                     </div>
